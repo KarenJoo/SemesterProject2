@@ -15,13 +15,13 @@ $colors: (
   "red": $red,
   "black": $black,
   "blue": $blue,
-  "gray": $gray-500,
+  "gray": $gray-100,
 );
 
 // scss-docs-start theme-color-variables
 $primary: $blue;
 $secondary: $red;
-$light: $gray-500;
+$light: $gray-100;
 $dark: $black;
 // scss-docs-end theme-color-variables
 
