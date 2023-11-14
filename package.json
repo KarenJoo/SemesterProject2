@@ -2,10 +2,12 @@
   "name": "semesterproject2",
   "version": "0.0.2",
   "description": "Semester Project 2 BestBid auction app ",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KarenJoo/SemesterProject2.git"
@@ -23,4 +25,5 @@
     "url": "https://github.com/KarenJoo/SemesterProject2/issues"
   },
   "homepage": "https://github.com/KarenJoo/SemesterProject2#readme"
+  
 }
