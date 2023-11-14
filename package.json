@@ -1,6 +1,6 @@
 {
   "name": "semesterproject2",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Semester Project 2 BestBid auction app ",
   "type": "module",
   "main": "index.js",
