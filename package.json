@@ -7,7 +7,8 @@
   "scripts": {
     "test": "npm run build",
     "build": "sass src/scss:dist/css",
-    "watch": "sass --watch src/scss:dist/css & live-server"
+    "watch": "sass --watch src/scss:dist/css & live-server",
+    "start": "npm run build && live-server"
   },
   "repository": {
     "type": "git",
@@ -30,7 +31,10 @@
     "bootstrap": "^5.3.2"
   },
   "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^15.1.0",
     "live-server": "^1.2.2",
+    "prettier": "^3.1.0",
     "sass": "^1.69.5"
   }
 }
