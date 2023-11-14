@@ -1,6 +1,6 @@
 {
   "name": "semesterproject2",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Semester Project 2 BestBid auction app ",
   "type": "module",
   "main": "index.js",
@@ -38,9 +38,11 @@
     "sass": "^1.69.5"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,css,scss,json,md,html}": ["prettier --write", "git add"]
-  }
-  ,
+    "*.{js,jsx,ts,tsx,css,scss,json,md,html}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
