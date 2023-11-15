@@ -5,10 +5,10 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "npm run build",
+    "start": "npm run build && live-server",
     "build": "sass src/scss:dist/css",
     "watch": "sass --watch src/scss:dist/css & live-server",
-    "start": "npm run build && live-server"
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
