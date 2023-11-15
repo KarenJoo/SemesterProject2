@@ -6,6 +6,8 @@
 $blue: #2B3352;
 $gray-100: #F9F6F5;
 $black: #231d21;
+$green:   #909D75;
+
 
 // scss-docs-start color-variables
 $red: #CD8980;
@@ -16,11 +18,13 @@ $colors: (
   "black": $black,
   "blue": $blue,
   "gray": $gray-100,
+  "green": $green,
 );
 
 // scss-docs-start theme-color-variables
 $primary: $blue;
 $secondary: $red;
+$green: $green;
 $light: $gray-100;
 $dark: $black;
 // scss-docs-end theme-color-variables
@@ -31,6 +35,7 @@ $theme-colors: (
   "secondary": $secondary,
   "light": $light,
   "dark": $dark,
+  "green": $green,
 );
 
 // scss-docs-start spacer-variables-maps
