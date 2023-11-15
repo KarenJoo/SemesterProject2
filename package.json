@@ -5,9 +5,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && live-server",
+    "start": "npm run build",
     "build": "sass src/scss:dist/css",
-    "watch": "sass --watch src/scss:dist/css & live-server",
+    "watch": "sass --watch src/scss:dist/css",
     "prepare": "husky install"
   },
   "repository": {
