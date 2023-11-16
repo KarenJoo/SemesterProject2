@@ -1,2 +1,8 @@
 @import 'custom-variables';
 @import "../../node_modules/bootstrap/scss/bootstrap";
+
+.bg-img {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center; 
+  }
