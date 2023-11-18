@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../API.mjs";
+import * as storage from "../../handlers/storage/index.mjs";
 
 const action = "/auction/auth/login";
 const method = "post";
@@ -15,6 +16,10 @@ const response = await fetch(loginURL, {
         body
     })
 
-    const result = await response.json()
-    console.log(result);
+    const { accessToken, ...user } = await response.json()
+    
+    storage.save("token", accessToken);
+    storage.save("profile", user);
+
 }
+
