@@ -20,6 +20,7 @@ const response = await fetch(loginURL, {
     
     storage.save("token", accessToken);
     storage.save("profile", user);
+    alert("You are now logged in")
 
 }
 
