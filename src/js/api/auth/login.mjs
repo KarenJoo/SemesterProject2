@@ -8,19 +8,29 @@ export async function login(profile) {
     const loginURL = API_BASE_URL + action;
     const body = JSON.stringify(profile);
    
+    try {
 const response = await fetch(loginURL, {
         headers: {
             "Content-Type": "application/json"
         },
         method,
         body
-    })
+    });
 
-    const { accessToken, ...user } = await response.json()
-    
+    if (!response.ok) {
+        throw new Error(`Login failed with status ${response.status}`);
+    }
+
+    const { accessToken, ...user } = await response.json();
+
     storage.save("token", accessToken);
     storage.save("profile", user);
-    alert("You are now logged in")
+    alert("You are now logged in");
 
+    // Redirect to the profile page
+    window.location.href = "/profile/index.html";
+} catch (error) {
+    console.error("Login Error:", error.message);
+}
 }
 
