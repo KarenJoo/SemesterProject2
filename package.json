@@ -29,6 +29,7 @@
   "homepage": "https://github.com/KarenJoo/SemesterProject2#readme",
   "dependencies": {
     "bootstrap": "^5.3.2",
+    "bootstrap-icons": "^1.11.1",
     "popper.js": "^1.16.1",
     "sass": "^1.69.5"
   },
