@@ -13,6 +13,7 @@
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"
         defer></script>
         <script src="/src/js/index.mjs" type="module" defer></script>
+        <script src="./src/js/pages/allListings.mjs" type="module" defer></script>
 
     <link rel="stylesheet" href="/dist/css/styles.css">
 </head>
@@ -100,11 +101,12 @@
             <!-- START THE FEATURETTES -->
             <hr class="featurette-divider">
 
-            <div class="row featurette">
+            <div id="cardContainer" class="row featurette">
                 <div class="col-md-7">
-                    <div class="card shadow" style="width: 18rem;">
+                    <div id="card" class="shadow" style="width: 18rem;">
                         <img src="/img/example_listing.jpg" class="card-img-top" alt="image of listing">
                         <div class="card-body my-3">
+                            <p id="seller">seller:</p>
                             <h5 class="card-title">Example listing</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk
                                 of the card's content.</p>
@@ -112,17 +114,16 @@
 
                                 <tbody>
                                     <td>
-                                        <p class="credits mt-1 text-green">Credits</p>
+                                        <p class="mt-1 text-green">Credits</p>
                                     </td>
                                     <td>
-                                        <div class="input-group-sm">
-                                            <input type="number" class="form-control" style="width: 100px;">
+                                        <div id="credits" class="form-control" style="width: 100px;">
                                         </div>
                                     </td>
                                     <tr>
                                         <td>
 
-                                            <h6 class="bids mt-1">Bid here</h6>
+                                            <h6 class="mt-1">Bid here</h6>
                                         </td>
                                         <td>
                                             <div class="input-group-sm">
@@ -137,8 +138,8 @@
 
                             <!-- Time left and Bids -->
                             <div class="container d-flex justify-content-between">
-                                <p class="list-group-item">Time left:</p>
-                                <p class="list-group-item">Bids:</p>
+                                <p class="list-group-item">Time left:</p><div id="time"></div>
+                                <p class="list-group-item">Bids:</p><div id="bids"></div>
                             </div>
 
                             <!-- Bid button -->
