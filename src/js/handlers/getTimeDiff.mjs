@@ -11,17 +11,17 @@ export function getTimeDifference(endsAt) {
     return { days, hours, minutes };
 }
 
-// formats the time difference > days, hours, minutes
+// formats the time difference > days, hours, minutes (chatGPT)
 export function formatTimeDifference(days, hours, minutes) {
     const parts = [];
     if (days > 0) {
-      parts.push(`${days} day${days > 1 ? 's' : ''}`);
+      parts.push(`${days} d${days > 1 ? '' : ''}`);
     }
     if (hours > 0) {
-      parts.push(`${hours} hour${hours > 1 ? 's' : ''}`);
+      parts.push(`${hours} h${hours > 1 ? '' : ''}`);
     }
     if (minutes > 0) {
-      parts.push(`${minutes} minute${minutes > 1 ? 's' : ''}`);
+      parts.push(`${minutes} m${minutes > 1 ? '' : ''}`);
     }
     return parts.join(' ');
   }

@@ -1,11 +1,6 @@
 import { load } from "../handlers/storage/index.mjs";
 import { getTimeDifference, formatTimeDifference } from "../handlers/getTimeDiff.mjs";
 
-// const profile = load("profile");
-// // const { name: userName } = profile;
-// const userName = profile?.name || "unknown name";
-// console.log(userName);
-
 export function cardTemplate(cardData, isClickable = false) {
 
     const container = document.createElement("container");
@@ -21,13 +16,14 @@ export function cardTemplate(cardData, isClickable = false) {
     cardSize.classList.add("card", "shadow-sm");
     cardSize.style.width = "18rem";
   
+    //if no media > insert example image
     const img = document.createElement("img");
     img.classList.add("card-img-top");
-    img.src = cardData.media[0] || "/img/example_listing.jpg"; // Use the first media item
+    img.src = cardData.media[0] || "/img/example_listing.jpg";
     img.alt = `Image of listing from ${cardData.title}`;
   
     const cardBody = document.createElement("div");
-    cardBody.classList.add("card-body", "my-3", "mx-2");
+    cardBody.classList.add("card-body", "my-1");
   
     const seller = document.createElement("p");
     seller.id = "seller";
@@ -44,9 +40,8 @@ export function cardTemplate(cardData, isClickable = false) {
     const bidRow = document.createElement("div");
     bidRow.classList.add("row", "mt-1");
 
-    const bidLabel = document.createElement("h6");
     
-
+    const bidLabel = document.createElement("h6");
     const bidInput = document.createElement("input");
     bidInput.setAttribute("type", "number");
     bidInput.classList.add("form-control", "input-group-sm");
@@ -56,37 +51,35 @@ export function cardTemplate(cardData, isClickable = false) {
 
     const tbody = document.createElement("tbody");
 
-    const creditsTable = document.createElement("tr");
-    const creditsTableData1 = document.createElement("td");
+    const yourCreditsTable = document.createElement("tr");
+    const yourCreditsRow1 = document.createElement("td");
 
-    const creditsParagraph = document.createElement("p");
-    creditsParagraph.classList.add("credits", "mt-1", "text-green");
-    creditsParagraph.innerText = "Your Credits";
-    const creditsTableData2 = document.createElement("td");
-    const creditsInputGroup = document.createElement("div");
-    creditsInputGroup.classList.add("input-group-sm");
-    const creditsInputTable = document.createElement("input");
-    creditsInputTable.setAttribute("type", "number");
-    creditsInputTable.classList.add("form-control");
-    creditsInputTable.style.width = "100px";
+    const yourCredits = document.createElement("p");
+    yourCredits.classList.add("credits", "mt-1", "text-green");
+    yourCredits.innerText = "Your Credits";
+    const yourCreditsTableData = document.createElement("td");
+    const yourCreditsInput = document.createElement("div");
+    yourCreditsInput.classList.add("input-group-sm");
+    const yourCreditsValue = document.createElement("input");
+    yourCreditsValue.setAttribute("type", "number");
+    yourCreditsValue.classList.add("form-control");
+    yourCreditsValue.style.width = "100px";
 
    
-    
-
-    creditsTableData1.appendChild(creditsParagraph);
-    creditsTableData2.appendChild(creditsInputGroup);
-    creditsInputGroup.appendChild(creditsInputTable);
-    creditsTable.appendChild(creditsTableData1);
-    creditsTable.appendChild(creditsTableData2);
-    tbody.appendChild(creditsTable);
+    yourCreditsRow1.appendChild(yourCredits);
+    yourCreditsTableData.appendChild(yourCreditsInput);
+    yourCreditsInput.appendChild(yourCreditsValue);
+    yourCreditsTable.appendChild(yourCreditsRow1);
+    yourCreditsTable.appendChild(yourCreditsTableData);
+    tbody.appendChild(yourCreditsTable);
 
     
 
     const bidTable = document.createElement("tr");
     const bidTableData1 = document.createElement("td");
-    const bidTableHeader = document.createElement("h6");
-    bidTableHeader.classList.add("bids", "mt-1");
-    bidTableHeader.innerText = "Bid here";
+    const bidHere = document.createElement("h6");
+    bidHere.classList.add("bids", "mt-1");
+    bidHere.innerText = "Bid here";
 
     const bidTableData2 = document.createElement("td");
     const bidInputGroup = document.createElement("div");
@@ -97,23 +90,13 @@ export function cardTemplate(cardData, isClickable = false) {
     bidInputTable.classList.add("form-control");
     bidInputTable.style.width = "100px"; 
     
-    // (chatGPT)
+    // Bid here input (chatGPT)
     const bidsCount = cardData._count && cardData._count.bids !== undefined ? cardData._count.bids : 0;
 
-    // display getTimeDiff as days, hours, min > endsAt
-    const endsAt = cardData.endsAt || "N/A";
-    const { days, hours, minutes } = getTimeDifference(endsAt);
-
-    const timeLeft = document.createElement("p");
-    timeLeft.classList.add("list-group-item");
-    timeLeft.innerText = "Time left:";
-
-    const timeLeftValue = document.createElement("div");
-    timeLeftValue.id = "endsAt";
-    timeLeftValue.innerText = formatTimeDifference(days, hours, minutes); 
+    
 
 
-    bidTableData1.appendChild(bidTableHeader);
+    bidTableData1.appendChild(bidHere);
     bidTableData2.appendChild(bidInputGroup);
     bidInputGroup.appendChild(bidInputTable);
     bidTable.appendChild(bidTableData1);
@@ -138,17 +121,29 @@ export function cardTemplate(cardData, isClickable = false) {
     const timeBidsContainer = document.createElement("div");
     timeBidsContainer.classList.add("container", "d-flex", "justify-content-between");
 
+// Display getTimeDiff as days, hours, min > endsAt
+    const endsAt = cardData.endsAt || "N/A";
+    const { days, hours, minutes } = getTimeDifference(endsAt);
 
+    const timeLeft = document.createElement("p");
+    timeLeft.classList.add("list-group-item");
+    timeLeft.innerText = "Time left:";
+
+    const timeLeftValue = document.createElement("p");
+    timeLeftValue.id = "endsAt";
+    timeLeftValue.innerText = formatTimeDifference(days, hours, minutes); 
+
+    
     const bidsParagraph = document.createElement("p");
     bidsParagraph.classList.add("list-group-item");
     bidsParagraph.innerText = "Bids:";
 
-    const bidsValue = document.createElement("div");
+    const bidsValue = document.createElement("p");
     bidsValue.id = "bids";
     bidsValue.innerText = bidsCount; 
 
     timeBidsContainer.appendChild(timeLeft);
-timeBidsContainer.appendChild(timeLeftValue);
+    timeBidsContainer.appendChild(timeLeftValue);
 
     timeBidsContainer.appendChild(bidsParagraph);
     timeBidsContainer.appendChild(bidsValue);
