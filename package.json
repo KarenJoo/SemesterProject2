@@ -5,10 +5,10 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "npm run build",
+    "start": "npm run build",
     "build": "sass src/scss:dist/css",
-    "watch": "sass --watch src/scss:dist/css & live-server",
-    "start": "npm run build && live-server"
+    "watch": "sass --watch src/scss:dist/css",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -29,14 +29,15 @@
   "homepage": "https://github.com/KarenJoo/SemesterProject2#readme",
   "dependencies": {
     "bootstrap": "^5.3.2",
-    "popper.js": "^1.16.1"
+    "bootstrap-icons": "^1.11.1",
+    "popper.js": "^1.16.1",
+    "sass": "^1.69.5"
   },
   "devDependencies": {
     "husky": "^8.0.3",
     "lint-staged": "^15.1.0",
     "live-server": "^1.2.2",
-    "prettier": "3.1.0",
-    "sass": "^1.69.5"
+    "prettier": "3.1.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,css,scss,json,md,html}": [
