@@ -4,18 +4,22 @@ import { getTimeDifference, formatTimeDifference } from "../handlers/getTimeDiff
 export function cardTemplate(cardData, isClickable = false) {
 
     const cardContainer = document.createElement("div");
-    cardContainer.classList.add("mb-2", "col-12", "col-md-4");
+    cardContainer.classList.add("mb-1", "col-12", "col-md-4");
   
     const card = document.createElement("div");
-    card.classList.add("mx-1", "mb-3");
+    card.classList.add("mx-1", "mb-3", "d-flex", "flex-column");
   
     const cardSize = document.createElement("div");
-    cardSize.classList.add("card", "shadow-sm", "d-flex", "flex-column", "flex-grow-1");
-    cardSize.style.width = "100%";
-  
+    cardSize.classList.add("card", "shadow-sm");
+    cardSize.style.height = "800px";
+
+    // Container for maintaining aspect ratio
+const imgContainer = document.createElement("div");
+imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
+
     //if no media > insert example image
     const img = document.createElement("img");
-    img.classList.add("card-img-top");
+    img.classList.add("card-img-top", "aspect-ratio-item", "object-fit-cover", "w-100");
     img.src = cardData.media[0] || "/img/example_listing.jpg";
     img.alt = `Image of listing from ${cardData.title}`;
   
@@ -108,6 +112,7 @@ export function cardTemplate(cardData, isClickable = false) {
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(cardText);
     cardBody.appendChild(bidRow);
+    imgContainer.appendChild(img);
     cardSize.appendChild(img);
     cardBody.appendChild(table);
     cardSize.appendChild(cardBody);
