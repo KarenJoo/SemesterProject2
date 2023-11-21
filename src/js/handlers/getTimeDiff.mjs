@@ -15,13 +15,13 @@ export function getTimeDifference(endsAt) {
 export function formatTimeDifference(days, hours, minutes) {
     const parts = [];
     if (days > 0) {
-      parts.push(`${days} d${days > 1 ? '' : ''}`);
+      parts.push(`${days}d${days > 1 ? '' : ''}`);
     }
     if (hours > 0) {
-      parts.push(`${hours} h${hours > 1 ? '' : ''}`);
+      parts.push(`${hours}h${hours > 1 ? '' : ''}`);
     }
     if (minutes > 0) {
-      parts.push(`${minutes} m${minutes > 1 ? '' : ''}`);
+      parts.push(`${minutes}m${minutes > 1 ? '' : ''}`);
     }
     return parts.join(' ');
   }
