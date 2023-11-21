@@ -1,4 +1,5 @@
 import { load } from "../handlers/storage/index.mjs";
+import { getTimeDifference } from "../handlers/getTimeDiff.mjs";
 
 // const profile = load("profile");
 // // const { name: userName } = profile;
@@ -14,7 +15,7 @@ export function cardTemplate(cardData, isClickable = false) {
     cardContainer.classList.add("row", "featurette");
   
     const card = document.createElement("div");
-    card.classList.add("col-m-7", "d-flex", "justify-content-center");
+    card.classList.add("col-m-7", "d-flex", "justify-content-center", "mb-3");
   
     const cardSize = document.createElement("div");
     cardSize.classList.add("card", "shadow-sm");
@@ -57,9 +58,10 @@ export function cardTemplate(cardData, isClickable = false) {
 
     const creditsTable = document.createElement("tr");
     const creditsTableData1 = document.createElement("td");
+
     const creditsParagraph = document.createElement("p");
     creditsParagraph.classList.add("credits", "mt-1", "text-green");
-    creditsParagraph.innerText = "Credits";
+    creditsParagraph.innerText = "Your Credits";
     const creditsTableData2 = document.createElement("td");
     const creditsInputGroup = document.createElement("div");
     creditsInputGroup.classList.add("input-group-sm");
@@ -68,12 +70,17 @@ export function cardTemplate(cardData, isClickable = false) {
     creditsInputTable.classList.add("form-control");
     creditsInputTable.style.width = "100px";
 
+   
+    
+
     creditsTableData1.appendChild(creditsParagraph);
     creditsTableData2.appendChild(creditsInputGroup);
     creditsInputGroup.appendChild(creditsInputTable);
     creditsTable.appendChild(creditsTableData1);
     creditsTable.appendChild(creditsTableData2);
     tbody.appendChild(creditsTable);
+
+    
 
     const bidTable = document.createElement("tr");
     const bidTableData1 = document.createElement("td");
@@ -86,7 +93,14 @@ export function cardTemplate(cardData, isClickable = false) {
     const bidInputTable = document.createElement("input");
     bidInputTable.setAttribute("type", "number");
     bidInputTable.classList.add("form-control");
-    bidInputTable.style.width = "100px";
+    bidInputTable.style.width = "100px"; 
+    
+    const bidsCount = cardData._count && cardData._count.bids !== undefined ? cardData._count.bids : 0;
+    const endsAt = cardData.endsAt || "N/A";
+
+    // Calculate time difference
+    const { days, hours, minutes } = getTimeDifference(endsAt);
+    
 
     bidTableData1.appendChild(bidTableHeader);
     bidTableData2.appendChild(bidInputGroup);
@@ -121,6 +135,48 @@ export function cardTemplate(cardData, isClickable = false) {
     cardSize.appendChild(cardBody);
     card.appendChild(cardSize);
     cardContainer.appendChild(card);
+
+// Time left and Bids Section
+    const timeBidsContainer = document.createElement("div");
+    timeBidsContainer.classList.add("container", "d-flex", "justify-content-between");
+
+    const timeLeftParagraph = document.createElement("p");
+    timeLeftParagraph.classList.add("list-group-item");
+    timeLeftParagraph.innerText = "Time left:";
+
+    const timeLeftValue = document.createElement("div");
+    timeLeftValue.id = "endsAt";
+    timeLeftValue.innerText = endsAt; 
+
+
+    const bidsParagraph = document.createElement("p");
+    bidsParagraph.classList.add("list-group-item");
+    bidsParagraph.innerText = "Bids:";
+
+    const bidsValue = document.createElement("div");
+    bidsValue.id = "bids";
+    bidsValue.innerText = bidsCount; 
+
+    timeBidsContainer.appendChild(timeLeftParagraph);
+
+    timeBidsContainer.appendChild(bidsParagraph);
+    timeBidsContainer.appendChild(bidsValue);
+
+    cardBody.appendChild(timeBidsContainer);
+
+    // Bid button Section
+    const bidButtonContainer = document.createElement("div");
+    bidButtonContainer.classList.add("card-body", "d-flex", "justify-content-center");
+
+    const bidButton = document.createElement("button");
+    bidButton.setAttribute("type", "button");
+    bidButton.classList.add("btn", "btn-outline-secondary", "shadow");
+    bidButton.innerText = "Bid here";
+
+    bidButtonContainer.appendChild(bidButton);
+    cardBody.appendChild(bidButtonContainer);
+
+    
   
     if (isClickable) {
       cardContainer.addEventListener("click", () => {
