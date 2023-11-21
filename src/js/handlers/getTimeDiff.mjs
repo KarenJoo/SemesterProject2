@@ -1,4 +1,4 @@
-// Calculate time difference between two dates
+// Calculate time difference to insert as "endsAt" (chatGPT)
 export function getTimeDifference(endsAt) {
     const now = new Date();
     const endsAtDate = new Date(endsAt);
@@ -10,3 +10,18 @@ export function getTimeDifference(endsAt) {
 
     return { days, hours, minutes };
 }
+
+// formats the time difference > days, hours, minutes
+export function formatTimeDifference(days, hours, minutes) {
+    const parts = [];
+    if (days > 0) {
+      parts.push(`${days} day${days > 1 ? 's' : ''}`);
+    }
+    if (hours > 0) {
+      parts.push(`${hours} hour${hours > 1 ? 's' : ''}`);
+    }
+    if (minutes > 0) {
+      parts.push(`${minutes} minute${minutes > 1 ? 's' : ''}`);
+    }
+    return parts.join(' ');
+  }

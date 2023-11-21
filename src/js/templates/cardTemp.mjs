@@ -1,5 +1,5 @@
 import { load } from "../handlers/storage/index.mjs";
-import { getTimeDifference } from "../handlers/getTimeDiff.mjs";
+import { getTimeDifference, formatTimeDifference } from "../handlers/getTimeDiff.mjs";
 
 // const profile = load("profile");
 // // const { name: userName } = profile;
@@ -87,20 +87,31 @@ export function cardTemplate(cardData, isClickable = false) {
     const bidTableHeader = document.createElement("h6");
     bidTableHeader.classList.add("bids", "mt-1");
     bidTableHeader.innerText = "Bid here";
+
     const bidTableData2 = document.createElement("td");
     const bidInputGroup = document.createElement("div");
     bidInputGroup.classList.add("input-group-sm");
     const bidInputTable = document.createElement("input");
+
     bidInputTable.setAttribute("type", "number");
     bidInputTable.classList.add("form-control");
     bidInputTable.style.width = "100px"; 
     
+    // (chatGPT)
     const bidsCount = cardData._count && cardData._count.bids !== undefined ? cardData._count.bids : 0;
-    const endsAt = cardData.endsAt || "N/A";
 
-    // Calculate time difference
+    // display getTimeDiff as days, hours, min > endsAt
+    const endsAt = cardData.endsAt || "N/A";
     const { days, hours, minutes } = getTimeDifference(endsAt);
-    
+
+    const timeLeft = document.createElement("p");
+    timeLeft.classList.add("list-group-item");
+    timeLeft.innerText = "Time left:";
+
+    const timeLeftValue = document.createElement("div");
+    timeLeftValue.id = "endsAt";
+    timeLeftValue.innerText = formatTimeDifference(days, hours, minutes); 
+
 
     bidTableData1.appendChild(bidTableHeader);
     bidTableData2.appendChild(bidInputGroup);
@@ -111,19 +122,6 @@ export function cardTemplate(cardData, isClickable = false) {
 
     table.appendChild(tbody);
 
-
-
-    // const credits = document.createElement("div");
-    // credits.classList.add("row", "mt-1");
-
-    // const creditsLabel = document.createElement("p");
-    // creditsLabel.classList.add("credits", "mt-1", "text-green");
-    // creditsLabel.innerText = "Credits";
-
-    // const creditsInput = document.createElement("input");
-    // creditsInput.setAttribute("type", "number");
-    // creditsInput.classList.add("form-control", "input-group-sm");
-  
     
     // Append elements to the DOM
     cardBody.appendChild(seller);
@@ -140,14 +138,6 @@ export function cardTemplate(cardData, isClickable = false) {
     const timeBidsContainer = document.createElement("div");
     timeBidsContainer.classList.add("container", "d-flex", "justify-content-between");
 
-    const timeLeftParagraph = document.createElement("p");
-    timeLeftParagraph.classList.add("list-group-item");
-    timeLeftParagraph.innerText = "Time left:";
-
-    const timeLeftValue = document.createElement("div");
-    timeLeftValue.id = "endsAt";
-    timeLeftValue.innerText = endsAt; 
-
 
     const bidsParagraph = document.createElement("p");
     bidsParagraph.classList.add("list-group-item");
@@ -157,11 +147,11 @@ export function cardTemplate(cardData, isClickable = false) {
     bidsValue.id = "bids";
     bidsValue.innerText = bidsCount; 
 
-    timeBidsContainer.appendChild(timeLeftParagraph);
+    timeBidsContainer.appendChild(timeLeft);
+timeBidsContainer.appendChild(timeLeftValue);
 
     timeBidsContainer.appendChild(bidsParagraph);
     timeBidsContainer.appendChild(bidsValue);
-
     cardBody.appendChild(timeBidsContainer);
 
     // Bid button Section
