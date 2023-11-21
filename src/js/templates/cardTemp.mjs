@@ -3,18 +3,15 @@ import { getTimeDifference, formatTimeDifference } from "../handlers/getTimeDiff
 
 export function cardTemplate(cardData, isClickable = false) {
 
-    const container = document.createElement("container");
-    container.classList.add("mt-5");
-
     const cardContainer = document.createElement("div");
-    cardContainer.classList.add("row", "featurette");
+    cardContainer.classList.add("mb-2", "col-12", "col-md-4");
   
     const card = document.createElement("div");
-    card.classList.add("col-m-7", "d-flex", "justify-content-center", "mb-3");
+    card.classList.add("mx-1", "mb-3");
   
     const cardSize = document.createElement("div");
-    cardSize.classList.add("card", "shadow-sm");
-    cardSize.style.width = "18rem";
+    cardSize.classList.add("card", "shadow-sm", "d-flex", "flex-column", "flex-grow-1");
+    cardSize.style.width = "100%";
   
     //if no media > insert example image
     const img = document.createElement("img");
