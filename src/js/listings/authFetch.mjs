@@ -7,6 +7,7 @@ export async function headers() {
     return {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
+      "Origin": window.location.origin
     };
   }
   

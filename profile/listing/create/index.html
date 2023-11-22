@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="Description" content="BestBid auction app" />
-    <title>Specific listing | BestBid</title>
+    <title>Create listing | BestBid</title>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"
         defer></script>
@@ -13,7 +13,6 @@
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"
         defer></script>
     <script src="/src/js/index.mjs" type="module" defer></script>
-    <script src="/src/js/pages/singleListing.mjs" type="module" defer></script>
 
 
     <link rel="stylesheet" href="/dist/css/styles.css">
@@ -92,8 +91,7 @@
                                 href="/profile/index.html">Profile</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-primary" href="/profile/listing/create/index.html">Create
-                                listing</a>
+                            <a class="nav-link text-primary" href="#">Create listing</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-primary" href="#">Log out</a>
@@ -105,89 +103,44 @@
     </header>
 
     <main>
-        <div class="container mt-4">
-
-
-            <!-- All listings feed-->
-
-            <div id="cardContainer" class="row featurette container-fluid">
-                <div class="col-md-7">
-                    <div id="card" class="shadow pr-2 pl-2 mx-3" style="width: 18rem;">
-                        <img src="/img/example_listing.jpg" class="card-img-top" alt="image of listing">
-                        <div class="card-body my-3">
-                            <p id="seller">seller:</p>
-                            <h5 class="card-title">Example listing</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <table class="table">
-
-                                <tbody>
-                                    <td>
-                                        <p class="mt-1 text-green">Credits</p>
-                                    </td>
-                                    <td>
-                                        <div id="credits" class="form-control" style="width: 100px;">
-                                        </div>
-                                    </td>
-                                    <tr>
-                                        <td>
-
-                                            <h6 class="mt-1">Bid here</h6>
-                                        </td>
-                                        <td>
-                                            <div class="input-group-sm">
-                                                <input type="number" class="form-control" style="width: 100px;">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-
-
-                            <!-- Time left and Bids -->
-                            <div class="container d-flex justify-content-between">
-                                <p class="list-group-item">Time left:</p>
-                                <div id="time"></div>
-                                <p class="list-group-item">Bids:</p>
-                                <div id="bids"></div>
-                            </div>
-
-                            <!-- Bid button -->
-                            <div class="card-body d-flex justify-content-center">
-                                <button type="button" class="btn btn-outline-secondary shadow">Bid here</button>
-                            </div>
-                        </div>
-                    </div>
+        <div class="container mt-5 mb-4">
+            <div class="row">
+                <div class="d-flex align-items-center justify-content-center">
+                    <h2>Create listing</h2>
                 </div>
+                <!-- insert title -->
+                <form id="createListing" class="mb-5" method="POST" action="">
+                    <label for="title">Listing Title</label>
+                    <input class="form-control border-dark" id="title" type="text" name="title" required
+                        placeholder="Listing title..." maxlength="30"></input>
 
-                <hr class="featurette-divider">
-
-                <div class="row featurette">
-                    <div class="col-md-7">
-                        <h2 class="featurette-heading fw-normal lh-1">About<span class="text-green">BestBid.</span></h2>
-                        <p class="lead">And yes, this is the last block of representative placeholder content.
-                            Again, not
-                            really intended to be actually read, simply here to give you a better view of what this
-                            would
-                            look like with some actual content. Your content.</p>
+                    <!-- insert description -->
+                    <div class="mb-3">
+                        <label for="body" class="form-label"></label>
+                        <textarea class="form-control border-secondary" id="body" name="body" rows="3" required
+                            placeholder="Write a description..."></textarea>
                     </div>
-                    <div class="col-md-5">
-                        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-                            width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img"
-                            aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
-                            <title>Placeholder</title>
-                            <rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect><text x="50%" y="50%"
-                                fill="var(--bs-secondary-color)" dy=".3em">500x500</text>
-                        </svg>
+                    <!-- insert img URL, separated by comma -->
+                    <div class="mb-3">
+                        <label for="media" class="form-label">Insert Image URLs (separated by commas)</label>
+                        <input class="form-control border-secondary mb-2" id="media" type="text" name="media"
+                            placeholder="Insert URLs here..."></input>
                     </div>
-                </div>
+                    <!-- insert tags -->
+                    <label for="tags" class="form-label">Tags</label>
+                    <input class="form-control border-secondary mb-2" id="tags" type="text" name="tags"
+                        placeholder="Insert tags..."></input>
 
-                <hr class="featurette-divider">
-
-                <!-- /END THE FEATURETTES -->
-
+                    <div class="d-grid gap-2 mb-2">
+                        <button class="btn btn-green text-light" type="submit">
+                            Create Listing
+                        </button>
+                    </div>
+                </form>
             </div>
+        </div>
+        </div>
+
     </main>
     <!-- FOOTER -->
     <footer class="container-fluid bg-green mt-auto text-center text-light p-3">

@@ -1,7 +1,7 @@
 import { load } from "../handlers/storage/index.mjs";
-import { getTimeDifference, formatTimeDifference } from "../handlers/getTimeDiff.mjs";
+import { getTimeDifference, formatTimeDifference } from "../handlers/storage/getTimeDiff.mjs";
 
-export function cardTemplate(cardData, isClickable = false) {
+export function cardTemplate(listingData, isClickable = false) {
 
     const cardContainer = document.createElement("div");
     cardContainer.classList.add("mb-1", "col-12", "col-md-4");
@@ -20,23 +20,23 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
     //if no media > insert example image
     const img = document.createElement("img");
     img.classList.add("card-img-top", "aspect-ratio-item", "object-fit-cover", "w-100");
-    img.src = cardData.media[0] || "/img/example_listing.jpg";
-    img.alt = `Image of listing from ${cardData.title}`;
+    img.src = listingData.media[0] || "/img/example_listing.jpg";
+    img.alt = `Image of listing from ${listingData.title}`;
   
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body", "my-1");
   
     const seller = document.createElement("p");
     seller.id = "seller";
-    seller.innerText = `Seller: ${cardData.seller.name}`;
+    seller.innerText = `Seller: ${listingData.seller.name}`;
   
     const cardTitle = document.createElement("h5");
     cardTitle.classList.add("card-title");
-    cardTitle.innerText = cardData.title;
+    cardTitle.innerText = listingData.title;
   
     const cardText = document.createElement("p");
     cardText.classList.add("card-text");
-    cardText.innerText = cardData.description;
+    cardText.innerText = listingData.description;
 
     const bidRow = document.createElement("div");
     bidRow.classList.add("row", "mt-1");
@@ -92,7 +92,7 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
     bidInputTable.style.width = "100px"; 
     
     // Bid here input (chatGPT)
-    const bidsCount = cardData._count && cardData._count.bids !== undefined ? cardData._count.bids : 0;
+    const bidsCount = listingData._count && listingData._count.bids !== undefined ? listingData._count.bids : 0;
 
     
 
@@ -124,7 +124,7 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
     timeBidsContainer.classList.add("container", "d-flex", "justify-content-between");
 
 // Display getTimeDiff as days, hours, min > endsAt
-    const endsAt = cardData.endsAt || "N/A";
+    const endsAt = listingData.endsAt || "N/A";
     const { days, hours, minutes } = getTimeDifference(endsAt);
 
     const timeLeft = document.createElement("p");
@@ -167,7 +167,7 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
   
     if (isClickable) {
       cardContainer.addEventListener("click", () => {
-        window.location.href = `/listing/specific.html?id=${cardData.id}`;
+        window.location.href = `/listing/specific.html?id=${listingData.id}`;
       });
       cardContainer.style.cursor = "pointer";
     }
@@ -176,14 +176,14 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
   }
   
   // Function to render a single card
-  export function renderCardTemplate(cardData, parent, isClickable = false) {
-    const card = cardTemplate(cardData, isClickable);
+  export function renderCardTemplate(listingData, parent, isClickable = false) {
+    const card = cardTemplate(listingData, isClickable);
     parent.appendChild(card);
   }
   
   // Function to render multiple cards
-  export function renderCardsTemplate(cardDataList, parent, isClickable = false) {
-    cardDataList.forEach((cardData) => {
-      renderCardTemplate(cardData, parent, isClickable);
+  export function renderCardsTemplate(listingDataList, parent, isClickable = false) {
+    listingDataList.forEach((listingData) => {
+      renderCardTemplate(listingData, parent, isClickable);
     });
   }
