@@ -6,15 +6,22 @@ export async function headers() {
   
     return {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
         };
   }
   
 
   export async function authFetch(url, options = {}) {
-    return fetch(url, {
+    try {
+      const response = await fetch(url, {
         ...options,
         headers: await headers(),
       });
-  
+      console.log('response:', response)
+
+      return response;
+    } catch (error) {
+      console.error("Error authenticated request:", error.message);
+      throw error;
+    }
   }

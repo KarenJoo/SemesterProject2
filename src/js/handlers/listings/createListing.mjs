@@ -1,7 +1,8 @@
 import { createListing } from "../../listings/create.mjs";
-
+import dayjs from 'https://cdn.jsdelivr.net/npm/dayjs@1.10.7';
 
 export function createListingListener() {
+
     const form = document.getElementById("createListing");
     console.log("Form element:", form)
 
@@ -11,16 +12,25 @@ export function createListingListener() {
             event.preventDefault();
 
             const formData = new FormData(event.target);
+
+            // Get user-friendly input for endsAt
+            const userFriendlyEndsAt = formData.get("endsAt");
+
+            // Convert user-friendly input to a valid date and time
+            const endsAt = convertUserFriendlyToISO(userFriendlyEndsAt);
+
+
+
             const listingData = {
                 title: formData.get("title"),
                 body: formData.get("body"),
                 media: formData.get("media").split(",").map(url => url.trim()),
                 tags: [formData.get("tags").split(",").map(tag => tag.trim())],
-                endsAt: formData.get("endsAt"),
+                endsAt: endsAt,
             };
-
             try {
                 const response = await createListing(listingData);
+                console.log(listingData)
                 console.log("Listing created successfully:", response);
 
                 // Redirect or perform any other actions
@@ -35,4 +45,4 @@ export function createListingListener() {
         });
     }
 }
-    console.log("hello list")
+
