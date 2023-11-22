@@ -15,7 +15,8 @@ export function createListingListener() {
                 title: formData.get("title"),
                 body: formData.get("body"),
                 media: formData.get("media").split(",").map(url => url.trim()),
-                tags: formData.get("tags").split(",").map(tag => tag.trim()),
+                tags: [formData.get("tags").split(",").map(tag => tag.trim())],
+                endsAt: formData.get("endsAt"),
             };
 
             try {
@@ -23,7 +24,8 @@ export function createListingListener() {
                 console.log("Listing created successfully:", response);
 
                 // Redirect or perform any other actions
-                window.location.href = "/feed";
+                alert("Your listing is created");
+                // window.location.href = "/index.html";
             } catch (error) {
                 console.error("Error creating listing:", error.message);
                 if (error.response) {
@@ -33,3 +35,4 @@ export function createListingListener() {
         });
     }
 }
+    console.log("hello list")
