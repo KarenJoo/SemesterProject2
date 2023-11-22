@@ -3,7 +3,6 @@ import * as cardMethods from "../listings/index.mjs";
 
 
 async function allCardsTemplate() {
-    console.log("Inside allCardsTemplate");
       const listings = await cardMethods.getListings();
       console.log(listings);
       const listing = listings.pop();

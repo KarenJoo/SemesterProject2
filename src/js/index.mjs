@@ -14,5 +14,5 @@ if (path === "/profile/register/index.html") {
     setLoginFormListener()
 }
 
-
+listings.getListing("8b28b411-f6aa-430d-bfd3-a8d54c23f03b").then(console.log)
 listings.getListings().then(console.log);
