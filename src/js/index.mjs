@@ -2,9 +2,10 @@
 import { setRegisterFormListener } from "./handlers/register.mjs";
 import { setLoginFormListener } from "./handlers/login.mjs";
 import * as listings from "./listings/index.mjs";
+import { createListing } from "./listings/index.mjs";
+import { cardTemplate } from "./templates/cardTemp.mjs";
 import { createListingListener } from "./handlers/listings/createListing.mjs";
 import { getListing, getListings } from "./listings/index.mjs";
-import { cardTemplate } from "./templates/cardTemp.mjs";
 
 
 const path = location.pathname;

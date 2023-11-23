@@ -126,6 +126,8 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
 // Display getTimeDiff as days, hours, min > endsAt
     const endsAt = listingData.endsAt || "N/A";
     const { days, hours, minutes } = getTimeDifference(endsAt);
+    const formattedTimeDifference = formatTimeDifference(days, hours, minutes);
+    console.log('Formatted time difference:', formattedTimeDifference);
 
     const timeLeft = document.createElement("p");
     timeLeft.classList.add("list-group-item");
@@ -133,7 +135,7 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
 
     const timeLeftValue = document.createElement("p");
     timeLeftValue.id = "endsAt";
-    timeLeftValue.innerText = formatTimeDifference(days, hours, minutes); 
+    timeLeftValue.innerText = formattedTimeDifference;
 
     
     const bidsParagraph = document.createElement("p");

@@ -1,57 +1,55 @@
 import { createListing } from "../../listings/create.mjs";
+import { getTimeDifference, formatTimeDifference } from "../storage/getTimeDiff.mjs";
 
 export function createListingListener() {
-
     const form = document.getElementById("createListing");
     console.log("Form element:", form)
 
     if (form) {
         form.addEventListener("submit", async (event) => {
-            console.log("Form submitted");
             event.preventDefault();
 
-            const formData = new FormData(event.target);
+                const formData = new FormData(event.target);
+                // Convert input > endsAt
+                const convertedEndsAt = formData.get("endsAt");
+                // Convert endsAt input to a valid date and time
+                const endsAt = new Date(convertedEndsAt);
+                console.log('Converted endsAt:', endsAt);
 
-            // Convert input > endsAt
-            const convertedEndsAt = formData.get("endsAt");
+                const listingData = {
+                    title: formData.get("title"),
+                    description: formData.get("description"),
+                    media: validateMediaUrls(formData.get("media")),
+                    tags: formData.get("tags").split(",").map(tag => tag.trim()),
+                    endsAt: endsAt,
+                };
 
-            // Convert endsAt input to a valid date and time
-            const endsAt = convertEndsAt(convertedEndsAt);
-
-
-
-            const listingData = {
-                title: formData.get("title"),
-                body: formData.get("body"),
-                media: formData.get("media").split(",").map(url => url.trim()),
-                tags: [formData.get("tags").split(",").map(tag => tag.trim())],
-                endsAt: endsAt,
-            };
-            try {
-                const response = await createListing(listingData);
-                console.log(listingData)
-                console.log("Listing created successfully:", response);
-
-                alert("Your listing is created");
-                // window.location.href = "/index.html";
-            } catch (error) {
-                console.error("Error creating listing:", error.message);
-                if (error.response) {
+                try {
+                    const response = await createListing(listingData);
+                    console.log("Listing created successfully:", response);
+                    window.location.href = "/index.html";
+        
+                } catch (error) {
+                  console.error("Error creating post:", error.message);
+                  if (error.response) {
                     console.error("Response data:", await error.response.json());
+                  }
                 }
+              });
             }
-        });
-    }
+          }
+// validateMediaUrls function
+function validateMediaUrls(media) {
+    const mediaUrls = media.split(",").map(url => url.trim());
+        
+    return mediaUrls;
 }
 
-
-function convertEndsAt(userFriendlyInput) {
-    // convert input using the datetime-local format
-    return userFriendlyInput;
+// Display Time Difference Function
+function displayTimeDifference(endsAt) {
+    const { days, hours, minutes } = getTimeDifference(endsAt);
+    const formattedTimeDifference = formatTimeDifference(days, hours, minutes);
+    
+    // Display the formatted time difference to the user
+    document.getElementById("endsAt").innerText = `Time left: ${formattedTimeDifference}`;
 }
-
-function parseUserFriendlyDuration(userFriendlyInput) {
-    // return milliseconds, example: "00 days, 00h 00m"
-    return 0;
-}
-

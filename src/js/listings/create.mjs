@@ -7,19 +7,27 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-const action = "/auction/listings";
-const method = "POST";
-
-export async function createListing(listingData) {
+  const action = "/auction/listings";
+  const method = "POST";
+  
+  export async function createListing(listingData) {
     const createListingURL = API_BASE_URL + action;
-
-    console.log("Listing Data:", listingData);
-        const response = await authFetch(createListingURL, {
-            method,
-            body: JSON.stringify(listingData),
-        })
-
-        const listing = await response.json();
-        console.log(listing)
+  
+    try {
+      const response = await authFetch(createListingURL, {
+        method,
+        body: JSON.stringify(listingData),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Error creating listing");
+      }
+  
+      const listing = await response.json();
+      console.log("Listing created:", listing);
+      return listing;
+    } catch (error) {
+      console.error("Error creating listing:", error.message);
+      throw error; 
     }
-
+  }
