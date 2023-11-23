@@ -1,5 +1,4 @@
 import { createListing } from "../../listings/create.mjs";
-import dayjs from 'https://cdn.jsdelivr.net/npm/dayjs@1.10.7';
 
 export function createListingListener() {
 
@@ -13,11 +12,11 @@ export function createListingListener() {
 
             const formData = new FormData(event.target);
 
-            // Get user-friendly input for endsAt
-            const userFriendlyEndsAt = formData.get("endsAt");
+            // Convert input > endsAt
+            const convertedEndsAt = formData.get("endsAt");
 
-            // Convert user-friendly input to a valid date and time
-            const endsAt = convertUserFriendlyToISO(userFriendlyEndsAt);
+            // Convert endsAt input to a valid date and time
+            const endsAt = convertEndsAt(convertedEndsAt);
 
 
 
@@ -33,7 +32,6 @@ export function createListingListener() {
                 console.log(listingData)
                 console.log("Listing created successfully:", response);
 
-                // Redirect or perform any other actions
                 alert("Your listing is created");
                 // window.location.href = "/index.html";
             } catch (error) {
@@ -44,5 +42,16 @@ export function createListingListener() {
             }
         });
     }
+}
+
+
+function convertEndsAt(userFriendlyInput) {
+    // convert input using the datetime-local format
+    return userFriendlyInput;
+}
+
+function parseUserFriendlyDuration(userFriendlyInput) {
+    // return milliseconds, example: "00 days, 00h 00m"
+    return 0;
 }
 
