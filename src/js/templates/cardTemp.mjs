@@ -2,7 +2,6 @@ import { load } from "../handlers/storage/index.mjs";
 import { getTimeDifference, formatTimeDifference } from "../handlers/storage/getTimeDiff.mjs";
 
 const profile = load("profile");
-// const { name: userName } = profile;
 const userName = profile?.name || "unknown name";
 console.log(userName);
 
@@ -12,7 +11,7 @@ export function cardTemplate(listingData, isClickable = false) {
     cardContainer.classList.add("mb-1", "col-12", "col-md-4");
   
     const card = document.createElement("div");
-    card.classList.add("mx-1", "mb-3", "d-flex", "flex-column");
+    card.classList.add("mx-1", "mb-3", "mt-3", "d-flex", "flex-column");
   
     const cardSize = document.createElement("div");
     cardSize.classList.add("card", "shadow-sm");
@@ -154,7 +153,34 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
     timeBidsContainer.appendChild(bidsValue);
     cardBody.appendChild(timeBidsContainer);
 
-    // Bid button Section
+  
+    if (isClickable) {
+      cardContainer.addEventListener("click", () => {
+        window.location.href = `/listing/specific.html?id=${listingData.id}`;
+      });
+      cardContainer.style.cursor = "pointer";
+    }
+
+    const { seller: author } = listingData;
+    const isAuthorAndUser = author && author.name === userName;
+    console.log("isAuthorAndUser:", isAuthorAndUser);
+
+    // if user === author/seller === update, delete btn
+    // if else === "bid here" btn displayed on listing
+    if (isAuthorAndUser) {
+      const updateBtn = document.createElement("button");
+      updateBtn.classList.add("btn", "btn-primary");
+      updateBtn.innerText = "Update listing";
+    
+      updateBtn.addEventListener("click", () => {
+        window.location.href = `/profile/listing/update/index.html?id=${listingData.id}`;
+      });
+    
+      cardBody.appendChild(updateBtn);
+
+
+    } else {
+    // Bid button only on listings the author/user have not created 
     const bidButtonContainer = document.createElement("div");
     bidButtonContainer.classList.add("card-body", "d-flex", "justify-content-center");
 
@@ -165,35 +191,7 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
 
     bidButtonContainer.appendChild(bidButton);
     cardBody.appendChild(bidButtonContainer);
-
-    
-  
-    if (isClickable) {
-      cardContainer.addEventListener("click", () => {
-        window.location.href = `/listing/specific.html?id=${listingData.id}`;
-      });
-      cardContainer.style.cursor = "pointer";
     }
-
-
-    // check if user === isSeller
-    const { isSeller } = listingData;
-    const isSellerAndUser = isSeller && isSeller.name === userName;
-
-    if (isSellerAndUser) {
-      const updateBtn = document.createElement("button");
-      updateBtn.classList.add("btn", "btn-primary");
-      updateBtn.innerText = "Update listing";
-  
-      updateBtn.addEventListener("click", () => {
-        // Execute > editPost.html with the post ID
-        window.location.href = `/profile/listing/update/index.html?id=${postData.id}`;
-      });
-  
-    
-  
-    cardBody.appendChild(updateBtn);
-  }
     return cardContainer;
   }
   

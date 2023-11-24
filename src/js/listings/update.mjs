@@ -14,7 +14,7 @@ export async function updateListing(id, listingData) {
           throw new Error("Update listing requires a postID");
         }
       
-        const updateListingURL = `${API_BASE_URL}${action}/${id}`;
+        const updateListingURL = `${API_BASE_URL}${action}/${id}?_seller=true`;
       
         try {
           const response = await authFetch(updateListingURL, {
