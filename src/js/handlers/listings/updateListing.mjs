@@ -1,8 +1,12 @@
 import { updateListing } from "../../listings/update.mjs"; 
+import { getTimeDifference, formatTimeDifference } from "../storage/getTimeDiff.mjs";
 
 export function updateListingListener () {
     const form = document.getElementById("updateListing");
-    console.log("Form element:", form)
+    console.log("Form element:", form);
+
+    const url = new URL(location.href);
+    const id = url.searchParams.get("id");
 
     if (form) {
         form.addEventListener("submit", async (event) => {
@@ -23,10 +27,12 @@ export function updateListingListener () {
                     endsAt: endsAt,
                 };
 
+                console.log(listingData);
+
                 try {
-                    const response = await updateListing(listingData);
+                    const response = await updateListing(id, listingData);
                     console.log("Listing updated successfully:", response);
-                    window.location.href = "/index.html";
+                    window.location.href = "/listing/specific.html";
         
                 } catch (error) {
                   console.error("Error updating listing:", error.message);

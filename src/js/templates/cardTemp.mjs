@@ -99,9 +99,6 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
     // Bid here input (chatGPT)
     const bidsCount = listingData._count && listingData._count.bids !== undefined ? listingData._count.bids : 0;
 
-    
-
-
     bidTableData1.appendChild(bidHere);
     bidTableData2.appendChild(bidInputGroup);
     bidInputGroup.appendChild(bidInputTable);
@@ -111,7 +108,6 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
 
     table.appendChild(tbody);
 
-    
     // Append elements to the DOM
     cardBody.appendChild(seller);
     cardBody.appendChild(cardTitle);
@@ -179,6 +175,7 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
       cardContainer.style.cursor = "pointer";
     }
 
+
     // check if user === isSeller
     const { isSeller } = listingData;
     const isSellerAndUser = isSeller && isSeller.name === userName;
@@ -193,10 +190,10 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
         window.location.href = `/profile/listing/update/index.html?id=${postData.id}`;
       });
   
-    }
+    
   
     cardBody.appendChild(updateBtn);
-  
+  }
     return cardContainer;
   }
   

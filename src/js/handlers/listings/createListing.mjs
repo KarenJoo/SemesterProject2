@@ -30,7 +30,7 @@ export function createListingListener() {
                     window.location.href = "/index.html";
         
                 } catch (error) {
-                  console.error("Error creating post:", error.message);
+                  console.error("Error creating listing:", error.message);
                   if (error.response) {
                     console.error("Response data:", await error.response.json());
                   }
