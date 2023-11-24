@@ -168,11 +168,12 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
     // if user === author/seller === update, delete btn
     // if else === "bid here" btn displayed on listing
     if (isAuthorAndUser) {
-      const updateBtn = document.createElement("button");
-      updateBtn.classList.add("btn", "btn-primary");
-      updateBtn.innerText = "Update listing";
+      const updateBtn = document.createElement("p");
+      updateBtn.classList.add("btn-sm", "btn", "btn-outline-primary");
+      updateBtn.innerText = "Update your listing";
     
-      updateBtn.addEventListener("click", () => {
+    updateBtn.addEventListener("click", () => {
+        // Execute > update/index.html with the post ID
         window.location.href = `/profile/listing/update/index.html?id=${listingData.id}`;
       });
     

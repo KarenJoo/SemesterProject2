@@ -32,7 +32,7 @@ export function updateListingListener () {
                 try {
                     const response = await updateListing(id, listingData);
                     console.log("Listing updated successfully:", response);
-                    window.location.href = "/listing/specific.html";
+                    window.location.href = `/listing/specific.html?id=${id}`;
         
                 } catch (error) {
                   console.error("Error updating listing:", error.message);
