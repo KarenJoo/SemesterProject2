@@ -1,6 +1,11 @@
 import { load } from "../handlers/storage/index.mjs";
 import { getTimeDifference, formatTimeDifference } from "../handlers/storage/getTimeDiff.mjs";
 
+const profile = load("profile");
+// const { name: userName } = profile;
+const userName = profile?.name || "unknown name";
+console.log(userName);
+
 export function cardTemplate(listingData, isClickable = false) {
 
     const cardContainer = document.createElement("div");
@@ -173,6 +178,24 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
       });
       cardContainer.style.cursor = "pointer";
     }
+
+    // check if user === isSeller
+    const { isSeller } = listingData;
+    const isSellerAndUser = isSeller && isSeller.name === userName;
+
+    if (isSellerAndUser) {
+      const updateBtn = document.createElement("button");
+      updateBtn.classList.add("btn", "btn-primary");
+      updateBtn.innerText = "Update listing";
+  
+      updateBtn.addEventListener("click", () => {
+        // Execute > editPost.html with the post ID
+        window.location.href = `/profile/listing/update/index.html?id=${postData.id}`;
+      });
+  
+    }
+  
+    cardBody.appendChild(updateBtn);
   
     return cardContainer;
   }
@@ -189,3 +212,5 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
       renderCardTemplate(listingData, parent, isClickable);
     });
   }
+
+
