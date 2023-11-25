@@ -32,17 +32,28 @@ export function updateListingListener () {
                 try {
                     const response = await updateListing(id, listingData);
                     console.log("Listing updated successfully:", response);
-                    window.location.href = `/listing/specific.html?id=${id}`;
-        
-                } catch (error) {
-                  console.error("Error updating listing:", error.message);
-                  if (error.response) {
-                    console.error("Response data:", await error.response.json());
+            
+                    // Check if the user is the author and redirect accordingly
+                    const profile = load("profile");
+                    const userName = profile?.name || "unknown name";
+                    const { seller: author } = response;
+                    const isAuthorAndUser = author && author.name === userName;
+            
+                    if (isAuthorAndUser) {
+                      window.location.href = `/profile/listing/update/index.html?id=${id}`;
+                    } else {
+                      window.location.href = `/listing/specific.html?id=${id}`;
+                    }
+            
+                  } catch (error) {
+                    console.error("Error updating listing:", error.message);
+                    if (error.response) {
+                      console.error("Response data:", await error.response.json());
+                    }
                   }
-                }
-              });
+                });
+              }
             }
-          }
 // validateMediaUrls function
 function validateMediaUrls(media) {
     const mediaUrls = media.split(",").map(url => url.trim());

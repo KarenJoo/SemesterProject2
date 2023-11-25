@@ -155,45 +155,61 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
 
   
     if (isClickable) {
-      cardContainer.addEventListener("click", () => {
-        window.location.href = `/listing/specific.html?id=${listingData.id}`;
+      cardContainer.addEventListener("click", (event) => {
+        // if the user clicks > update button > redirect > update page
+        if (event.target.classList.contains("update-listing-btn")) {
+          // prevent the default card click behavior
+          event.preventDefault();
+        } else {
+          // if the user clicks > card/bid btn > Redirect to the specific page
+          window.location.href = `/listing/specific.html?id=${listingData.id}`;
+        }
       });
       cardContainer.style.cursor = "pointer";
     }
-
+  
+  
     const { seller: author } = listingData;
     const isAuthorAndUser = author && author.name === userName;
-    console.log("isAuthorAndUser:", isAuthorAndUser);
-
-    // if user === author/seller === update, delete btn
-    // if else === "bid here" btn displayed on listing
+  
     if (isAuthorAndUser) {
-      const updateBtn = document.createElement("p");
-      updateBtn.classList.add("btn-sm", "btn", "btn-outline-primary");
-      updateBtn.innerText = "Update your listing";
-    
-    updateBtn.addEventListener("click", () => {
-        // Execute > update/index.html with the post ID
-        window.location.href = `/profile/listing/update/index.html?id=${listingData.id}`;
-      });
-    
-      cardBody.appendChild(updateBtn);
-
-
+      renderUpdateButton(cardBody, listingData);
     } else {
-    // Bid button only on listings the author/user have not created 
+      renderBidButton(cardBody);
+    }
+  
+    return cardContainer;
+  }
+  
+  function renderUpdateButton(parent, listingData) {
+    const updateBtn = document.createElement("button");
+    updateBtn.type = "button";
+    updateBtn.classList.add("btn-sm", "btn", "btn-outline-primary", "update-listing-btn"); 
+    updateBtn.innerText = "Update your listing";
+    
+  
+    updateBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+      const updateUrl = `/profile/listing/update/index.html?id=${listingData.id}`;
+      window.location.href = updateUrl;
+      return false;
+    });
+  
+    parent.appendChild(updateBtn);
+  }
+  
+  function renderBidButton(parent) {
     const bidButtonContainer = document.createElement("div");
     bidButtonContainer.classList.add("card-body", "d-flex", "justify-content-center");
-
+  
     const bidButton = document.createElement("button");
     bidButton.setAttribute("type", "button");
-    bidButton.classList.add("btn", "btn-outline-secondary", "shadow");
+    bidButton.classList.add("btn", "btn-outline-secondary", "shadow", "bid-btn"); 
     bidButton.innerText = "Bid here";
-
+    
+  
     bidButtonContainer.appendChild(bidButton);
-    cardBody.appendChild(bidButtonContainer);
-    }
-    return cardContainer;
+    parent.appendChild(bidButtonContainer);
   }
   
   // Function to render a single card
