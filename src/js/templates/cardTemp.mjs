@@ -1,5 +1,6 @@
 import { load } from "../handlers/storage/index.mjs";
 import { getTimeDifference, formatTimeDifference } from "../handlers/storage/getTimeDiff.mjs";
+import { removeListing } from "../listings/remove.mjs";
 
 const profile = load("profile");
 const userName = profile?.name || "unknown name";
@@ -174,6 +175,7 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
   
     if (isAuthorAndUser) {
       renderUpdateButton(cardBody, listingData);
+      renderRemoveButton(cardBody, listingData);
     } else {
       renderBidButton(cardBody);
     }
@@ -197,6 +199,32 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
   
     parent.appendChild(updateBtn);
   }
+
+  function renderRemoveButton(parent, listingData) {
+    const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.classList.add("btn-sm", "btn", "btn-outline-danger", "remove-listing-btn");
+    removeBtn.innerText = "Delete your listing";
+
+    removeBtn.addEventListener("click", async (event) => {
+      event.preventDefault();
+
+      try {
+      const response = await removeListing(listingData.id);
+      console.log("Listing removed successfully:", response);
+
+      // Redirect to the feed
+      window.location.href = `/index.html`;
+    } catch (error) {
+      console.error("Error removing listing:", error.message);
+    }
+
+    return false;
+  });
+
+  parent.appendChild(removeBtn);
+}
+ 
   
   function renderBidButton(parent) {
     const bidButtonContainer = document.createElement("div");

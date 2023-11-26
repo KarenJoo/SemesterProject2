@@ -19,4 +19,4 @@ if (path === '/profile/register/index.html') {
     createListingListener()
 } else if (path === '/profile/listing/update/index.html') {
     updateListingListener()
-}
+} 
