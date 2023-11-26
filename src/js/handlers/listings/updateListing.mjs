@@ -1,5 +1,6 @@
 import { updateListing } from "../../listings/update.mjs"; 
 import { getTimeDifference, formatTimeDifference } from "../storage/getTimeDiff.mjs";
+import { load } from "../storage/index.mjs";
 
 export function updateListingListener () {
     const form = document.getElementById("updateListing");
@@ -32,6 +33,7 @@ export function updateListingListener () {
                 try {
                     const response = await updateListing(id, listingData);
                     console.log("Listing updated successfully:", response);
+
             
                     // Check if the user is the author and redirect accordingly
                     const profile = load("profile");
@@ -42,7 +44,7 @@ export function updateListingListener () {
                     if (isAuthorAndUser) {
                       window.location.href = `/profile/listing/update/index.html?id=${id}`;
                     } else {
-                      window.location.href = `/listing/specific.html?id=${id}`;
+                      window.location.href = `/listing/specific.html?id=${response.id}`;
                     }
             
                   } catch (error) {
