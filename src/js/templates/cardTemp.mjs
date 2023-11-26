@@ -9,7 +9,7 @@ console.log(userName);
 export function cardTemplate(listingData, isClickable = false) {
 
     const cardContainer = document.createElement("div");
-    cardContainer.classList.add("mb-1", "col-12", "col-md-4");
+    cardContainer.classList.add("mb-1", "col-12", "mb-5");
   
     const card = document.createElement("div");
     card.classList.add("mx-1", "mb-3", "mt-3", "d-flex", "flex-column");
@@ -154,7 +154,6 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
     timeBidsContainer.appendChild(bidsValue);
     cardBody.appendChild(timeBidsContainer);
 
-  
     if (isClickable) {
       cardContainer.addEventListener("click", (event) => {
         // if the user clicks > update button > redirect > update page
@@ -169,7 +168,7 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
       cardContainer.style.cursor = "pointer";
     }
   
-  
+    // if user === author/seller
     const { seller: author } = listingData;
     const isAuthorAndUser = author && author.name === userName;
   

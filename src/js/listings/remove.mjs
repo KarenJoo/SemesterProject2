@@ -19,6 +19,8 @@ export async function removeListing(id) {
         const response = await authFetch(removeListingURL, {
           method
         });
+
+        console.log('Response Status:', response.status);
     
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);

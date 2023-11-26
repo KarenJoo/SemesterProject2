@@ -7,6 +7,8 @@ import { cardTemplate } from "./templates/cardTemp.mjs";
 import { createListingListener } from "./handlers/listings/createListing.mjs";
 import { getListing, getListings } from "./listings/index.mjs";
 import { updateListingListener } from "./handlers/listings/updateListing.mjs";
+import { removeListingListener } from "./handlers/listings/removeListing.mjs";
+import { remove } from "./handlers/storage/index.mjs";
 
 
 const path = location.pathname;
@@ -19,4 +21,6 @@ if (path === '/profile/register/index.html') {
     createListingListener()
 } else if (path === '/profile/listing/update/index.html') {
     updateListingListener()
-} 
+} else if (path === '/src/js/handlers/listings/removeListing.mjs') {
+    removeListingListener()
+}
