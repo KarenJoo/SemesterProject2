@@ -25,10 +25,13 @@ const response = await fetch(loginURL, {
 
     storage.save("token", accessToken);
     storage.save("profile", user);
+    storage.save("user", user);
     alert("You are now logged in");
 
     // Redirect to the profile page
-    window.location.href = "/profile/index.html";
+    window.location.href = "/profile/index.html";   
+     return user;
+
 } catch (error) {
     console.error("Login Error:", error.message);
 }
