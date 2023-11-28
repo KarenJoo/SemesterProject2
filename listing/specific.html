@@ -23,7 +23,7 @@
     <header data-bs-theme="dark">
         <div class="container">
         </div>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-light box-shadow">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-white shadow">
             <div class="container-fluid d-flex justify-content-between align-items-center">
 
                 <!-- Burger menu -->
@@ -45,62 +45,57 @@
                 <a class="logo mx-auto" href="/index.html"> <img src="/img/BestBid.png" style="width: 7rem"
                         alt="BestBid logo" /></a>
 
+
                 <!-- profile menu -->
                 <div class="col-1 d-flex align-items-center justify-content-end">
-
-                    <!-- profile icon button -->
-                    <button class="navbar-toggler custom-toggler d-md-none" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#profileCollapse" aria-controls="profileCollapse" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <!-- profile icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="bg-dark"
-                            class="bi bi-person-circle" viewBox="0 0 16 16">
-                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                            <path fill-rule="evenodd"
-                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                        </svg>
-                    </button>
-
+                    <!-- profile icon -->
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="bg-dark"
+                                class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                <path fill-rule="evenodd"
+                                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                            </svg>
+                        </a>
+                        <ul class="dropdown-menu bg-light dropdown-menu-end">
+                            <li class="nav-item my-2 mx-2">
+                                <a class="nav-link text-primary" aria-current="page"
+                                    href="/profile/index.html">Profile</a>
+                            </li>
+                            <li class="nav-item my-2 mx-2">
+                                <a class="nav-link text-primary" href="/profile/listing/create/index.html">Create
+                                    listing</a>
+                            </li>
+                            <li class="nav-item my-2 mx-2">
+                                <a class="nav-link text-primary" href="/profile/listing/update/index.html">Update
+                                    listing</a>
+                            </li>
+                            <li class="nav-item my-2 mx-2">
+                                <a class="nav-link text-primary" href="#">Log out</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
 
                 <!-- Burger menu links -->
                 <div class="collapse navbar-collapse" id="burgerCollapse">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0 mt-2">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
 
                         <li class="nav-item">
-                            <a class="nav-link text-primary mt-3" href="/profile/login/index.html">Log in </a>
+                            <a class="nav-link text-primary" href="/profile/login/index.html">Log in </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-green disabled" href="/burger-menu-item2"
                                 aria-disabled="true">Feed</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-primary mt-3" href="#">About </a>
+                            <a class="nav-link text-primary" href="#">About </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-primary" href="#">Contact </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- profile menu links -->
-                <div class="collapse navbar-collapse" id="profileCollapse">
-                    <ul class="navbar-nav ml-auto mb-2 mb-md-0 mt-2 justify-content-end">
-                        <li class="nav-item">
-                            <a class="nav-link active text-primary" aria-current="page"
-                                href="/profile/index.html">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-primary" href="/profile/listing/create/index.html">Create
-                                listing</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-primary" href="/profile/listing/update/index.html">Update
-                                listing</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-primary" href="#">Log out</a>
                         </li>
                     </ul>
                 </div>

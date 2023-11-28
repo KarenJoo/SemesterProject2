@@ -7,8 +7,13 @@ import { authFetch } from "../../../listings/authFetch.mjs";
 import { login } from "../login.mjs";
 
 document.addEventListener("DOMContentLoaded", () => {
-    profileSetUp();
-  });
+    const currentPage = window.location.pathname;
+    
+    // Check if the current page is the profile page
+    if (currentPage.includes("/profile/index.html")) {
+        profileSetUp();
+    }
+});
 
   // prevents several executions and the profileSetup to duplicate data
   let executeOnce = false;
