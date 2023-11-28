@@ -1,8 +1,16 @@
 import { profileSetUp } from "../api/auth/profile/profileSetup.mjs";
 
 export function profileTemplate(name, avatar, email, credits, listings) {
+    // Remove existing profile containers
+    const existingContainers = document.querySelectorAll('.container-fluid.mb-1.col-12.mb-5');
+    existingContainers.forEach(container => container.remove());
+
+    // Create a new profile container
     const profileContainer = document.createElement("div");
     profileContainer.classList.add("container-fluid", "mb-1", "col-12", "mb-5");
+
+    const profile = document.createElement("div");
+    profile.classList.add("mx-1", "mb-3", "mt-3", "d-flex", "flex-column");
 
     const profileInfo = document.createElement("div");
     profileInfo.classList.add(
@@ -43,7 +51,7 @@ export function profileTemplate(name, avatar, email, credits, listings) {
     userCredits.classList.add("h6", "mb-2", "text-dark");
     userCredits.innerText = `Your Credits: ${credits}`;
 
-    
+    profileContainer.appendChild(profile);
 
     followers.appendChild(userCredits);
 
@@ -53,7 +61,7 @@ export function profileTemplate(name, avatar, email, credits, listings) {
 
     profileContainer.appendChild(profileInfo);
 
-    // Append the profileContainer to the body or any other desired element
-    document.body.appendChild(profileContainer);
-
+    // Append the profileContainer to the main section
+    const mainSection = document.querySelector('main');
+    mainSection.appendChild(profileContainer);
 }

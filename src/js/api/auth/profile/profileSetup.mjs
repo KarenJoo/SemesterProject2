@@ -2,6 +2,7 @@ import * as storage from "/src/js/handlers/storage/index.mjs";
 import { load } from "../../../handlers/storage/index.mjs";
 import { API_BASE_URL } from "../../API.mjs";
 import { profileTemplate } from "../../../templates/profileTemp.mjs";
+import { renderProfileListings } from "../../../templates/profileListingsTemp.mjs";
 import { authFetch } from "../../../listings/authFetch.mjs";
 import { login } from "../login.mjs";
 
@@ -30,6 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Render the profile using the template
             renderProfile(profile);
+
+            // get users listings
+            await getProfileListings(name);
         } else {
             console.error("User object is null or missing 'name' property.");
         }
@@ -53,4 +57,15 @@ function renderProfile(profile) {
     const { name, avatar, email, credits, _count } = profile;
     const { listings } = _count;
     profileTemplate(name, avatar, email, credits, listings);
+}
+
+async function getProfileListings(name) {
+    try {
+        const profileListingsResponse = await authFetch(`${API_BASE_URL}/auction/profiles/${name}/listings`);
+        const listingsData = await profileListingsResponse.json();
+        
+        renderProfileListings(listingsData);
+    } catch (error) {
+        console.error('Error fetching and rendering listings:', error);
+    }
 }
