@@ -9,7 +9,6 @@ import { getListing, getListings } from "./listings/index.mjs";
 import { updateListingListener } from "./handlers/listings/updateListing.mjs";
 import { removeListingListener } from "./handlers/listings/removeListing.mjs";
 import { remove } from "./handlers/storage/index.mjs";
-import { profileTemplate } from "./templates/profileTemp.mjs";
 
 
 const path = location.pathname;

@@ -5,9 +5,10 @@ export function renderProfileListings(profileData) {
 
     profileData.forEach(({ title, endsAt, media, id, _count }) => {
         const { bids } = _count;
-
+          
         const listingItem = document.createElement("div");
         listingItem.classList.add("card", "mb-3");
+
 
         // Create and append elements for listing details
         const titleElement = document.createElement("h5");
@@ -22,6 +23,14 @@ export function renderProfileListings(profileData) {
 
         listingItem.appendChild(titleElement);
         listingItem.appendChild(endsAtElement);
+
+        // Make the entire card clickable
+        listingItem.addEventListener("click", () => {
+            window.location.href = `/listing/specific.html?id=${id}`;
+        });
+
+        listingsContainer.style.cursor = "pointer";
+
 
         // Append the listing item to the container
         listingsContainer.appendChild(listingItem);
