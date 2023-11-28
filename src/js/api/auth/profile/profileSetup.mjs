@@ -18,12 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
         // Log user information for debugging
         console.log("User object:", user);
 
-        // Check if the user object exists and has a name property
+        // Check if the user exists and has a name property
         if (user && user.name) {
             const { name } = user;
-
-            // Log the name for debugging
-            console.log("User name:", name);
 
             // Fetch user profile data
             const profile = await fetchProfileData(name);
