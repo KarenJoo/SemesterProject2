@@ -3,12 +3,16 @@ export function renderProfileListings(profileData) {
     const listingsContainer = document.createElement("div");
     listingsContainer.classList.add("container-fluid", "mb-3");
 
+    const yourListings = document.createElement("h2");
+    yourListings.classList.add("mb-2", "text-green");
+    yourListings.innerText = "Your listings";
+    listingsContainer.appendChild(yourListings);
+
     profileData.forEach(({ title, endsAt, media, id, _count }) => {
         const { bids } = _count;
           
         const listingItem = document.createElement("div");
         listingItem.classList.add("card", "mb-3");
-
 
         // Create and append elements for listing details
         const titleElement = document.createElement("h5");
@@ -19,7 +23,6 @@ export function renderProfileListings(profileData) {
         endsAtElement.classList.add("card-text");
         endsAtElement.innerText = `Ends at: ${new Date(endsAt).toLocaleString()}`;
 
-        // You can add more elements for other details like media, tags, etc.
 
         listingItem.appendChild(titleElement);
         listingItem.appendChild(endsAtElement);
@@ -29,8 +32,7 @@ export function renderProfileListings(profileData) {
             window.location.href = `/listing/specific.html?id=${id}`;
         });
 
-        listingsContainer.style.cursor = "pointer";
-
+        listingItem.style.cursor = "pointer";
 
         // Append the listing item to the container
         listingsContainer.appendChild(listingItem);

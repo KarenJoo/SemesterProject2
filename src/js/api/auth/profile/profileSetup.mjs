@@ -10,14 +10,19 @@ document.addEventListener("DOMContentLoaded", () => {
     profileSetUp();
   });
 
+  // prevents several executions and the profileSetup to duplicate data
+  let executeOnce = false;
 
   export async function profileSetUp() {
     try {
-        // Get user information from storage
-        const user = storage.load("user");
+         // Check if profileSetUp has already been executed
+         if (executeOnce) {
+            return;
+        }
+           // true === indicates that profileSetUp has been executed
+           executeOnce = true;
 
-        // Log user information for debugging
-        console.log("User object:", user);
+           const user = storage.load("user");
 
         // Check if the user exists and has a name property
         if (user && user.name) {
@@ -26,10 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Fetch user profile data
             const profile = await fetchProfileData(name);
 
-            // Log the profile data for debugging
-            console.log("Fetched profile data:", profile);
 
-            // Render the profile using the template
             renderProfile(profile);
 
             // get users listings
