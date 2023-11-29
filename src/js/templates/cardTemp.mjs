@@ -31,10 +31,19 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body", "my-1");
   
-    const seller = document.createElement("p");
-    seller.id = "seller";
-    seller.innerText = `Seller: ${listingData.seller.name}`;
-  
+
+// Create seller element as an anchor element
+const seller = document.createElement("a");
+seller.id = "seller";
+seller.classList.add("clickable");
+seller.href = `/profile/index.html?name=${listingData.seller.name}`;
+seller.innerText = `Seller: ${listingData.seller.name}`;
+
+// Add click event to the seller's name
+seller.addEventListener("click", () => {
+    window.location.href = `/profile/index.html?name=${listingData.seller.name}`;
+});
+
     const cardTitle = document.createElement("h5");
     cardTitle.classList.add("card-title");
     cardTitle.innerText = listingData.title;
@@ -168,6 +177,7 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
       cardContainer.style.cursor = "pointer";
     }
   
+    
     // if user === author/seller
     const { seller: author } = listingData;
     const isAuthorAndUser = author && author.name === userName;

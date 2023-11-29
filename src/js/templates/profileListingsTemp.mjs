@@ -32,6 +32,8 @@ export function renderProfileListings(profileData) {
             window.location.href = `/listing/specific.html?id=${id}`;
         });
 
+        
+
         listingItem.style.cursor = "pointer";
 
         // Append the listing item to the container
