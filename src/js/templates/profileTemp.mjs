@@ -50,7 +50,7 @@ export function profileTemplate(name, avatar, email, credits, listings) {
     const userCredits = document.createElement("p");
     userCredits.id = "userCredits";
     userCredits.classList.add("h6", "mb-2", "text-dark");
-    userCredits.innerText = `Your Credits: ${credits}`;
+    userCredits.innerText = `Credits: ${credits}`;
 
     profileContainer.appendChild(profile);
 

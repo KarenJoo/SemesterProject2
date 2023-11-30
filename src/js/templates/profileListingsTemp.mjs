@@ -5,7 +5,7 @@ export function renderProfileListings(profileData) {
 
     const yourListings = document.createElement("h2");
     yourListings.classList.add("mb-2", "text-green");
-    yourListings.innerText = "Your listings";
+    yourListings.innerText = "All listings";
     listingsContainer.appendChild(yourListings);
 
     profileData.forEach(({ title, endsAt, media, id, _count }) => {
