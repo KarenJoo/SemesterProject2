@@ -18,8 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
         method,
         body: JSON.stringify(listingData),
       });
+      console.log("Response status:", response.status);
   
       if (!response.ok) {
+        console.error("Error creating listing");
         throw new Error("Error creating listing");
       }
   

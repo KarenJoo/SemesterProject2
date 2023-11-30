@@ -2,42 +2,52 @@ import { createListing } from "../../listings/create.mjs";
 import { getTimeDifference, formatTimeDifference } from "../storage/getTimeDiff.mjs";
 
 export function createListingListener() {
-    const form = document.getElementById("createListing");
-    console.log("Form element:", form)
+  const form = document.getElementById("createListing");
+  console.log("Form element:", form);
 
-    if (form) {
-        form.addEventListener("submit", async (event) => {
-            event.preventDefault();
+  if (form) {
+    const submitButton = form.querySelector('button[type="submit"]');
 
-                const formData = new FormData(event.target);
-                // Convert input > endsAt
-                const convertedEndsAt = formData.get("endsAt");
-                // Convert endsAt input to a valid date and time
-                const endsAt = new Date(convertedEndsAt);
-                console.log('Converted endsAt:', endsAt);
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
 
-                const listingData = {
-                    title: formData.get("title"),
-                    description: formData.get("description"),
-                    media: validateMediaUrls(formData.get("media")),
-                    tags: formData.get("tags").split(",").map(tag => tag.trim()),
-                    endsAt: endsAt,
-                };
+      // Disable the submit button to prevent multiple submissions
+      submitButton.setAttribute("disabled", "true");
 
-                try {
-                    const response = await createListing(listingData);
-                    console.log("Listing created successfully:", response);
-                    window.location.href = "/index.html";
-        
-                } catch (error) {
-                  console.error("Error creating listing:", error.message);
-                  if (error.response) {
-                    console.error("Response data:", await error.response.json());
-                  }
-                }
-              });
-            }
-          }
+      try {
+        console.log("form submitted");
+        const formData = new FormData(event.target);
+        const convertedEndsAt = formData.get("endsAt");
+        const endsAt = new Date(convertedEndsAt);
+
+        const listingData = {
+          title: formData.get("title"),
+          description: formData.get("description"),
+          media: validateMediaUrls(formData.get("media")),
+          tags: formData.get("tags").split(",").map(tag => tag.trim()),
+          endsAt: endsAt,
+        };
+
+        console.log("listing data:", listingData);
+
+        const response = await createListing(listingData);
+        console.log("Listing created successfully:", response);
+        window.location.href = "/index.html";
+
+      } catch (error) {
+        console.error("Error creating listing:", error.message);
+        if (error.response) {
+          console.error("Response data:", await error.response.json());
+        }
+
+      } finally {
+        // Enable the submit button after the request is completed
+        submitButton.removeAttribute("disabled");
+      }
+    });
+  }
+}
+              
 // validateMediaUrls function
 function validateMediaUrls(media) {
     const mediaUrls = media.split(",").map(url => url.trim());

@@ -9,15 +9,16 @@ console.log(userName);
 export function cardTemplate(listingData, isClickable = false) {
 
     const cardContainer = document.createElement("div");
-    cardContainer.classList.add("mb-1", "col-12", "col-md-6", "col-lg-3", "mb-5");
+    cardContainer.classList.add("mb-1", "col-12", "col-lg-4", "mb-5");
   
     const card = document.createElement("div");
     card.classList.add("mx-1", "mb-3", "mt-3", "d-flex", "flex-column");
   
     const cardSize = document.createElement("div");
     cardSize.classList.add("card", "shadow-sm");
-    cardSize.style.height = "800px";
-
+    cardSize.style.minHeight = "800px";
+    cardSize.style.maxHeight = "800px";
+    
     // Container for maintaining aspect ratio
 const imgContainer = document.createElement("div");
 imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
