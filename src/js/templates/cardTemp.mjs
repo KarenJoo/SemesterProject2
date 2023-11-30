@@ -9,7 +9,7 @@ console.log(userName);
 export function cardTemplate(listingData, isClickable = false) {
 
     const cardContainer = document.createElement("div");
-    cardContainer.classList.add("mb-1", "col-12", "col-lg-4", "mb-5");
+    cardContainer.classList.add("mb-1", "col-12", "col-lg-4", "mb-1");
   
     const card = document.createElement("div");
     card.classList.add("mx-1", "mb-3", "mt-3", "d-flex", "flex-column");
