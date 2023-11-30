@@ -39,9 +39,10 @@ seller.classList.add("clickable");
 seller.href = `/profile/index.html?name=${listingData.seller.name}`;
 seller.innerText = `Seller: ${listingData.seller.name}`;
 
+
 // Add click event to the seller's name
 seller.addEventListener("click", () => {
-    window.location.href = `/profile/index.html?name=${listingData.seller.name}`;
+    window.location.href = `/profiles/index.html?name=${listingData.seller.name}`;
 });
 
     const cardTitle = document.createElement("h5");

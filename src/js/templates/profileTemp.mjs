@@ -1,5 +1,6 @@
 import { profileSetUp } from "../api/auth/profile/profileSetup.mjs";
 
+// profileTemp.mjs
 export function profileTemplate(name, avatar, email, credits, listings) {
     // Remove existing profile containers
     const existingContainers = document.querySelectorAll('.container-fluid.mb-1.col-12.mb-5');
@@ -64,4 +65,7 @@ export function profileTemplate(name, avatar, email, credits, listings) {
     // Append the profileContainer to the main section
     const mainSection = document.querySelector('main');
     mainSection.appendChild(profileContainer);
+
+    // Return the created profileElement
+    return profileContainer;
 }

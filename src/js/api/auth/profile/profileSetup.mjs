@@ -5,6 +5,8 @@ import { profileTemplate } from "../../../templates/profileTemp.mjs";
 import { renderProfileListings } from "../../../templates/profileListingsTemp.mjs";
 import { authFetch } from "../../../listings/authFetch.mjs";
 import { login } from "../login.mjs";
+import { getSellerProfile } from "./fetchProfiles.mjs";
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const currentPage = window.location.pathname;
@@ -15,56 +17,78 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-  // prevents several executions and the profileSetup to duplicate data
-  let executeOnce = false;
+let executeOnce = false;
 
-  export async function profileSetUp() {
+export async function profileSetUp() {
     try {
-         // Check if profileSetUp has already been executed
-         if (executeOnce) {
+        if (executeOnce) {
             return;
         }
-           // true === indicates that profileSetUp has been executed
-           executeOnce = true;
+        executeOnce = true;
 
-           const user = storage.load("user");
+        const user = storage.load("user");
 
-        // Check if the user exists and has a name property
+        //if user == user.name redirect to own profile page, if else redirect to sellers profile page
         if (user && user.name) {
             const { name } = user;
 
-            // Fetch user profile data
-            const profile = await fetchProfileData(name);
+            const params = new URLSearchParams(window.location.search);
+            const sellerName = params.get("name");
 
-
-            renderProfile(profile);
-
-            // get users listings
-            await getProfileListings(name);
+            try {
+                // Use the seller's name from the URL parameter if available
+                const profile = await fetchProfileData(sellerName || name);
+                renderProfile(profile);
+                await getProfileListings(sellerName || name);
+            } catch (error) {
+                console.error('Error setting up profile:', error);
+            }
         } else {
             console.error("User object is null or missing 'name' property.");
         }
     } catch (error) {
-        console.error("Error setting up profile:", error);
+        console.error("Error in profileSetUp:", error);
     }
 }
 
 async function fetchProfileData(name) {
-    const API_PROFILE_URL = `${API_BASE_URL}/auction/profiles/${name}`;
-    const profileResponse = await authFetch(API_PROFILE_URL);
+    try {
+        const API_PROFILE_URL = `${API_BASE_URL}/auction/profiles/${name}`;
+        const profileResponse = await authFetch(API_PROFILE_URL);
 
-    if (!profileResponse.ok) {
-        throw new Error(`Failed to fetch profile data. Status: ${profileResponse.status}`);
+        if (!profileResponse.ok) {
+            throw new Error(`Failed to fetch profile data. Status: ${profileResponse.status}`);
+        }
+
+        return await profileResponse.json();
+    } catch (error) {
+        console.error('Error fetching profile data:', error);
+        throw error;
     }
-
-    return await profileResponse.json();
 }
 
 function renderProfile(profile) {
     const { name, avatar, email, credits, _count } = profile;
     const { listings } = _count;
-    profileTemplate(name, avatar, email, credits, listings);
+    const profileElement = profileTemplate(name, avatar, email, credits);
+
+    profileElement.addEventListener("click", async () => {
+        const isUserProfile = checkIfOwnProfile(name);
+
+        if (isUserProfile) {
+            // Redirect to user's own profile page
+            window.location.href = `/profile/index.html?name=${name}`;
+        } else {
+            // Redirect to profiles page with the seller's name
+            window.location.href = `/profiles/index.html?name=${name}`;
+        }
+    });
+
+    // Add the profileElement to the main section
+    const profilesContainer = document.getElementById("profilesContainer");
+    profilesContainer.appendChild(profileElement);
 }
+
 
 async function getProfileListings(name) {
     try {
@@ -75,4 +99,26 @@ async function getProfileListings(name) {
     } catch (error) {
         console.error('Error fetching and rendering listings:', error);
     }
+}
+
+
+export function renderSellerProfile(profile) {
+    const { name, avatar, email, credits } = profile;
+    const profileElement = profileTemplate(name, avatar, email, credits);
+
+    const sellerLabel = document.createElement("span");
+    sellerLabel.innerText = "Seller's Profile";
+    sellerLabel.classList.add("text-muted", "small");
+    profileElement.appendChild(sellerLabel);
+
+    const mainSection = document.getElementById("profilesContainer"); // Update the container ID
+    mainSection.appendChild(profileElement);
+}
+
+export function checkIfOwnProfile(profileName) {
+    const params = new URLSearchParams(window.location.search);
+    const currentProfileName = params.get("name");
+    
+    // Check if there's a current profile name in the URL and it's not the user's own profile
+    return currentProfileName && currentProfileName.toLowerCase() !== profileName.toLowerCase();
 }
