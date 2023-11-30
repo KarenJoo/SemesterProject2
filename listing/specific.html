@@ -111,7 +111,16 @@
 
             <div id="cardContainer" class="row featurette container-fluid">
                 <div class="col-md-7">
-                    <div id="card" class="shadow pr-2 pl-2 mx-3" style="width: 18rem;">
+
+                    <div class="loader-container d-flex justify-content-center align-items-center"
+                        style="min-height: 100vh;">
+                        <div class="spinner-border text-green justify-content-center align-items-center"
+                            style="width: 6rem; height: 6rem;" role="status">
+                            <span class="visually-hidden">Loading listings...</span>
+                        </div>
+                    </div>
+
+                    <!-- <div id="card" class="shadow pr-2 pl-2 mx-3" style="width: 18rem;">
                         <img src="/img/example_listing.jpg" class="card-img-top" alt="image of listing">
                         <div class="card-body my-3">
                             <p id="seller">seller:</p>
@@ -142,9 +151,6 @@
                                 </tbody>
                             </table>
 
-
-
-                            <!-- Time left and Bids -->
                             <div class="container d-flex justify-content-between">
                                 <p class="list-group-item">Time left:</p>
                                 <div id="time"></div>
@@ -152,12 +158,13 @@
                                 <div id="bids"></div>
                             </div>
 
-                            <!-- Bid button -->
                             <div class="card-body d-flex justify-content-center">
                                 <button type="button" class="btn btn-outline-secondary shadow">Bid here</button>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+
+
                 </div>
 
                 <hr class="featurette-divider">
@@ -183,8 +190,6 @@
                 </div>
 
                 <hr class="featurette-divider">
-
-                <!-- /END THE FEATURETTES -->
 
             </div>
     </main>
