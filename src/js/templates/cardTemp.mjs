@@ -46,7 +46,7 @@ sellerContainer.classList.add("d-flex", "align-items-center");
 // seller clickable tag
 const seller = document.createElement("a");
 seller.style.fontSize = "12px";
-seller.classList.add("clickable", "mx-1", "mb-1");
+seller.classList.add("clickable", "mx-1", "mb-1", "text-green");
 seller.href = `/profile/index.html?name=${listingData.seller.name}`;
 seller.innerText = `${listingData.seller.name}`;
 
@@ -57,7 +57,7 @@ seller.addEventListener("click", () => {
 });
 
     const cardTitle = document.createElement("h5");
-    cardTitle.classList.add("card-title");
+    cardTitle.classList.add("card-title", "mt-2");
     cardTitle.innerText = listingData.title;
   
     const cardText = document.createElement("p");
@@ -138,7 +138,10 @@ seller.addEventListener("click", () => {
       renderUpdateButton(cardBody, listingData);
       renderRemoveButton(cardBody, listingData);
     } else {
+
+      if(!isSpecificPage) {
       renderBidButton(cardBody);
+      }
     }
 
     // card data on specific.html
@@ -208,6 +211,11 @@ seller.addEventListener("click", () => {
     bidButton.setAttribute("type", "button");
     bidButton.classList.add("btn", "btn-outline-secondary", "mx-auto", "shadow", "bid-btn"); 
     bidButton.innerText = "Bid here";
+
+  
+    bidButton.addEventListener("click", (event) => {
+      event.preventDefault();
+    })
     
   
     bidButtonContainer.appendChild(bidButton);
