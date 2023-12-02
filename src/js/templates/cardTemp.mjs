@@ -19,14 +19,15 @@ export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
     cardSize.classList.add("card", "shadow-sm");
     cardSize.style.minHeight = "700px";
     cardSize.style.maxHeight = "70%";
+    cardSize.style.height = "400px";
     
     // Container for maintaining aspect ratio
 const imgContainer = document.createElement("div");
-imgContainer.classList.add("aspect-ratio", "aspect-ratio-3x5");
+imgContainer.classList.add("aspect-ratio", "aspect-ratio-4x5");
 
     //if no media > insert example image
     const img = document.createElement("img");
-    img.classList.add("card-img-top", "aspect-ratio-item", "object-fit-cover", "w-100");
+    img.classList.add("card-img-top", "aspect-ratio-item", "object-fit-cover", "w-100", "h-600");
     img.src = listingData.media[0] || "/img/example_listing.jpg";
     img.alt = `Image of listing from ${listingData.title}`;
   
