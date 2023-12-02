@@ -33,14 +33,22 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-4x5");
   
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body", "my-1");
-  
 
-// Create seller element as an anchor element
+    // seller container
+const sellerContainer = document.createElement("div");
+sellerContainer.id = "seller-container";
+sellerContainer.classList.add("d-flex", "align-items-center");
+  
+    const sellerParagraph = document.createElement("p");
+    sellerParagraph.classList.add("mb-1");
+    sellerParagraph.innerText = `Seller:`;
+
+// seller clickable tag
 const seller = document.createElement("a");
-seller.id = "seller";
-seller.classList.add("clickable");
+seller.style.fontSize = "12px";
+seller.classList.add("clickable", "mx-1", "mb-1");
 seller.href = `/profile/index.html?name=${listingData.seller.name}`;
-seller.innerText = `Seller: ${listingData.seller.name}`;
+seller.innerText = `${listingData.seller.name}`;
 
 
 // Add click event to the seller's name
@@ -53,7 +61,7 @@ seller.addEventListener("click", () => {
     cardTitle.innerText = listingData.title;
   
     const cardText = document.createElement("p");
-    cardText.classList.add("card-text");
+    cardText.classList.add("card-text", "mb-4");
     cardText.innerText = listingData.description;
     
     // Bid here input (chatGPT)
@@ -61,7 +69,10 @@ seller.addEventListener("click", () => {
 
 
     // Append elements to the DOM
-    cardBody.appendChild(seller);
+    sellerContainer.appendChild(sellerParagraph);
+    sellerContainer.appendChild(seller);
+    cardBody.appendChild(sellerContainer);
+
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(cardText);
     imgContainer.appendChild(img);
@@ -195,7 +206,7 @@ seller.addEventListener("click", () => {
   
     const bidButton = document.createElement("button");
     bidButton.setAttribute("type", "button");
-    bidButton.classList.add("btn", "btn-outline-secondary", "mt-5", "shadow", "bid-btn"); 
+    bidButton.classList.add("btn", "btn-outline-secondary", "mx-auto", "shadow", "bid-btn"); 
     bidButton.innerText = "Bid here";
     
   
