@@ -1,23 +1,24 @@
 import { load } from "../handlers/storage/index.mjs";
 import { getTimeDifference, formatTimeDifference } from "../handlers/storage/getTimeDiff.mjs";
 import { removeListing } from "../listings/remove.mjs";
+import { renderSpecificCard } from "./specificPageTemp.mjs";
 
 const profile = load("profile");
 const userName = profile?.name || "unknown name";
 console.log(userName);
 
-export function cardTemplate(listingData, isClickable = false) {
+export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
 
     const cardContainer = document.createElement("div");
-    cardContainer.classList.add("mb-1", "col-12", "col-lg-4", "mb-1");
+    cardContainer.classList.add("mb-1", "col-12", "col-lg-4", "mb-1", "mx-auto");
   
     const card = document.createElement("div");
     card.classList.add("mx-1", "mb-3", "mt-3", "d-flex", "flex-column");
   
     const cardSize = document.createElement("div");
     cardSize.classList.add("card", "shadow-sm");
-    cardSize.style.minHeight = "800px";
-    cardSize.style.maxHeight = "800px";
+    cardSize.style.minHeight = "700px";
+    cardSize.style.maxHeight = "70%";
     
     // Container for maintaining aspect ratio
 const imgContainer = document.createElement("div");
@@ -53,80 +54,18 @@ seller.addEventListener("click", () => {
     const cardText = document.createElement("p");
     cardText.classList.add("card-text");
     cardText.innerText = listingData.description;
-
-    const bidRow = document.createElement("div");
-    bidRow.classList.add("row", "mt-1");
-
-    
-    const bidLabel = document.createElement("h6");
-    const bidInput = document.createElement("input");
-    bidInput.setAttribute("type", "number");
-    bidInput.classList.add("form-control", "input-group-sm");
-
-    const table = document.createElement("table");
-    table.classList.add("table");
-
-    const tbody = document.createElement("tbody");
-
-    const yourCreditsTable = document.createElement("tr");
-    const yourCreditsRow1 = document.createElement("td");
-
-    const yourCredits = document.createElement("p");
-    yourCredits.classList.add("credits", "mt-1", "text-green");
-    yourCredits.innerText = "Your Credits";
-    const yourCreditsTableData = document.createElement("td");
-    const yourCreditsInput = document.createElement("div");
-    yourCreditsInput.classList.add("input-group-sm");
-    const yourCreditsValue = document.createElement("input");
-    yourCreditsValue.setAttribute("type", "number");
-    yourCreditsValue.classList.add("form-control");
-    yourCreditsValue.style.width = "100px";
-
-   
-    yourCreditsRow1.appendChild(yourCredits);
-    yourCreditsTableData.appendChild(yourCreditsInput);
-    yourCreditsInput.appendChild(yourCreditsValue);
-    yourCreditsTable.appendChild(yourCreditsRow1);
-    yourCreditsTable.appendChild(yourCreditsTableData);
-    tbody.appendChild(yourCreditsTable);
-
-    
-
-    const bidTable = document.createElement("tr");
-    const bidTableData1 = document.createElement("td");
-    const bidHere = document.createElement("h6");
-    bidHere.classList.add("bids", "mt-1");
-    bidHere.innerText = "Bid here";
-
-    const bidTableData2 = document.createElement("td");
-    const bidInputGroup = document.createElement("div");
-    bidInputGroup.classList.add("input-group-sm");
-    const bidInputTable = document.createElement("input");
-
-    bidInputTable.setAttribute("type", "number");
-    bidInputTable.classList.add("form-control");
-    bidInputTable.style.width = "100px"; 
     
     // Bid here input (chatGPT)
     const bidsCount = listingData._count && listingData._count.bids !== undefined ? listingData._count.bids : 0;
 
-    bidTableData1.appendChild(bidHere);
-    bidTableData2.appendChild(bidInputGroup);
-    bidInputGroup.appendChild(bidInputTable);
-    bidTable.appendChild(bidTableData1);
-    bidTable.appendChild(bidTableData2);
-    tbody.appendChild(bidTable);
-
-    table.appendChild(tbody);
 
     // Append elements to the DOM
     cardBody.appendChild(seller);
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(cardText);
-    cardBody.appendChild(bidRow);
     imgContainer.appendChild(img);
     cardSize.appendChild(img);
-    cardBody.appendChild(table);
+ 
     cardSize.appendChild(cardBody);
     card.appendChild(cardSize);
     cardContainer.appendChild(card);
@@ -179,7 +118,6 @@ seller.addEventListener("click", () => {
       cardContainer.style.cursor = "pointer";
     }
   
-    
     // if user === author/seller
     const { seller: author } = listingData;
     const isAuthorAndUser = author && author.name === userName;
@@ -189,6 +127,19 @@ seller.addEventListener("click", () => {
       renderRemoveButton(cardBody, listingData);
     } else {
       renderBidButton(cardBody);
+    }
+
+    // card data on specific.html
+
+    if (isSpecificPage) {
+      const specificPageData = document.createElement("div");
+      specificPageData.classList.add("specific-container");
+
+      
+      renderSpecificCard(specificPageData, listingData);
+      
+      cardBody.appendChild(specificPageData);
+
     }
   
     return cardContainer;
@@ -243,7 +194,7 @@ seller.addEventListener("click", () => {
   
     const bidButton = document.createElement("button");
     bidButton.setAttribute("type", "button");
-    bidButton.classList.add("btn", "btn-outline-secondary", "shadow", "bid-btn"); 
+    bidButton.classList.add("btn", "btn-outline-secondary", "mt-5", "shadow", "bid-btn"); 
     bidButton.innerText = "Bid here";
     
   
@@ -263,5 +214,8 @@ seller.addEventListener("click", () => {
       renderCardTemplate(listingData, parent, isClickable);
     });
   }
+
+ 
+
 
 

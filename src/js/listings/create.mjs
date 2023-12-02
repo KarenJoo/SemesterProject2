@@ -2,9 +2,6 @@ import { API_BASE_URL } from "../api/API.mjs";
 import { authFetch } from "./authFetch.mjs";
 import { createListingListener } from "../handlers/listings/createListing.mjs";
 
-document.addEventListener("DOMContentLoaded", () => {
-    createListingListener();
-  });
 
 
   const action = "/auction/listings";
