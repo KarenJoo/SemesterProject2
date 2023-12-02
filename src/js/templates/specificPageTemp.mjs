@@ -1,13 +1,35 @@
+import { getSellerProfile } from "../api/auth/profile/fetchProfiles.mjs";
+import { load } from "../handlers/storage/index.mjs";
 
+const profile = load("profile");
+const userName = profile?.name || "unknown name";
+console.log(userName);
 
-export function renderSpecificCard(parent, listingData) {
+export async function renderSpecificCard(parent, listingData) {
     const specificCardContainer = document.createElement("div");
     specificCardContainer.classList.add("specific-container");
   
-    const imgSlider = document.createElement("p");
+    try { 
+        
+        const imgSlider = document.createElement("p");
     imgSlider.id = "imgSlider";
     imgSlider.innerText = "Image slider:";
   
+        // Fetch end user's credits
+        const endUserProfile = await getSellerProfile(userName); 
+        const endUserCredits = endUserProfile?.credits || 0;
+
+        // Display end user credits
+        const yourCreditsParagraph = document.createElement("p");
+        yourCreditsParagraph.classList.add("mb-1");
+        yourCreditsParagraph.innerText = "Your Credits:";
+
+        const yourCreditsValue = document.createElement("p");
+        yourCreditsValue.classList.add("mb-4");
+        yourCreditsValue.innerText = endUserCredits;
+
+
+   
     // Bid here elements
   const bidHereContainer = document.createElement("div");
   bidHereContainer.classList.add("bid-here-container");
@@ -27,24 +49,17 @@ export function renderSpecificCard(parent, listingData) {
   const yourCreditsContainer = document.createElement("div");
   yourCreditsContainer.classList.add("your-credits-container");
 
-  const yourCreditsLabel = document.createElement("p");
-  yourCreditsLabel.classList.add("credits", "mt-1", "text-green");
-  yourCreditsLabel.innerText = "Your Credits";
+specificCardContainer.appendChild(imgSlider);
+  parent.appendChild(yourCreditsParagraph);
+  parent.appendChild(yourCreditsValue);
 
-  const yourCreditsInput = document.createElement("input");
-  yourCreditsInput.setAttribute("type", "number");
-  yourCreditsInput.classList.add("form-control");
-  yourCreditsInput.style.width = "100px";
-
-  yourCreditsContainer.appendChild(yourCreditsLabel);
-  yourCreditsContainer.appendChild(yourCreditsInput);
-
-  // Append everything to the specificCardContainer
-  specificCardContainer.appendChild(imgSlider);
+  
   specificCardContainer.appendChild(bidHereContainer);
-  specificCardContainer.appendChild(yourCreditsContainer);
 
   // Append the specificCardContainer to the parent
   parent.appendChild(specificCardContainer);
+  } catch (error) {
+    console.error('Error fetching the users credits:', error);
   }
+}
   
