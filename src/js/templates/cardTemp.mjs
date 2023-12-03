@@ -52,8 +52,9 @@ seller.innerText = `${listingData.seller.name}`;
 
 
 // Add click event to the seller's name
-seller.addEventListener("click", () => {
+seller.addEventListener("click", (event) => {
     window.location.href = `/profiles/index.html?name=${listingData.seller.name}`;
+    event.stopPropagation();
 });
 
     const cardTitle = document.createElement("h5");
@@ -156,6 +157,8 @@ seller.addEventListener("click", () => {
       cardBody.appendChild(specificPageData);
 
     }
+
+    
   
     return cardContainer;
   }
@@ -211,11 +214,7 @@ seller.addEventListener("click", () => {
     bidButton.setAttribute("type", "button");
     bidButton.classList.add("btn", "btn-outline-secondary", "mx-auto", "shadow", "bid-btn"); 
     bidButton.innerText = "Bid here";
-
   
-    bidButton.addEventListener("click", (event) => {
-      event.preventDefault();
-    })
     
   
     bidButtonContainer.appendChild(bidButton);
