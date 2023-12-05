@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 export async function updateListing(id, listingData) {
         if (!id) {
-          throw new Error("Update listing requires a postID");
+          throw new Error("Update listing requires a ID");
         }
       
         const updateListingURL = `${API_BASE_URL}${action}/${id}?_seller=true`;

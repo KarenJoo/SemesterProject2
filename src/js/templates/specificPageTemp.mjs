@@ -2,6 +2,10 @@ import { API_BASE_URL } from "../api/API.mjs";
 import { getSellerProfile } from "../api/auth/profile/fetchProfiles.mjs";
 import { load } from "../handlers/storage/index.mjs";
 import { cardTemplate } from "./cardTemp.mjs";
+import { authFetch } from "../listings/authFetch.mjs";
+import * as bids from "../api/auth/bids/index.mjs";
+import { placeBid, getToken } from "../api/auth/bids/bidAuth.mjs";
+
 
 
 const profile = load("profile");
@@ -56,39 +60,51 @@ export async function renderSpecificCard(parent, listingData) {
   bidInput.addEventListener("click", (event) => {
     event.stopPropagation(); // Prevent click events from propagating to the parent elements
 });
+const bidForm = document.getElementById('bidForm');
 
-// Prevent click events from propagating to the parent elements
-bidInput.addEventListener("click", (event) => {
-    event.stopPropagation(); 
+bidForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const bidAmount = document.getElementById('bidAmount').value;
+  const listingId = "your_listing_id_here";
+
+  try {
+    const bidResponse = await placeBid(listingId, bidAmount);
+    console.log("Bid placed successfully:", bidResponse);
+    // Handle success, e.g., update UI
+  } catch (error) {
+    // Handle error, e.g., display an error message to the user
+    console.error("Error placing bid:", error.message);
+  }
 });
+
+
   const placeBidBtn = document.createElement("button");
     placeBidBtn.setAttribute("type", "button"); 
     placeBidBtn.classList.add("btn", "btn-green");
     placeBidBtn.innerText = "Place Bid";
 
-    async function placeBid() {
-        const bidAmount = parseInt(bidInput.value, 10);
+async function placeBid() {
+    const bidAmount = parseInt(bidInput.value, 10);
     
-        try {
-            await registerBid(listingData.id, bidAmount);
-            await updateCredits();
-        } catch (error) {
-            console.error("Error placing bid:", error.message);
-            alert("Failed to place bid. Please try again.");
-        }
+    try {
+        await bidAuth(listingData.id, { amount: bidAmount }, 'POST');
+        await updateCredits();
+    } catch (error) {
+        console.error("Error placing bid:", error.message);
+        alert("Failed to place bid. Please try again.");
     }
-    
-    placeBidBtn.addEventListener("click", async () => {
-        const bidAmount = parseInt(bidInput.value, 10);
-    
-        try {
-            await registerBid(listingData.id, bidAmount);
-            await updateCredits(); // Call the updateCredits function after placing the bid
-        } catch (error) {
-            console.error("Error placing bid:", error.message);
-            alert("Failed to place bid. Please try again.");
-        }
-    });
+      // Example: Fetch updated credits
+  const endUserProfile = await getSellerProfile(userName);
+  const endUserCredits = endUserProfile?.credits || 0;
+  yourCreditsValue.innerText = endUserCredits;
+
+  // Example: Fetch updated bid count for the specific listing
+  await renderSpecificCard(parent, listingData);
+
+}
+
+placeBidBtn.addEventListener("click", () => placeBid(listingData));
 
 
  
@@ -106,30 +122,10 @@ specificCardContainer.appendChild(imgSlider);
   }
 }
 
+  
 
+        // // Check if the bid count is present in the response
+        // const bidCount = responseData?._count?.bids;
+        // console.log("Bid count:", bidCount);
 
-// Function to register bid in the API
-async function registerBid(Id, bidAmount) {
-    const bidData = {
-        amount: bidAmount,
-    };
-
-    try {
-        const response = await fetch(`${API_BASE_URL}/auction/listings/${Id}/bids`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(bidData),
-        });
-
-        if (!response.ok) {
-            throw new Error(`Failed to register bid. Status: ${response.status}`);
-        }
-    } catch (error) {
-        console.error("Error placing bid:", error.message);
-        throw error; 
-    }
-}
-
-
+  

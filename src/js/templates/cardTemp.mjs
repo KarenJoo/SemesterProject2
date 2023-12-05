@@ -149,7 +149,7 @@ seller.addEventListener("click", (event) => {
 
     if (isSpecificPage) {
       const specificPageData = document.createElement("div");
-      specificPageData.classList.add("specific-container");
+      specificPageData.classList.add("specific-container", "d-flex", "container");
 
       
       renderSpecificCard(specificPageData, listingData);
