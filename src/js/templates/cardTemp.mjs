@@ -166,7 +166,7 @@ seller.addEventListener("click", (event) => {
 
     if (isSpecificPage) {
       const specificPageData = document.createElement("div");
-      specificPageData.classList.add("specific-container", "d-flex", "container");
+      specificPageData.classList.add("specific-container", "bg-primary", "container");
       cardContainer.style.height = "100vh";
       cardContainer.style.width = "100%";
       card.style.height = "100vh";

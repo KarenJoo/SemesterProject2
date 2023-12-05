@@ -13,8 +13,10 @@ const userName = profile?.name || "unknown name";
 console.log(userName);
 
 export async function renderSpecificCard(parent, listingData) {
-    const specificCardContainer = document.createElement("div");
-    specificCardContainer.classList.add("specific-container");
+    const specificDataDiv = document.createElement("div");
+    specificDataDiv.classList.add("specific-container", "bg-primary", "mx-auto", "bg-secondary");
+    specificDataDiv.style.height = "30vh";
+    specificDataDiv.style.width = "100%";
   
     try { 
         
@@ -108,15 +110,15 @@ placeBidBtn.addEventListener("click", () => placeBid(listingData));
 
 
  
-specificCardContainer.appendChild(imgSlider);
+specificDataDiv.appendChild(imgSlider);
   parent.appendChild(yourCreditsParagraph);
   parent.appendChild(yourCreditsValue);
  bidHereContainer.appendChild(bidHereLabel);
  bidHereContainer.appendChild(bidInput)
   bidHereContainer.appendChild(placeBidBtn);
 
-  specificCardContainer.appendChild(bidHereContainer);
-  parent.appendChild(specificCardContainer);
+  specificDataDiv.appendChild(bidHereContainer);
+  parent.appendChild(specificDataDiv);
   } catch (error) {
     console.error('Error fetching the users credits:', error);
   }
