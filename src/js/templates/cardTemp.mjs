@@ -43,12 +43,18 @@ const imgContainer = document.createElement("div");
 imgContainer.classList.add("aspect-ratio", "aspect-ratio-4x5");
 
     //if no media > insert example image
+  if(!isSpecificPage) {
     const img = document.createElement("img");
     img.classList.add("card-img-top", "aspect-ratio-item", "object-fit-cover", "w-100", "h-600");
-    img.classList.add("listing-image", "hidden");
+    img.classList.add("listing-image");
     img.src = listingData.media[0] || "/img/example_listing.jpg";
     img.alt = `Image of listing from ${listingData.title}`;
-  
+  imgContainer.appendChild(img);
+    cardSize.appendChild(img);
+
+  }
+
+ 
     
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body", "my-1");
@@ -109,9 +115,7 @@ seller.addEventListener("click", (event) => {
 
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(cardText);
-    imgContainer.appendChild(img);
-    cardSize.appendChild(img);
- 
+    
     cardSize.appendChild(cardBody);
     card.appendChild(cardSize);
     cardContainer.appendChild(card);
