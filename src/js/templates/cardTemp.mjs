@@ -142,6 +142,8 @@ seller.addEventListener("click", (event) => {
 
       if(!isSpecificPage) {
       renderBidButton(cardBody);
+      
+      
       }
     }
 
@@ -150,7 +152,9 @@ seller.addEventListener("click", (event) => {
     if (isSpecificPage) {
       const specificPageData = document.createElement("div");
       specificPageData.classList.add("specific-container", "d-flex", "container");
-
+      cardContainer.style.height = "100vh";
+      cardContainer.style.width = "100%";
+      card.style.height = "100vh";
       
       renderSpecificCard(specificPageData, listingData);
       
