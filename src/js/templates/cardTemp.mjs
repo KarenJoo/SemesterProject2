@@ -45,9 +45,11 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-4x5");
     //if no media > insert example image
     const img = document.createElement("img");
     img.classList.add("card-img-top", "aspect-ratio-item", "object-fit-cover", "w-100", "h-600");
+    img.classList.add("listing-image", "hidden");
     img.src = listingData.media[0] || "/img/example_listing.jpg";
     img.alt = `Image of listing from ${listingData.title}`;
   
+    
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body", "my-1");
   // card data on specific.html
@@ -178,8 +180,7 @@ seller.addEventListener("click", (event) => {
 
   // Handle bid placement
   placeBidBtn.addEventListener("click", async () => {
-    // ... (your existing code)
-
+  
     // Fetch updated credits
     const updatedEndUserProfile = await getSellerProfile(userName);
     const updatedEndUserCredits = updatedEndUserProfile?.credits || 0;
@@ -207,6 +208,7 @@ seller.addEventListener("click", (event) => {
   // Append bid and credits container based on isSpecificPage
   if (isSpecificPage) {
     cardBody.appendChild(bidAndCreditsContainer);
+    cardBody.appendChild(bidForm);
   } else {
     cardContainer.appendChild(bidAndCreditsContainer);
   }
@@ -331,8 +333,8 @@ seller.addEventListener("click", (event) => {
   
     const bidButton = document.createElement("button");
     bidButton.setAttribute("type", "button");
-    bidButton.classList.add("btn", "btn-outline-secondary", "mx-auto", "shadow", "bid-btn"); 
-    bidButton.innerText = "Bid here";
+    bidButton.classList.add("bidListing", "btn", "btn-outline-secondary", "mx-auto", "shadow", "bid-btn"); 
+    bidButton.innerText = "Bid on item";
   
     
   

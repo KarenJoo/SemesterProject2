@@ -25,6 +25,10 @@ export async function renderSpecificCard(parent, listingData) {
     // image slider container
     const imgSliderContainer = document.createElement("div");
     imgSliderContainer.classList.add("img-slider-container");
+    imgSliderContainer.style.width = "100%";
+imgSliderContainer.style.height = "50%"; // Adjust as needed
+imgSliderContainer.style.overflow = "hidden";
+
 
     const imgSlider = document.createElement("div");
     imgSlider.id = "imgSlider";
@@ -107,7 +111,7 @@ specificDataDiv.appendChild(imgSliderContainer);
   bidInput.addEventListener("click", (event) => {
     event.stopPropagation(); // Prevent click events from propagating to the parent elements
 });
-const bidForm = document.createElement('form'); 
+const bidForm = document.createElement('bid-form'); 
 
 bidForm.addEventListener('submit', async (event) => {
   event.preventDefault();
@@ -159,7 +163,6 @@ placeBidBtn.addEventListener("click", handlePlaceBid);
  specificDataDiv.appendChild(bidForm);
 
  parent.appendChild(specificDataDiv);
- bidHereContainer.appendChild(bidHereLabel);
 
  specificDataDiv.appendChild(bidForm);
 
