@@ -3,8 +3,10 @@ import { getTimeDifference, formatTimeDifference } from "../storage/getTimeDiff.
 
 export function createListingListener() {
   const form = document.getElementById("createListing");
+  const submitButton = form.querySelector('#submit');
   console.log("Form element:", form);
 
+  document.addEventListener("DOMContentLoaded", function() {
   if (form) {
     const submitButton = form.querySelector('button[type="submit"]');
 
@@ -19,6 +21,8 @@ export function createListingListener() {
         const formData = new FormData(event.target);
         const convertedEndsAt = formData.get("endsAt");
         const endsAt = new Date(convertedEndsAt);
+
+  
 
         const listingData = {
           title: formData.get("title"),
@@ -47,6 +51,7 @@ export function createListingListener() {
     });
   }
 }
+)};
               
 // validateMediaUrls function
 function validateMediaUrls(media) {
