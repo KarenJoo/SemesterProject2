@@ -20,6 +20,21 @@ export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
     cardSize.style.minHeight = "700px";
     cardSize.style.maxHeight = "70%";
     cardSize.style.height = "400px";
+
+     // Update styles for specific page
+     if (isSpecificPage) {
+      cardContainer.style.height = "100vh";
+      cardContainer.style.width = "100%";
+      card.style.height = "100vh";
+      cardSize.style.minHeight = "80vh"; 
+      cardSize.style.maxHeight = "80vh"; 
+      cardSize.style.height = "auto"; 
+  } else {
+      // Styles for non-specific page
+      cardSize.style.minHeight = "700px";
+      cardSize.style.maxHeight = "70%";
+      cardSize.style.height = "400px";
+  }
     
     // Container for maintaining aspect ratio
 const imgContainer = document.createElement("div");
