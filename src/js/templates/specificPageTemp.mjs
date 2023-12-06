@@ -26,8 +26,8 @@ export async function renderSpecificCard(parent, listingData) {
     const imgSliderContainer = document.createElement("div");
     imgSliderContainer.classList.add("img-slider-container");
     imgSliderContainer.style.width = "100%";
-imgSliderContainer.style.height = "50%"; // Adjust as needed
-imgSliderContainer.style.overflow = "hidden";
+    imgSliderContainer.style.overflow = "hidden";
+    imgSliderContainer.style.position = "relative"; 
 
 
     const imgSlider = document.createElement("div");
@@ -73,10 +73,10 @@ imgSliderContainer.style.overflow = "hidden";
       imgSlider.appendChild(imgSliderInner);
       imgSlider.appendChild(prevButton);
       imgSlider.appendChild(nextButton);
-specificDataDiv.appendChild(imgSlider); 
-specificDataDiv.appendChild(imgSliderContainer);
-    specificDataDiv.appendChild(imgSlider);
-          specificDataDiv.appendChild(imgSliderContainer);
+      specificDataDiv.appendChild(imgSlider); 
+      specificDataDiv.appendChild(imgSliderContainer);
+      specificDataDiv.appendChild(imgSlider);
+      specificDataDiv.appendChild(imgSliderContainer);
 
   
         // Fetch end user's credits
