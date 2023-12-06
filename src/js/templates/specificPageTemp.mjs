@@ -18,14 +18,13 @@ export async function renderSpecificCard(parent, listingData) {
       
     const specificDataDiv = document.createElement("div");
     specificDataDiv.classList.add("specific-container", "mx-auto");
-    specificDataDiv.style.height = "30vh";
+    specificDataDiv.style.height = "auto";
     specificDataDiv.style.width = "100%";
-
 
     // image slider container
     const imgSliderContainer = document.createElement("div");
-    imgSliderContainer.classList.add("img-slider-container");
-    imgSliderContainer.style.width = "100%";
+    imgSliderContainer.classList.add("img-slider-container", "bg-green");
+    imgSliderContainer.style.height = "auto";
     imgSliderContainer.style.overflow = "hidden";
     imgSliderContainer.style.position = "relative"; 
 
@@ -44,7 +43,7 @@ export async function renderSpecificCard(parent, listingData) {
   
         const img = document.createElement("img");
         img.src = mediaUrl;
-        img.classList.add("d-block", "w-100");
+        img.classList.add("aspect-ratio-item", "object-fit-cover");
   
         carouselItem.appendChild(img);
         imgSliderInner.appendChild(carouselItem);
@@ -54,8 +53,7 @@ export async function renderSpecificCard(parent, listingData) {
           carouselItem.classList.add("active");
         }
       });
-  
-      // Add navigation controls
+   // Add navigation controls
       const prevButton = document.createElement("button");
       prevButton.classList.add("carousel-control-prev");
       prevButton.setAttribute("type", "button");
@@ -73,15 +71,23 @@ export async function renderSpecificCard(parent, listingData) {
       imgSlider.appendChild(imgSliderInner);
       imgSlider.appendChild(prevButton);
       imgSlider.appendChild(nextButton);
-      specificDataDiv.appendChild(imgSlider); 
-      specificDataDiv.appendChild(imgSliderContainer);
-      specificDataDiv.appendChild(imgSlider);
-      specificDataDiv.appendChild(imgSliderContainer);
+
+  
+      imgSliderContainer.appendChild(imgSlider);
+      specificDataDiv.appendChild(imgSliderContainer); 
+      
+
+        // Add the image slider container to the card container
+        const cardContainer = document.createElement("div");
+        cardContainer.id = "cardContainer";
+        cardContainer.classList.add("row", "featurette", "container-fluid", "mb-4");
+      
 
   
         // Fetch end user's credits
         const endUserProfile = await getSellerProfile(userName); 
         const endUserCredits = endUserProfile?.credits || 0;
+
 
         // Display end user credits
         const yourCreditsParagraph = document.createElement("p");
@@ -92,10 +98,9 @@ export async function renderSpecificCard(parent, listingData) {
         yourCreditsValue.classList.add("mb-4");
         yourCreditsValue.innerText = endUserCredits;
 
-  // Your Credits elements
-  const creditsContainer = document.createElement("div");
-  creditsContainer.classList.add("your-credits-container");
-   
+        // Your Credits elements
+        const creditsContainer = document.createElement("div");
+        creditsContainer.classList.add("your-credits-container");
 
 
   const bidInput = document.createElement("input");
@@ -108,11 +113,12 @@ export async function renderSpecificCard(parent, listingData) {
   bidInput.max = 20;
   bidInput.value = 0; 
 
+// Prevent click events from propagating to the parent elements
   bidInput.addEventListener("click", (event) => {
-    event.stopPropagation(); // Prevent click events from propagating to the parent elements
+    event.stopPropagation(); 
 });
-const bidForm = document.createElement('bid-form'); 
 
+const bidForm = document.createElement('bid-form'); 
 bidForm.addEventListener('submit', async (event) => {
   event.preventDefault();
 
@@ -122,9 +128,7 @@ bidForm.addEventListener('submit', async (event) => {
   try {
     const bidResponse = await placeBid(listingId, bidAmount);
     console.log("Bid placed successfully:", bidResponse);
-    // Handle success, e.g., update UI
   } catch (error) {
-    // Handle error, e.g., display an error message to the user
     console.error("Error placing bid:", error.message);
   }
 });
@@ -145,26 +149,26 @@ async function handlePlaceBid() {
     alert("Failed to place bid. Please try again.");
   }
 
-  // Example: Fetch updated credits
+  //Fetch updated credits
   const endUserProfile = await getSellerProfile(userName);
   const endUserCredits = endUserProfile?.credits || 0;
   yourCreditsValue.innerText = endUserCredits;
 
-  // Example: Fetch updated bid count for the specific listing
+  // Fetch updated bid count for the specific listing
   await renderSpecificCard(parent, listingData);
 }
 
 placeBidBtn.addEventListener("click", handlePlaceBid);
 
+specificDataDiv.appendChild(imgSliderContainer);
 
+ specificDataDiv.appendChild(creditsContainer);
  specificDataDiv.appendChild(yourCreditsParagraph);
  specificDataDiv.appendChild(yourCreditsValue);
- specificDataDiv.appendChild(creditsContainer);
  specificDataDiv.appendChild(bidForm);
+specificDataDiv.appendChild(cardContainer);
 
  parent.appendChild(specificDataDiv);
-
- specificDataDiv.appendChild(bidForm);
 
   } catch (error) {
     console.error('Error fetching the users credits:', error);

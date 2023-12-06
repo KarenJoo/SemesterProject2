@@ -43,7 +43,8 @@ p {
   object-fit: cover;
 }
 
-.hidden {
-  display: none;
+.specific-container {
+  z-index: 1;
+overflow: hidden;
 }
 

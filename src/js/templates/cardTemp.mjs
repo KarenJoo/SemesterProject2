@@ -12,7 +12,9 @@ console.log(userName);
 export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
 
     const cardContainer = document.createElement("div");
-    cardContainer.classList.add("mb-1", "col-12", "col-lg-4", "mb-1", "mx-auto");
+    cardContainer.id = "cardContainer";
+    cardContainer.classList.add("row", "featurette", "container-fluid", "mb-4");
+
   
     const card = document.createElement("div");
     card.classList.add("mx-1", "mb-3", "mt-3", "d-flex", "flex-column");
@@ -23,20 +25,17 @@ export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
     cardSize.style.maxHeight = "70%";
     cardSize.style.height = "400px";
 
-     // Update styles for specific page
-     if (isSpecificPage) {
-      cardContainer.style.height = "100vh";
-      cardContainer.style.width = "100%";
-      card.style.height = "100vh";
-      cardSize.style.minHeight = "80vh"; 
-      cardSize.style.maxHeight = "80vh"; 
-      cardSize.style.height = "auto"; 
+    if (isSpecificPage) {
+      // Styles for specific page
+      cardSize.style.minHeight = "auto";
+      cardSize.style.maxHeight = "none";
+      cardSize.style.height = "auto";
   } else {
       // Styles for non-specific page
-      cardSize.style.minHeight = "700px";
-      cardSize.style.maxHeight = "70%";
-      cardSize.style.height = "400px";
+      cardSize.style.minHeight = "100vh";
+      cardSize.style.maxHeight = "50%";
   }
+
     
     // Container for maintaining aspect ratio
 const imgContainer = document.createElement("div");
@@ -45,16 +44,15 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-4x5");
     //if no media > insert example image
   if(!isSpecificPage) {
     const img = document.createElement("img");
-    img.classList.add("card-img-top", "aspect-ratio-item", "object-fit-cover", "w-100", "h-600");
+    img.classList.add("card-img-top", "aspect-ratio-item", "object-fit-cover");
     img.classList.add("listing-image");
     img.src = listingData.media[0] || "/img/example_listing.jpg";
     img.alt = `Image of listing from ${listingData.title}`;
-  imgContainer.appendChild(img);
+    
+    imgContainer.appendChild(img);
     cardSize.appendChild(img);
 
   }
-
- 
     
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body", "my-1");
@@ -63,10 +61,6 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-4x5");
     if (isSpecificPage) {
       const specificPageData = document.createElement("div");
       specificPageData.classList.add("specific-container", "container");
-      cardContainer.style.height = "100vh";
-      cardContainer.style.width = "100%";
-      card.style.height = "100vh";
-      
       renderSpecificCard(specificPageData, listingData);
       cardBody.appendChild(specificPageData);
 
@@ -300,9 +294,6 @@ seller.addEventListener("click", (event) => {
       }
     }
 
-    
-
-
     return cardContainer;
   }
   
@@ -367,9 +358,6 @@ function renderBidButton(parent, listingData) {
   bidButtonContainer.appendChild(bidButton);
   parent.appendChild(bidButtonContainer);
 }
-
-
-
   
   // Function to render a single card
   export function renderCardTemplate(listingData, parent, isClickable = false) {
