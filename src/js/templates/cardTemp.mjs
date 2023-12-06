@@ -253,17 +253,35 @@ seller.addEventListener("click", (event) => {
     cardBody.appendChild(timeBidsContainer);
 
     if (isClickable) {
-      cardContainer.addEventListener("click", (event) => {
-        // if the user clicks > update button > redirect > update page
-        if (event.target.classList.contains("update-listing-btn")) {
-          // prevent the default card click behavior
+  cardTitle.style.cursor = "pointer";
+      // Add click event to the cardContainer
+      cardTitle.addEventListener("click", (event) => {
+        const clickedElement = event.target;
+    
+        // Check if the clicked element is a button or the seller's username
+        const isButton = clickedElement.classList.contains("update-listing-btn") ||
+        clickedElement.classList.contains("remove-listing-btn") ||
+        clickedElement.classList.contains("bid-btn") ||
+        clickedElement.classList.contains("button");
+
+    
+        const isSellerUsername = clickedElement.classList.contains("text-green");
+    
+        // Redirect only if the clicked element is a button or the seller's username
+        if (isButton || isSellerUsername) {
           event.preventDefault();
+    
+          if (isButton) {
+            // Handle button click (if needed)
+          } else if (isSellerUsername) {
+            // Redirect to the seller's profile
+            window.location.href = `/profiles/index.html?name=${listingData.seller.name}`;
+          }
         } else {
-          // if the user clicks > card/bid btn > Redirect to the specific page
+          // Redirect to the specific page
           window.location.href = `/listing/specific.html?id=${listingData.id}`;
         }
       });
-      cardContainer.style.cursor = "pointer";
     }
   
     // if user === author/seller
@@ -276,7 +294,7 @@ seller.addEventListener("click", (event) => {
     } else {
 
       if(!isSpecificPage) {
-      renderBidButton(cardBody);
+      renderBidButton(cardBody, listingData);
       
       
       }
@@ -331,20 +349,27 @@ seller.addEventListener("click", (event) => {
 }
  
   
-  function renderBidButton(parent) {
-    const bidButtonContainer = document.createElement("div");
-    bidButtonContainer.classList.add("card-body", "d-flex", "justify-content-center");
+function renderBidButton(parent, listingData) {
+  const bidButtonContainer = document.createElement("div");
+  bidButtonContainer.classList.add("card-body", "d-flex", "justify-content-center");
+
+  const bidButton = document.createElement("button");
+  bidButton.setAttribute("type", "button");
+  bidButton.classList.add("btn", "btn-outline-secondary", "mx-auto", "shadow", "bid-btn"); 
+  bidButton.innerText = "Bid on item";
   
-    const bidButton = document.createElement("button");
-    bidButton.setAttribute("type", "button");
-    bidButton.classList.add("bidListing", "btn", "btn-outline-secondary", "mx-auto", "shadow", "bid-btn"); 
-    bidButton.innerText = "Bid on item";
-  
-    
-  
-    bidButtonContainer.appendChild(bidButton);
-    parent.appendChild(bidButtonContainer);
-  }
+  bidButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      // Redirect to the specific page for bidding
+      window.location.href = `/listing/specific.html?id=${listingData.id}`;
+  });
+
+  bidButtonContainer.appendChild(bidButton);
+  parent.appendChild(bidButtonContainer);
+}
+
+
+
   
   // Function to render a single card
   export function renderCardTemplate(listingData, parent, isClickable = false) {
