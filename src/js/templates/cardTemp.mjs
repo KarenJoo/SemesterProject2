@@ -61,8 +61,9 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-4x5");
     if (isSpecificPage) {
       const specificPageData = document.createElement("div");
       specificPageData.classList.add("specific-container", "container");
-      renderSpecificCard(specificPageData, listingData);
+      renderSpecificCard(specificPageData, listingData, isSpecificPage);
       cardBody.appendChild(specificPageData);
+
 
     }
 
@@ -114,7 +115,7 @@ seller.addEventListener("click", (event) => {
     card.appendChild(cardSize);
     cardContainer.appendChild(card);
 
-    
+   
      // Bid and Credits container
   const bidAndCreditsContainer = document.createElement("div");
   bidAndCreditsContainer.classList.add("mb-5");
@@ -188,7 +189,11 @@ seller.addEventListener("click", (event) => {
     await renderSpecificCard(parent, listingData);
   });
 
-  bidForm.appendChild(placeBidBtn);
+
+  // Append bid and credits container based on isSpecificPage
+  if (isSpecificPage) {
+    cardBody.appendChild(bidAndCreditsContainer);
+    cardBody.appendChild(bidForm);bidForm.appendChild(placeBidBtn);
   bidHereContainer.appendChild(bidHereLabel);
   bidHereContainer.appendChild(bidInput);
   bidForm.appendChild(bidHereContainer);
@@ -196,17 +201,6 @@ seller.addEventListener("click", (event) => {
   // Append bid and credits elements to the container
   bidAndCreditsContainer.appendChild(creditsContainer);
   bidAndCreditsContainer.appendChild(bidForm);
-
-
-  // Append creditsContainer only when isSpecificPage is true
-  if (isSpecificPage) {
-    bidAndCreditsContainer.appendChild(creditsContainer);
-  }
-
-  // Append bid and credits container based on isSpecificPage
-  if (isSpecificPage) {
-    cardBody.appendChild(bidAndCreditsContainer);
-    cardBody.appendChild(bidForm);
   } else {
     cardContainer.appendChild(bidAndCreditsContainer);
   }
