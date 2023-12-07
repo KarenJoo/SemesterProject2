@@ -88,6 +88,9 @@ export async function renderSpecificCard(parent, listingData) {
         const endUserProfile = await getSellerProfile(userName); 
         const endUserCredits = endUserProfile?.credits || 0;
 
+ // Your Credits elements
+        const creditsContainer = document.createElement("div");
+        creditsContainer.classList.add("your-credits-container");
 
         // Display end user credits
         const yourCreditsParagraph = document.createElement("p");
@@ -98,74 +101,13 @@ export async function renderSpecificCard(parent, listingData) {
         yourCreditsValue.classList.add("mb-4");
         yourCreditsValue.innerText = endUserCredits;
 
-        // Your Credits elements
-        const creditsContainer = document.createElement("div");
-        creditsContainer.classList.add("your-credits-container");
+       
 
-
-  const bidInput = document.createElement("input");
-  bidInput.setAttribute("type", "number");
-  bidInput.classList.add("form-control", "mx-1");
-  bidInput.style.width = "70px";
-  bidInput.style.height = "40px";
-  bidInput.style.fontSize = "12px";
-  bidInput.min = 1;
-  bidInput.max = 20;
-  bidInput.value = 0; 
-
-// Prevent click events from propagating to the parent elements
-  bidInput.addEventListener("click", (event) => {
-    event.stopPropagation(); 
-});
-
-const bidForm = document.createElement('bid-form'); 
-bidForm.addEventListener('submit', async (event) => {
-  event.preventDefault();
-
-  const bidAmount = bidInput.value;
-  const listingId = listingData.id;
-
-  try {
-    const bidResponse = await placeBid(listingId, bidAmount);
-    console.log("Bid placed successfully:", bidResponse);
-  } catch (error) {
-    console.error("Error placing bid:", error.message);
-  }
-});
-
-const placeBidBtn = document.createElement("button");
-placeBidBtn.setAttribute("type", "button");
-placeBidBtn.classList.add("btn", "btn-green");
-placeBidBtn.innerText = "Place Bid";
-
-async function handlePlaceBid() {
-  const bidAmount = parseInt(bidInput.value, 10);
-
-  try {
-    await bidAuth(listingData.id, { amount: bidAmount }, 'POST');
-    await updateCredits();
-  } catch (error) {
-    console.error("Error placing bid:", error.message);
-    alert("Failed to place bid. Please try again.");
-  }
-
-  //Fetch updated credits
-  const endUserProfile = await getSellerProfile(userName);
-  const endUserCredits = endUserProfile?.credits || 0;
-  yourCreditsValue.innerText = endUserCredits;
-
-  // Fetch updated bid count for the specific listing
-  await renderSpecificCard(parent, listingData);
-}
-
-placeBidBtn.addEventListener("click", handlePlaceBid);
 
 specificDataDiv.appendChild(imgSliderContainer);
-
  specificDataDiv.appendChild(creditsContainer);
  specificDataDiv.appendChild(yourCreditsParagraph);
  specificDataDiv.appendChild(yourCreditsValue);
- specificDataDiv.appendChild(bidForm);
 specificDataDiv.appendChild(cardContainer);
 
  parent.appendChild(specificDataDiv);
@@ -176,9 +118,4 @@ specificDataDiv.appendChild(cardContainer);
 }
 
   
-
-        // // Check if the bid count is present in the response
-        // const bidCount = responseData?._count?.bids;
-        // console.log("Bid count:", bidCount);
-
   

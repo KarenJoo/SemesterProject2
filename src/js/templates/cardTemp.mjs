@@ -14,8 +14,18 @@ export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
     const cardContainer = document.createElement("div");
     cardContainer.id = "cardContainer";
     cardContainer.classList.add("row", "featurette", "container-fluid", "mb-4");
-
+ 
+    const cardBody = document.createElement("div");
+    cardBody.classList.add("card-body", "my-1");
   
+    if (isSpecificPage) {
+      const specificPageData = document.createElement("div");
+      specificPageData.classList.add("specific-container", "container");
+      renderSpecificCard(specificPageData, listingData, isSpecificPage);
+      cardBody.appendChild(specificPageData);
+
+    }
+
     const card = document.createElement("div");
     card.classList.add("mx-1", "mb-3", "mt-3", "d-flex", "flex-column");
   
@@ -25,21 +35,22 @@ export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
     cardSize.style.maxHeight = "70%";
     cardSize.style.height = "400px";
 
+    // if specificpage > style cardsize
+
     if (isSpecificPage) {
-      // Styles for specific page
       cardSize.style.minHeight = "auto";
       cardSize.style.maxHeight = "none";
       cardSize.style.height = "auto";
+      cardContainer.classList.add("mt-5");
   } else {
-      // Styles for non-specific page
       cardSize.style.minHeight = "100vh";
       cardSize.style.maxHeight = "50%";
   }
 
     
     // Container for maintaining aspect ratio
-const imgContainer = document.createElement("div");
-imgContainer.classList.add("aspect-ratio", "aspect-ratio-4x5");
+  const imgContainer = document.createElement("div");
+  imgContainer.classList.add("aspect-ratio", "aspect-ratio-4x5");
 
     //if no media > insert example image
   if(!isSpecificPage) {
@@ -54,29 +65,17 @@ imgContainer.classList.add("aspect-ratio", "aspect-ratio-4x5");
 
   }
     
-    const cardBody = document.createElement("div");
-    cardBody.classList.add("card-body", "my-1");
-  // card data on specific.html
 
-    if (isSpecificPage) {
-      const specificPageData = document.createElement("div");
-      specificPageData.classList.add("specific-container", "container");
-      renderSpecificCard(specificPageData, listingData, isSpecificPage);
-      cardBody.appendChild(specificPageData);
-
-
-    }
-
-    // seller container
-const sellerContainer = document.createElement("div");
-sellerContainer.id = "seller-container";
-sellerContainer.classList.add("d-flex", "align-items-center");
+    // seller 
+  const sellerContainer = document.createElement("div");
+  sellerContainer.id = "seller-container";
+  sellerContainer.classList.add("d-flex", "align-items-center");
   
     const sellerParagraph = document.createElement("p");
     sellerParagraph.classList.add("mb-1");
     sellerParagraph.innerText = `Seller:`;
 
-// seller clickable tag
+// seller > profile page
 const seller = document.createElement("a");
 seller.style.fontSize = "12px";
 seller.classList.add("clickable", "mx-1", "mb-1", "text-green");
@@ -84,12 +83,14 @@ seller.href = `/profile/index.html?name=${listingData.seller.name}`;
 seller.innerText = `${listingData.seller.name}`;
 
 
-// Add click event to the seller's name
+// click event to the seller's name
 seller.addEventListener("click", (event) => {
     window.location.href = `/profiles/index.html?name=${listingData.seller.name}`;
     event.stopPropagation();
 });
 
+
+// card data 
     const cardTitle = document.createElement("h5");
     cardTitle.classList.add("card-title", "mt-2");
     cardTitle.innerText = listingData.title;
@@ -99,21 +100,23 @@ seller.addEventListener("click", (event) => {
     cardText.innerText = listingData.description;
     
     
-    // Bid here input (chatGPT)
-    const bidsCount = listingData._count && listingData._count.bids !== undefined ? listingData._count.bids : 0;
-
-
     // Append elements to the DOM
+     
+    cardSize.appendChild(cardBody);
+    card.appendChild(cardSize);
+    cardContainer.appendChild(card);
+    
     sellerContainer.appendChild(sellerParagraph);
     sellerContainer.appendChild(seller);
     cardBody.appendChild(sellerContainer);
 
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(cardText);
-    
-    cardSize.appendChild(cardBody);
-    card.appendChild(cardSize);
-    cardContainer.appendChild(card);
+   
+
+    // Bid here input (chatGPT)
+    const bidsCount = listingData._count && listingData._count.bids !== undefined ? listingData._count.bids : 0;
+
 
    
      // Bid and Credits container
@@ -133,77 +136,6 @@ seller.addEventListener("click", (event) => {
   const creditsContainer = document.createElement("div");
   creditsContainer.classList.add("your-credits-container");
 
-  // Bid here elements
-  const bidHereContainer = document.createElement("div");
-  bidHereContainer.classList.add("bid-here-container", "d-flex");
-
-  const bidHereLabel = document.createElement("h6");
-  bidHereLabel.classList.add("bids", "mt-1", "mx-2");
-  bidHereLabel.innerText = "Bid here";
-
-  const bidInput = document.createElement("input");
-  bidInput.setAttribute("type", "number");
-  bidInput.classList.add("form-control", "mx-1");
-  bidInput.style.width = "70px";
-  bidInput.style.height = "40px";
-  bidInput.style.fontSize = "12px";
-  bidInput.min = 1;
-  bidInput.max = 20;
-  bidInput.value = 0;
-
-  bidInput.addEventListener("click", (event) => {
-    event.stopPropagation();
-  });
-
-  const bidForm = document.createElement("form");
-  bidForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    const bidAmount = bidInput.value;
-    const listingId = listingData.id;
-
-    try {
-      const bidResponse = await placeBid(listingId, bidAmount);
-      console.log("Bid placed successfully:", bidResponse);
-      // Handle success, e.g., update UI
-    } catch (error) {
-      // Handle error, e.g., display an error message to the user
-      console.error("Error placing bid:", error.message);
-    }
-  });
-
-  const placeBidBtn = document.createElement("button");
-  placeBidBtn.setAttribute("type", "button");
-  placeBidBtn.classList.add("btn", "btn-green");
-  placeBidBtn.innerText = "Place Bid";
-
-  // Handle bid placement
-  placeBidBtn.addEventListener("click", async () => {
-  
-    // Fetch updated credits
-    const updatedEndUserProfile = await getSellerProfile(userName);
-    const updatedEndUserCredits = updatedEndUserProfile?.credits || 0;
-    yourCreditsValue.innerText = updatedEndUserCredits;
-
-    // Fetch updated bid count for the specific listing
-    await renderSpecificCard(parent, listingData);
-  });
-
-
-  // Append bid and credits container based on isSpecificPage
-  if (isSpecificPage) {
-    cardBody.appendChild(bidAndCreditsContainer);
-    cardBody.appendChild(bidForm);bidForm.appendChild(placeBidBtn);
-  bidHereContainer.appendChild(bidHereLabel);
-  bidHereContainer.appendChild(bidInput);
-  bidForm.appendChild(bidHereContainer);
-
-  // Append bid and credits elements to the container
-  bidAndCreditsContainer.appendChild(creditsContainer);
-  bidAndCreditsContainer.appendChild(bidForm);
-  } else {
-    cardContainer.appendChild(bidAndCreditsContainer);
-  }
 
 
 // Time left and Bids Section
