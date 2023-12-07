@@ -25,8 +25,16 @@ export async function removeListing(id) {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-    
-       return await response.json();
+
+        
+    // Check if the response body is empty
+    const responseBody = await response.text();
+    if (!responseBody.trim()) {
+      console.warn('Empty response body received.');
+      return null; // or handle it as needed
+    }
+
+    return JSON.parse(responseBody);
        
        
       } catch (error) {

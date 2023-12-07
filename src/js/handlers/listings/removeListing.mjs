@@ -12,7 +12,6 @@ export function removeListingListener() {
 
         try {
           await removeListing(id);
-  
 
         } catch (error) {
           console.error("Error removing Listing:", error.message);

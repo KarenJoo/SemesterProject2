@@ -35,7 +35,36 @@ export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
     cardSize.style.maxHeight = "70%";
     cardSize.style.height = "400px";
 
-  
+    // if specificpage > style cardsize
+
+    if (isSpecificPage) {
+      cardSize.style.minHeight = "auto";
+      cardSize.style.maxHeight = "none";
+      cardSize.style.height = "auto";
+      cardContainer.classList.add("mt-5");
+  } else {
+      cardSize.style.minHeight = "100vh";
+      cardSize.style.maxHeight = "50%";
+  }
+
+    
+    // Container for maintaining aspect ratio
+  const imgContainer = document.createElement("div");
+  imgContainer.classList.add("aspect-ratio", "aspect-ratio-4x5");
+
+    //if no media > insert example image
+  if(!isSpecificPage) {
+    const img = document.createElement("img");
+    img.classList.add("card-img-top", "aspect-ratio-item", "object-fit-cover");
+    img.classList.add("listing-image");
+    img.src = listingData.media[0] || "/img/example_listing.jpg";
+    img.alt = `Image of listing from ${listingData.title}`;
+    
+    imgContainer.appendChild(img);
+    cardSize.appendChild(img);
+
+  }
+    
 
     // seller 
   const sellerContainer = document.createElement("div");
@@ -70,36 +99,7 @@ seller.addEventListener("click", (event) => {
     cardText.classList.add("card-text", "mb-4");
     cardText.innerText = listingData.description;
     
-     // if specificpage > style cardsize
-
-    if (isSpecificPage) {
-      cardSize.style.minHeight = "auto";
-      cardSize.style.maxHeight = "none";
-      cardSize.style.height = "auto";
-      cardContainer.classList.add("mt-5");
-  } else {
-      cardSize.style.minHeight = "100vh";
-      cardSize.style.maxHeight = "50%";
-  }
-
     
-    // Container for maintaining aspect ratio
-  const imgContainer = document.createElement("div");
-  imgContainer.classList.add("aspect-ratio", "aspect-ratio-4x5");
-
-    //if no media > insert example image
-  if(!isSpecificPage) {
-    const img = document.createElement("img");
-    img.classList.add("card-img-top", "aspect-ratio-item", "object-fit-cover");
-    img.classList.add("listing-image");
-    img.src = listingData.media[0] || "/img/example_listing.jpg";
-    img.alt = `Image of listing from ${listingData.title}`;
-    
-    imgContainer.appendChild(img);
-    cardSize.appendChild(img);
-
-  }
-     
     // Append elements to the DOM
      
     cardSize.appendChild(cardBody);
@@ -243,8 +243,9 @@ seller.addEventListener("click", (event) => {
   function renderRemoveButton(parent, listingData) {
     const removeBtn = document.createElement("button");
     removeBtn.type = "button";
-    removeBtn.classList.add("btn-sm", "btn", "btn-outline-danger", "remove-listing-btn");
+    removeBtn.classList.add("btn-sm", "btn", "btn-outline-danger");
     removeBtn.innerText = "Delete your listing";
+    removeBtn.id = `removeListingBtn-${listingData.id}`;
 
     removeBtn.addEventListener("click", async (event) => {
       event.preventDefault();
