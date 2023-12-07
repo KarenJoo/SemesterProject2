@@ -81,7 +81,7 @@ export async function renderSpecificCard(parent, listingData) {
        // Add the image slider container to the card container
         const cardContainer = document.createElement("div");
         cardContainer.id = "cardContainer";
-        cardContainer.classList.add("row", "featurette", "container-fluid", "mb-4");
+        cardContainer.classList.add("row", "featurette", "container-fluid", "mb-2", "mt-4");
       
 
         // Fetch end user's credits
@@ -90,15 +90,15 @@ export async function renderSpecificCard(parent, listingData) {
 
  // Your Credits elements
         const creditsContainer = document.createElement("div");
-        creditsContainer.classList.add("your-credits-container");
+        creditsContainer.classList.add("your-credits-container", "d-flex");
 
         // Display end user credits
         const yourCreditsParagraph = document.createElement("p");
-        yourCreditsParagraph.classList.add("mb-1", "mt-5");
+        yourCreditsParagraph.classList.add("mx-2");
         yourCreditsParagraph.innerText = "Your Credits:";
 
         const yourCreditsValue = document.createElement("p");
-        yourCreditsValue.classList.add("mb-4");
+        yourCreditsValue.classList.add("mb-4", "text-green");
         yourCreditsValue.innerText = endUserCredits;
 
        // Bid container
@@ -109,7 +109,7 @@ export async function renderSpecificCard(parent, listingData) {
     const bidInput = document.createElement("input");
     bidInput.type = "number";
     bidInput.classList.add("form-control");
-    bidInput.placeholder = "Enter bid amount";
+    bidInput.placeholder = "Bid amount";
     bidInput.id = "bidAmount";
 
     // Bid button
@@ -128,14 +128,11 @@ specificDataDiv.appendChild(imgSliderContainer);
      
 bidContainer.appendChild(bidInput);
  bidContainer.appendChild(bidButton); 
-
 cardContainer.appendChild(bidContainer);
 
  cardContainer.appendChild(creditsContainer);
  creditsContainer.appendChild(yourCreditsParagraph);
  creditsContainer.appendChild(yourCreditsValue);
-    // Add the bid container to the card container
-
 
  specificDataDiv.appendChild(cardContainer);
  parent.appendChild(specificDataDiv); 
