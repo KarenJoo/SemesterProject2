@@ -81,8 +81,6 @@ seller.addEventListener("click", (event) => {
     cardText.innerText = listingData.description;
 
     
-      // if specificpage > style cardsize
-
     if (isSpecificPage) {
       cardSize.style.minHeight = "auto";
       cardSize.style.maxHeight = "none";
@@ -93,25 +91,24 @@ seller.addEventListener("click", (event) => {
       cardSize.style.maxHeight = "50%";
   }
  
-    
+    // Append elements to the DOM     
+     sellerContainer.appendChild(sellerParagraph);
+    sellerContainer.appendChild(seller);
+     cardBody.appendChild(sellerContainer);
+
+     cardSize.appendChild(cardBody); 
+    cardBody.appendChild(cardTitle);
+    cardBody.appendChild(cardText);
+
     if (isSpecificPage) {
       const specificPageData = document.createElement("div");
       specificPageData.classList.add("specific-container", "container");
       renderSpecificCard(specificPageData, listingData, isSpecificPage);
       cardBody.appendChild(specificPageData);
       
-    }
+    } 
 
-    // Append elements to the DOM     
-     sellerContainer.appendChild(sellerParagraph);
-    sellerContainer.appendChild(seller);
-     cardBody.appendChild(sellerContainer);
-
-     cardBody.appendChild(cardTitle);
-    cardBody.appendChild(cardText);
-    cardSize.appendChild(cardBody); 
     cardContainer.appendChild(card);
-
     card.appendChild(cardSize);   
 
 
