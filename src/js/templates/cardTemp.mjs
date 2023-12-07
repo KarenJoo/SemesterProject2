@@ -18,14 +18,6 @@ export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body", "my-1");
   
-    if (isSpecificPage) {
-      const specificPageData = document.createElement("div");
-      specificPageData.classList.add("specific-container", "container");
-      renderSpecificCard(specificPageData, listingData, isSpecificPage);
-      cardBody.appendChild(specificPageData);
-
-    }
-
     const card = document.createElement("div");
     card.classList.add("mx-1", "mb-3", "mt-3", "d-flex", "flex-column");
   
@@ -35,18 +27,7 @@ export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
     cardSize.style.maxHeight = "70%";
     cardSize.style.height = "400px";
 
-    // if specificpage > style cardsize
-
-    if (isSpecificPage) {
-      cardSize.style.minHeight = "auto";
-      cardSize.style.maxHeight = "none";
-      cardSize.style.height = "auto";
-      cardContainer.classList.add("mt-5");
-  } else {
-      cardSize.style.minHeight = "100vh";
-      cardSize.style.maxHeight = "50%";
-  }
-
+ 
     
     // Container for maintaining aspect ratio
   const imgContainer = document.createElement("div");
@@ -98,45 +79,44 @@ seller.addEventListener("click", (event) => {
     const cardText = document.createElement("p");
     cardText.classList.add("card-text", "mb-4");
     cardText.innerText = listingData.description;
-    
-    
-    // Append elements to the DOM
-     
-    cardSize.appendChild(cardBody);
-    card.appendChild(cardSize);
-    cardContainer.appendChild(card);
-    
-    sellerContainer.appendChild(sellerParagraph);
-    sellerContainer.appendChild(seller);
-    cardBody.appendChild(sellerContainer);
 
-    cardBody.appendChild(cardTitle);
+    
+      // if specificpage > style cardsize
+
+    if (isSpecificPage) {
+      cardSize.style.minHeight = "auto";
+      cardSize.style.maxHeight = "none";
+      cardSize.style.height = "auto";
+      cardContainer.classList.add("mt-5");
+  } else {
+      cardSize.style.minHeight = "100vh";
+      cardSize.style.maxHeight = "50%";
+  }
+ 
+    
+    if (isSpecificPage) {
+      const specificPageData = document.createElement("div");
+      specificPageData.classList.add("specific-container", "container");
+      renderSpecificCard(specificPageData, listingData, isSpecificPage);
+      cardBody.appendChild(specificPageData);
+      
+    }
+
+    // Append elements to the DOM     
+     sellerContainer.appendChild(sellerParagraph);
+    sellerContainer.appendChild(seller);
+     cardBody.appendChild(sellerContainer);
+
+     cardBody.appendChild(cardTitle);
     cardBody.appendChild(cardText);
-   
+    cardSize.appendChild(cardBody); 
+    cardContainer.appendChild(card);
+
+    card.appendChild(cardSize);   
+
 
     // Bid here input (chatGPT)
     const bidsCount = listingData._count && listingData._count.bids !== undefined ? listingData._count.bids : 0;
-
-
-   
-     // Bid and Credits container
-  const bidAndCreditsContainer = document.createElement("div");
-  bidAndCreditsContainer.classList.add("mb-5");
-
-  // Your Credits elements
-  const yourCreditsParagraph = document.createElement("p");
-  yourCreditsParagraph.classList.add("mb-1");
-  yourCreditsParagraph.innerText = "Your Credits:";
-
-  const yourCreditsValue = document.createElement("p");
-  yourCreditsValue.classList.add("mb-4");
-  yourCreditsValue.innerText = "0"; // Set initial value
-
-  // Your Credits elements
-  const creditsContainer = document.createElement("div");
-  creditsContainer.classList.add("your-credits-container");
-
-
 
 // Time left and Bids Section
     const timeBidsContainer = document.createElement("div");

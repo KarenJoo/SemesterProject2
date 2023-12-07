@@ -5,17 +5,16 @@ import { authFetch } from "../../../listings/authFetch.mjs";
 import { bidListener } from "./bidListener.mjs";
 
 
-export async function placeBid(listingId, bidAmount) {
+export async function placeBid(id, listingId, bidAmount) {
   const bidURL = `${API_BASE_URL}/auction/listings/${listingId}/bids`;
 
   try {
-    const token = await getToken();
-
+  
     const response = await authFetch(bidURL, {
-      method: 'POST',
-      body: JSON.stringify({ amount: bidAmount }),
+     amount: bidAmount,
+    }, {
       headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
+        'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
       },
     });

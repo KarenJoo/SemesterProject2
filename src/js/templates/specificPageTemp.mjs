@@ -15,7 +15,8 @@ console.log(userName);
 export async function renderSpecificCard(parent, listingData) {
     
   try { 
-      
+       
+  
     const specificDataDiv = document.createElement("div");
     specificDataDiv.classList.add("specific-container", "mx-auto");
     specificDataDiv.style.height = "auto";
@@ -77,13 +78,12 @@ export async function renderSpecificCard(parent, listingData) {
       specificDataDiv.appendChild(imgSliderContainer); 
       
 
-        // Add the image slider container to the card container
+       // Add the image slider container to the card container
         const cardContainer = document.createElement("div");
         cardContainer.id = "cardContainer";
         cardContainer.classList.add("row", "featurette", "container-fluid", "mb-4");
       
 
-  
         // Fetch end user's credits
         const endUserProfile = await getSellerProfile(userName); 
         const endUserCredits = endUserProfile?.credits || 0;
@@ -94,23 +94,51 @@ export async function renderSpecificCard(parent, listingData) {
 
         // Display end user credits
         const yourCreditsParagraph = document.createElement("p");
-        yourCreditsParagraph.classList.add("mb-1");
+        yourCreditsParagraph.classList.add("mb-1", "mt-5");
         yourCreditsParagraph.innerText = "Your Credits:";
 
         const yourCreditsValue = document.createElement("p");
         yourCreditsValue.classList.add("mb-4");
         yourCreditsValue.innerText = endUserCredits;
 
-       
+       // Bid container
+    const bidContainer = document.createElement("div");
+    bidContainer.classList.add("input-group", "mb-3");
 
+    // Bid input field
+    const bidInput = document.createElement("input");
+    bidInput.type = "number";
+    bidInput.classList.add("form-control");
+    bidInput.placeholder = "Enter bid amount";
+    bidInput.id = "bidAmount";
+
+    // Bid button
+    const bidButton = document.createElement("button");
+    bidButton.type = "button";
+    bidButton.classList.add("btn", "btn-primary");
+    bidButton.innerText = "Place Bid";
+    bidButton.onclick = placeBid;
+
+ 
+ 
 
 specificDataDiv.appendChild(imgSliderContainer);
- specificDataDiv.appendChild(creditsContainer);
- specificDataDiv.appendChild(yourCreditsParagraph);
- specificDataDiv.appendChild(yourCreditsValue);
-specificDataDiv.appendChild(cardContainer);
+    
+   // Append input field and button to the bid container
+     
+bidContainer.appendChild(bidInput);
+ bidContainer.appendChild(bidButton); 
 
- parent.appendChild(specificDataDiv);
+cardContainer.appendChild(bidContainer);
+
+ cardContainer.appendChild(creditsContainer);
+ creditsContainer.appendChild(yourCreditsParagraph);
+ creditsContainer.appendChild(yourCreditsValue);
+    // Add the bid container to the card container
+
+
+ specificDataDiv.appendChild(cardContainer);
+ parent.appendChild(specificDataDiv); 
 
   } catch (error) {
     console.error('Error fetching the users credits:', error);
