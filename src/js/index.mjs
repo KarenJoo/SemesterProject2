@@ -23,4 +23,4 @@ if (path === '/profile/register/index.html') {
     updateListingListener()
 } else if (path === '/src/js/handlers/listings/removeListing.mjs') {
     removeListingListener()
-}
+} 
