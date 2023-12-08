@@ -1,35 +1,38 @@
-import { load } from "../storage/index.mjs";
+import { API_BASE_URL } from "../../api/API.mjs";
 import { editProfile } from "../../api/auth/profile/edit.mjs";
 import { getSellerProfile } from "../../api/auth/profile/fetchProfiles.mjs";
 
 export async function editProfileListener() {
-const form = document.querySelector("#editProfile");
-
-if (form) {
-    const { name, email } = load("profile");
-    form.name.value = name;
-    form.email.value = email;
-
-    const button = form.querySelector("button");
-    button.disabled = true;
-
-    const profile = await getSellerProfile(name);
-    form.avatar.value = profile.avatar;
-
-    button.disabled = false;
-    
+    const form = document.querySelector("#editProfile");
+  
     form.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const form = event.target;
-        const formData = new FormData(form);
-        const profile = Object.fromEntries(formData.entries());
-
+      event.preventDefault();
+  
+      if (form) {
+        const { name, email } = load("profile");
+        form.name.value = name;
+        form.email.value = email;
+  
+        const button = form.querySelector("button");
+        button.disabled = true;
+  
+        const profile = await getSellerProfile(name);
+        form.avatar.value = profile.avatar;
+  
+        button.disabled = false;
+  
         try {
-            await editProfile(profile.name, profile);
-          
+          // Move the try block inside the if statement
+          const formData = new FormData(form);
+          const profileData = Object.fromEntries(formData.entries());
+  
+          await editProfile(name, profileData);
+  
+          console.log("Profile updated successfully");
         } catch (error) {
-            console.error("Error updating profile:", error.message);
+          console.error("Error updating profile:", error.message);
         }
-    })
-}
-}
+      }
+    });
+  }
+  

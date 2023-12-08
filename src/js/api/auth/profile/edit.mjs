@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../api/API.mjs";
+import * as storage from "/src/js/handlers/storage/index.mjs";
 import { authFetch } from "../listings/authFetch.mjs";
 import { editProfileListener } from "../../../handlers/profile/editProfileListener.mjs";
 
@@ -6,26 +7,29 @@ import { editProfileListener } from "../../../handlers/profile/editProfileListen
   const action = "/auction/profiles/{name}/media";
   const method = "PUT"; 
 
-export async function editProfile(profileData) {
-        if (!profileData.name) {
-          throw new Error("edit profile requires a name");
-        }
-      
-        const editProfileURL = `${API_BASE_URL}${action}/${profileData.name}`;
-      
-        try {
-          const response = await authFetch(editProfileURL, {
-            method,
-            body: JSON.stringify(profileData),
-          });
-      
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-      
-          return await response.json();
-        } catch (error) {
-          console.error("Error updating profile", error.message);
-          throw error;
-        }
+  export async function editProfile(url, body, method) {
+    try {
+      const token = storage.load("accessToken");
+      const response = await fetch(url, {
+        method: method,
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(body),
+      });
+      if (response.ok) {
+        window.location.reload();
       }
+      if (!response.ok) {
+        alert(
+          "Failed to update avatar"
+        );
+      }
+    } catch (error) {
+      alert(
+        "Failed to update avatar"
+      );
+      console.log(error);
+    }
+  }
