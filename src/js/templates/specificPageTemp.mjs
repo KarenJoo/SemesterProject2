@@ -4,16 +4,17 @@ import { load } from "../handlers/storage/index.mjs";
 import { cardTemplate } from "./cardTemp.mjs";
 import { authFetch } from "../listings/authFetch.mjs";
 import * as bids from "../api/auth/bids/index.mjs";
-import { placeBid, getToken } from "../api/auth/bids/bidAuth.mjs";
-
+import { placeBid } from "../api/auth/bids/bidAuth.mjs";
+import { bidListener } from "../api/auth/bids/bidListener.mjs";
 
 
 const profile = load("profile");
 const userName = profile?.name || "unknown name";
 console.log(userName);
 
-export async function renderSpecificCard(parent, listingData) {
-    
+
+export async function renderSpecificCard(parent, listingData, url) {
+
   try { 
        
   
@@ -102,15 +103,19 @@ export async function renderSpecificCard(parent, listingData) {
         yourCreditsValue.innerText = endUserCredits;
 
        // Bid container
-    const bidContainer = document.createElement("div");
-    bidContainer.classList.add("input-group", "mb-3");
+    const bidForm = document.createElement("form");
+    bidForm.classList.add( "mb-3");
+    bidForm.id = "bid-form";
+
 
     // Bid input field
     const bidInput = document.createElement("input");
     bidInput.type = "number";
     bidInput.classList.add("form-control");
     bidInput.placeholder = "Bid amount";
+    bidInput.name = "amount";
     bidInput.id = "bidAmount";
+
 
     // Bid button
     const bidButton = document.createElement("button");
@@ -119,16 +124,15 @@ export async function renderSpecificCard(parent, listingData) {
     bidButton.innerText = "Place Bid";
     bidButton.onclick = placeBid;
 
- 
- 
 
-specificDataDiv.appendChild(imgSliderContainer);
+    bidButton.onclick = () => bidForm.submit();
+
+    specificDataDiv.appendChild(imgSliderContainer);
     
-   // Append input field and button to the bid container
      
-bidContainer.appendChild(bidInput);
- bidContainer.appendChild(bidButton); 
-cardContainer.appendChild(bidContainer);
+bidForm.appendChild(bidInput);
+ bidForm.appendChild(bidButton); 
+cardContainer.appendChild(bidForm);
 
  cardContainer.appendChild(creditsContainer);
  creditsContainer.appendChild(yourCreditsParagraph);

@@ -1,16 +1,16 @@
-import { placeBid, getToken } from "./bidAuth.mjs";
+import { placeBid} from "./bidAuth.mjs";
+import { API_BASE_URL } from "../../API.mjs";
 
-export function bidListener() {
+export function bidListener(url) {
   const form = document.querySelector("#bid-form");
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    const formData = event.target;
-    const bidURL = formData.getAttribute("action");
-    const method = formData.getAttribute("method");
-    const amount = JSON.parse(formData.bid.value);
+    const formData = new FormData(event.target);
+    const method = "POST";
+    const amount = formData.get("amount");
     const bid = {
-      amount: amount,
+      amount: parseFloat(amount),
     };
-    await bidAuth(bidURL, bid, method);
+    await placeBid(url, bid, method);
   });
 }

@@ -1,40 +1,33 @@
 import { API_BASE_URL } from "../../API.mjs";
-import * as storage from "/src/js/handlers/storage/index.mjs";
+import * as storage from "../../../handlers/storage/index.mjs";
 import { load } from "../../../handlers/storage/index.mjs";
 import { authFetch } from "../../../listings/authFetch.mjs";
 import { bidListener } from "./bidListener.mjs";
 
 
-export async function placeBid(id, listingId, bidAmount) {
-  const bidURL = `${API_BASE_URL}/auction/listings/${listingId}/bids`;
-
+export async function placeBid(url, bid, method) {
   try {
-  
-    const response = await authFetch(bidURL, {
-     amount: bidAmount,
-    }, {
+    const token = storage.load("accessToken");
+    const response = await fetch(url, {
+      method: method,
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        "Content-Type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${token}`,
       },
+      body: JSON.stringify(bid),
     });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+    if (response.ok) {
+      window.location.reload();
     }
-
-    return await response.json();
+    if (!response.ok) {
+      alert(
+        "Error when placing bid"
+      );
+    }
   } catch (error) {
-    console.error("Error placing bid:", error.message);
-    throw error;
-  }
-}
-
-export function getToken() {
-  const accessToken = localStorage.getItem('accessToken');
-  if (accessToken) {
-    return accessToken;
-  } else {
-    throw new Error('Authentication token not found or expired');
+    console.log(error);
+    alert(
+      "Error when placing bid"
+    );
   }
 }
