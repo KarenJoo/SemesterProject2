@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../../api/API.mjs";
+import * as storage from "../storage/index.mjs";
 import { editProfile } from "../../api/auth/profile/edit.mjs";
 import { getSellerProfile } from "../../api/auth/profile/fetchProfiles.mjs";
 

@@ -2,7 +2,7 @@ import { cardTemplate, renderCardTemplate, renderCardsTemplate } from "../templa
 import * as cardMethods from "../listings/index.mjs";
 
 
-async function allCardsTemplate() {
+export async function allCardsTemplate() {
       const listings = await cardMethods.getListings();
       console.log(listings);
       const listing = listings.pop();

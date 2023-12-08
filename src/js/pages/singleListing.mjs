@@ -1,6 +1,8 @@
 import { renderCardTemplate, cardTemplate } from "../templates/cardTemp.mjs";
 import * as cardMethods from "../listings/index.mjs";
-async function singleCardTemplate() {
+import { bidListener } from "../api/auth/bids/bidListener.mjs";
+
+export async function singleCardTemplate() {
   const urlParams = new URLSearchParams(window.location.search);
   const listingId = urlParams.get('id');
 
@@ -22,11 +24,11 @@ async function singleCardTemplate() {
 
     const isSpecificPage = window.location.pathname.includes("/listing/specific.html");
 
-    // Use cardTemplate directly
     const card = cardTemplate(listing, container, isSpecificPage);
     
-    // Optionally, you can append the card to the container
     container.appendChild(card);
+
+    bidListener(listingId); 
   } catch (error) {
     console.error("Error fetching or rendering listing:", error.message);
   }

@@ -1,4 +1,3 @@
 
-import { placeBid} from "./bidAuth.mjs";
-import { bidListener } from "./bidListener.mjs";
-import { renderSpecificCard } from "../../../templates/specificPageTemp.mjs";
+export { placeBid} from "./bidAuth.mjs";
+export { bidListener } from "./bidListener.mjs";
