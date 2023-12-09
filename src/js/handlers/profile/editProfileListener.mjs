@@ -1,4 +1,4 @@
-import * as storage from "../storage/index.mjs";
+import { load } from "../storage/index.mjs";
 import { editProfile } from "../../api/auth/profile/edit.mjs";
 import { getSellerProfile } from "../../api/auth/profile/fetchProfiles.mjs";
 
@@ -7,9 +7,12 @@ export async function editProfileListener() {
   
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
+
+      console.log("Submit button clicked");
   
       if (form) {
         const { name, email } = load("profile");
+        console.log("Name:", name, "Email:", email);
         form.name.value = name;
         form.email.value = email;
   
@@ -17,6 +20,7 @@ export async function editProfileListener() {
         button.disabled = true;
   
         const profile = await getSellerProfile(name);
+        console.log("Fetched profile:", profile); 
         form.avatar.value = profile.avatar;
   
         button.disabled = false;

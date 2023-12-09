@@ -1,4 +1,4 @@
-import * as storage from "/src/js/handlers/storage/index.mjs";
+import * as storage from "../../../handlers/storage/index.mjs";
 import { editProfileListener } from "../../../handlers/profile/editProfileListener.mjs";
 import { authFetch } from "../../../listings/authFetch.mjs";
 
@@ -6,7 +6,7 @@ import { authFetch } from "../../../listings/authFetch.mjs";
   const action = "/auction/profiles/{name}/media";
   const method = "PUT"; 
 
-  export async function editProfile(url, body, method) {
+  export async function editProfile(url, profileData, method) {  
     try {
       const token = storage.load("accessToken");
       const response = await authFetch(url, {
@@ -15,7 +15,7 @@ import { authFetch } from "../../../listings/authFetch.mjs";
           "Content-Type": "application/json; charset=UTF-8",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify(profileData),
       });
       if (response.ok) {
         window.location.reload();
@@ -32,3 +32,4 @@ import { authFetch } from "../../../listings/authFetch.mjs";
       console.log(error);
     }
   }
+
