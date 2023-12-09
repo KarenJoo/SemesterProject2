@@ -1,9 +1,6 @@
 import { API_BASE_URL } from "../api/API.mjs";
 import { getSellerProfile } from "../api/auth/profile/fetchProfiles.mjs";
 import { load } from "../handlers/storage/index.mjs";
-import { cardTemplate } from "./cardTemp.mjs";
-import { authFetch } from "../listings/authFetch.mjs";
-import * as bids from "../api/auth/bids/index.mjs";
 import { placeBid } from "../api/auth/bids/bidAuth.mjs";
 import { bidListener } from "../api/auth/bids/bidListener.mjs";
 
@@ -99,7 +96,7 @@ export async function renderSpecificCard(parent, listingData, url) {
         yourCreditsParagraph.innerText = "Your Credits:";
 
         const yourCreditsValue = document.createElement("p");
-        yourCreditsValue.classList.add("mb-4", "text-green");
+        yourCreditsValue.classList.add("mb-2", "text-green");
         yourCreditsValue.innerText = endUserCredits;
 
        // Bid container
@@ -141,10 +138,41 @@ cardContainer.appendChild(bidForm);
  specificDataDiv.appendChild(cardContainer);
  parent.appendChild(specificDataDiv); 
 
+
+  // Extract bidder names
+  const bidderNames = (listingData.bids || []).map(bid => bid.bidderName);
+
+const bidListContainer = document.createElement("div");
+bidListContainer.id = "bidListContainer";
+bidListContainer.classList.add("row", "featurette", "bg-green", "container-fluid", "mb-2", "mt-2");
+
+cardContainer.appendChild(bidListContainer);
+
+
+const bidderNamesContainer = document.createElement("div");
+bidderNamesContainer.classList.add("row", "featurette", "bg-light", "shadow", "container-fluid", "mb-2", "mt-4");
+
+const bidderNamesTitle = document.createElement("h3");
+bidderNamesTitle.innerText = "Bidders";
+
+const bidderNamesList = document.createElement("ul");
+bidderNames.forEach(bidderName => {
+  const bidderNameItem = document.createElement("li");
+  bidderNameItem.innerText = bidderName;
+  bidderNamesList.appendChild(bidderNameItem);
+});
+
+
+bidderNamesContainer.appendChild(bidderNamesTitle);
+bidderNamesContainer.appendChild(bidderNamesList);
+
+// Add bidderNamesContainer to the parent container
+parent.appendChild(bidderNamesContainer);
   } catch (error) {
     console.error('Error fetching the users credits:', error);
   }
 }
 
-  
+// Extract bidder names and display them
+
   

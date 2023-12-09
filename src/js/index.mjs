@@ -22,13 +22,15 @@ import { createListingListener } from "./handlers/listings/createListing.mjs"
 import { updateListingListener } from "./handlers/listings/updateListing.mjs";
 // remove listing
 import { removeListingListener } from "./handlers/listings/removeListing.mjs";
+
+
  
 
 function router() {
 const pathname = location.pathname;
 
 switch(pathname) {
-    case "/":
+    case "/index.html":
     console.log("this is the homepage");
     allCardsTemplate();
     break;
@@ -48,14 +50,14 @@ switch(pathname) {
     case "/profile/index.html":
     console.log("this is the profile page");
     profileSetUp();
-    break; 
+    break;
     case "/profile/edit/index.html":
     console.log("this is the edit profile page");
     editProfileListener();
     break;
     case "/profile/listing/create/index.html":
     console.log("this is the create listing page");
-    createListingListener();
+    createListingListener();  
     break;
     case "/profile/listing/update/index.html":
     console.log("this is the update listing page");

@@ -21,4 +21,9 @@ export function bidListener(listingId, bidURL) {
     
     await placeBid(listingId, bid, method, bidURL); 
   });
+
+  const bidListLink = document.getElementById("bidListLink"); // Adjust the ID based on your HTML
+  bidListLink.addEventListener("click", () => {
+    renderBidListModal(listingData.id, userName);
+  });
 }
