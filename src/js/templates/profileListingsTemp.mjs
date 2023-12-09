@@ -1,7 +1,8 @@
 
 export function renderProfileListings(profileData) {
     const listingsContainer = document.createElement("div");
-    listingsContainer.classList.add("container-fluid", "mb-3");
+    listingsContainer.classList.add("container-fluid", "mb-5");
+    listingsContainer.style.minHeight = "100vh";
 
     const yourListings = document.createElement("h2");
     yourListings.classList.add("mb-2", "text-green");
