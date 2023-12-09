@@ -2,6 +2,8 @@ import * as auth from "./api/auth/index.mjs";
 import * as API from "./api/API.mjs";
 import { setRegisterFormListener } from "./handlers/register.mjs";
 import { setLoginFormListener } from "./handlers/login.mjs";
+
+import { allCardsTemplate } from "./pages/index.mjs";
 import * as listings from "./listings/index.mjs";
 import { createListing } from "./listings/index.mjs";
 import { cardTemplate } from "./templates/cardTemp.mjs";

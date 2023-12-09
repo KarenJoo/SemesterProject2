@@ -1,2 +1,4 @@
-export { singleCardTemplate } from "../pages/singleListing.mjs";
-export { allCardsTemplate } from "../pages/allListings.mjs";
+import { singleCardTemplate } from "../pages/singleListing.mjs";
+import { allCardsTemplate } from "../pages/allListings.mjs";
+
+export {singleCardTemplate, allCardsTemplate}
