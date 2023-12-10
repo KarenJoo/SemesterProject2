@@ -13,7 +13,7 @@ export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
 
     const cardContainer = document.createElement("div");
     cardContainer.id = "cardContainer";
-    cardContainer.classList.add("row", "featurette", "container-fluid", "mb-4");
+    cardContainer.classList.add("col-12", "col-md-4", "row", "featurette", "container-fluid", "mb-2");
  
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body", "my-1");
@@ -27,7 +27,6 @@ export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
     cardSize.style.maxHeight = "70%";
     cardSize.style.height = "400px";
 
- 
     
     // Container for maintaining aspect ratio
   const imgContainer = document.createElement("div");
@@ -85,10 +84,14 @@ seller.addEventListener("click", (event) => {
       cardSize.style.minHeight = "auto";
       cardSize.style.maxHeight = "none";
       cardSize.style.height = "auto";
-      cardContainer.classList.add("mt-5");
+      cardContainer.classList.add("mt-5", "mx-auto");
+      cardContainer.style.width = "70%";
+      cardContainer.style.margin = "0 auto";
+  
   } else {
-      cardSize.style.minHeight = "100vh";
-      cardSize.style.maxHeight = "50%";
+      cardSize.style.minHeight = "70vh";
+      cardSize.style.maxHeight = "70%";
+          
   }
  
     // Append elements to the DOM     
@@ -232,7 +235,7 @@ seller.addEventListener("click", (event) => {
       console.log("Listing removed successfully:", response);
 
       // Redirect to the feed
-      window.location.href = `/index.html`;
+      window.location.href = `/src/index.html`;
     } catch (error) {
       console.error("Error removing listing:", error.message);
     }

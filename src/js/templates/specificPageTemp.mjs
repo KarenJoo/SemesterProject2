@@ -16,7 +16,7 @@ export async function renderSpecificCard(parent, listingData, url) {
        
   
     const specificDataDiv = document.createElement("div");
-    specificDataDiv.classList.add("specific-container", "mx-auto");
+    specificDataDiv.classList.add("specific-container", "mx-auto", "container");
     specificDataDiv.style.height = "auto";
     specificDataDiv.style.width = "100%";
 
@@ -79,7 +79,7 @@ export async function renderSpecificCard(parent, listingData, url) {
        // Add the image slider container to the card container
         const cardContainer = document.createElement("div");
         cardContainer.id = "cardContainer";
-        cardContainer.classList.add("row", "featurette", "container-fluid", "mb-2", "mt-4");
+        cardContainer.classList.add("row", "featurette", "container", "mb-2", "mt-4", "mx-auto");
       
 
         // Fetch end user's credits
