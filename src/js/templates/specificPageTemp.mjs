@@ -10,7 +10,7 @@ const userName = profile?.name || "unknown name";
 console.log(userName);
 
 
-export async function renderSpecificCard(parent, listingData, url) {
+export async function renderSpecificCard(parent, listingData) {
 
   try { 
        
@@ -128,7 +128,7 @@ export async function renderSpecificCard(parent, listingData, url) {
     
      
 bidForm.appendChild(bidInput);
- bidForm.appendChild(bidButton); 
+bidForm.appendChild(bidButton); 
 cardContainer.appendChild(bidForm);
 
  cardContainer.appendChild(creditsContainer);
@@ -139,35 +139,36 @@ cardContainer.appendChild(bidForm);
  parent.appendChild(specificDataDiv); 
 
 
-  // Extract bidder names
-  const bidderNames = (listingData.bids || []).map(bid => bid.bidderName);
+  // Extract bidder names and bid amount
+const biddersInfo = (listingData.bids || []).map(bid => bid.bidderName);
 
 const bidListContainer = document.createElement("div");
 bidListContainer.id = "bidListContainer";
-bidListContainer.classList.add("row", "featurette", "bg-green", "container-fluid", "mb-2", "mt-2");
+bidListContainer.classList.add("row", "featurette", "container-fluid", "mb-2", "mt-2");
 
 cardContainer.appendChild(bidListContainer);
 
 
-const bidderNamesContainer = document.createElement("div");
-bidderNamesContainer.classList.add("row", "featurette", "bg-light", "shadow", "container-fluid", "mb-2", "mt-4");
+const biddersInfoContainer = document.createElement("div");
+biddersInfoContainer.classList.add("row", "text-green", "featurette", "container-fluid", "mb-4", "mt-2");
 
-const bidderNamesTitle = document.createElement("h3");
-bidderNamesTitle.innerText = "Bidders";
+const biddersInfoTitle = document.createElement("h3");
+biddersInfoTitle.innerText = "Bidders";
 
-const bidderNamesList = document.createElement("ul");
-bidderNames.forEach(bidderName => {
-  const bidderNameItem = document.createElement("li");
-  bidderNameItem.innerText = bidderName;
-  bidderNamesList.appendChild(bidderNameItem);
+const biddersInfoList = document.createElement("ul");
+biddersInfo.forEach(bidderName => {
+
+const bidderNameItem = document.createElement("li");
+bidderNameItem.innerText = bidderName;
+biddersInfoList.appendChild(bidderNameItem);
 });
 
 
-bidderNamesContainer.appendChild(bidderNamesTitle);
-bidderNamesContainer.appendChild(bidderNamesList);
+biddersInfoContainer.appendChild(biddersInfoTitle);
+biddersInfoContainer.appendChild(biddersInfoList);
 
-// Add bidderNamesContainer to the parent container
-parent.appendChild(bidderNamesContainer);
+// Add biddersInfoContainer to the parent container
+parent.appendChild(biddersInfoContainer);
   } catch (error) {
     console.error('Error fetching the users credits:', error);
   }
