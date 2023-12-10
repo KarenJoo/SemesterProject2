@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentPage = window.location.pathname;
     
     // Check if the current page is the profile page
-    if (currentPage.includes("/profile/index.html")) {
+    if (currentPage.includes("/src/profile/index.html")) {
         profileSetUp();
     }
 });
@@ -77,10 +77,10 @@ function renderProfile(profile) {
 
         if (isUserProfile) {
             // Redirect to user's own profile page
-            window.location.href = `/profile/index.html?name=${name}`;
+            window.location.href = `/src/profile/index.html?name=${name}`;
         } else {
             // Redirect to profiles page with the seller's name
-            window.location.href = `/profiles/index.html?name=${name}`;
+            window.location.href = `/src/profiles/index.html?name=${name}`;
         }
     });
 
