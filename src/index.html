@@ -41,8 +41,8 @@
 
                 <!-- BestBid Logo -->
                 <a class="logo mx-auto" href="./index.html">
-                     <img src="../src/img/BestBid.png" style="width: 7rem" alt="BestBid logo">
-                    </a>
+                    <img src="../src/img/BestBid.png" style="width: 7rem" alt="BestBid logo">
+                </a>
 
                 <!-- profile menu -->
                 <div class="col-1 d-flex align-items-center justify-content-end">
@@ -87,7 +87,7 @@
                         </li>
                         <li class="nav-item">
                             <!--/burger-menu-item2???-->
-                            <a class="nav-link text-green disabled" href="/burger-menu-item2" 
+                            <a class="nav-link text-green disabled" href="/burger-menu-item2"
                                 aria-disabled="true">Feed</a>
                         </li>
                         <li class="nav-item">
@@ -101,11 +101,17 @@
 
     <main>
         <!-- hero -->
-        <img src="/img/hero.jpg" class="hero-img img-fluid" alt="hero img white stone floor">
+        <div class="position-relative">
+            <img src="/src/img/hero_bestbid.avif" class="hero-img img-fluid"
+                style="min-height: 50vh; object-fit: cover;" alt="hero img white stone floor">
 
+            <div class="container mt-4 position-absolute top-50 start-50 translate-middle text-center">
+                <h1 class="text-light mt-2">Take a chance, make a bid </h1>
+                <a href="/src/profile/register/index.html" class="btn btn-outline-light btn-md">Start the journey
+                    here</a>
+            </div>
+        </div>
         <div class="container mt-4">
-
-
             <!-- All listings feed-->
 
             <div id="cardContainer" class="row featurette container-fluid">
