@@ -42,9 +42,9 @@ export function updateListingListener () {
                     const isAuthorAndUser = author && author.name === userName;
             
                     if (isAuthorAndUser) {
-                      window.location.href = `/profile/listing/update/index.html?id=${id}`;
+                      window.location.href = `/src/profile/listing/update/index.html?id=${id}`;
                     } else {
-                      window.location.href = `/listing/specific.html?id=${response.id}`;
+                      window.location.href = `/src/listing/specific.html?id=${response.id}`;
                     }
             
                   } catch (error) {

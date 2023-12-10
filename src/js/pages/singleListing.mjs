@@ -22,7 +22,7 @@ export async function singleCardTemplate() {
 
     container.innerHTML = "";
 
-    const isSpecificPage = window.location.pathname.includes("/listing/specific.html");
+    const isSpecificPage = window.location.pathname.includes("/src/listing/specific.html");
 
     const card = cardTemplate(listing, container, isSpecificPage);
     

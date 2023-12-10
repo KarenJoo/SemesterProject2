@@ -11,7 +11,7 @@ import { editProfile } from "./edit.mjs";
 document.addEventListener("DOMContentLoaded", () => {
     const updateProfilePage = window.location.pathname;
 
-    if (updateProfilePage.includes("/profile/edit/index.html")) {
+    if (updateProfilePage.includes("/src/profile/edit/edit.mjs")) {
         editProfile();
     }
 });

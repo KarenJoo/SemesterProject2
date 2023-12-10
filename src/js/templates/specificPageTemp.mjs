@@ -144,7 +144,7 @@ cardContainer.appendChild(bidForm);
 
 const bidListContainer = document.createElement("div");
 bidListContainer.id = "bidListContainer";
-bidListContainer.classList.add("row", "featurette", "bg-green", "container-fluid", "mb-2", "mt-2");
+bidListContainer.classList.add("row", "featurette", "container-fluid", "mb-2", "mt-2");
 
 cardContainer.appendChild(bidListContainer);
 

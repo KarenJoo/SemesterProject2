@@ -31,7 +31,7 @@ export async function removeListing(id) {
     const responseBody = await response.text();
     if (!responseBody.trim()) {
       console.warn('Empty response body received.');
-      return null; // or handle it as needed
+      return null; 
     }
 
     return JSON.parse(responseBody);

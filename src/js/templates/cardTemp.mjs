@@ -60,13 +60,13 @@ export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
 const seller = document.createElement("a");
 seller.style.fontSize = "12px";
 seller.classList.add("clickable", "mx-1", "mb-1", "text-green");
-seller.href = `/profile/index.html?name=${listingData.seller.name}`;
+seller.href = `/src/profile/index.html?name=${listingData.seller.name}`;
 seller.innerText = `${listingData.seller.name}`;
 
 
 // click event to the seller's name
 seller.addEventListener("click", (event) => {
-    window.location.href = `/profiles/index.html?name=${listingData.seller.name}`;
+    window.location.href = `/src/profiles/index.html?name=${listingData.seller.name}`;
     event.stopPropagation();
 });
 
@@ -176,7 +176,7 @@ seller.addEventListener("click", (event) => {
           }
         } else {
           // Redirect to the specific page
-          window.location.href = `../../listing/specific.html?id=${listingData.id}`;
+          window.location.href = `/src/listing/specific.html?id=${listingData.id}`;
         }
       });
     }
@@ -209,7 +209,7 @@ seller.addEventListener("click", (event) => {
   
     updateBtn.addEventListener("click", (event) => {
       event.preventDefault();
-      const updateUrl = `/profile/listing/update/index.html?id=${listingData.id}`;
+      const updateUrl = `/src/profile/listing/update/index.html?id=${listingData.id}`;
       window.location.href = updateUrl;
       return false;
     });
@@ -256,7 +256,7 @@ function renderBidButton(parent, listingData) {
   bidButton.addEventListener("click", (event) => {
       event.preventDefault();
       // Redirect to the specific page for bidding
-      window.location.href = `/listing/specific.html?id=${listingData.id}`;
+      window.location.href = `/src/listing/specific.html?id=${listingData.id}`;
   });
 
   bidButtonContainer.appendChild(bidButton);

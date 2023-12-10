@@ -30,7 +30,7 @@ export function renderProfileListings(profileData) {
 
         // Make the entire card clickable
         listingItem.addEventListener("click", () => {
-            window.location.href = `/listing/specific.html?id=${id}`;
+            window.location.href = `/src/listing/specific.html?id=${id}`;
         });
 
         
