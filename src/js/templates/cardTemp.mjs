@@ -235,7 +235,7 @@ seller.addEventListener("click", (event) => {
       console.log("Listing removed successfully:", response);
 
       // Redirect to the feed
-      window.location.href = `/src/index.html`;
+      window.location.href = `/index.html`;
     } catch (error) {
       console.error("Error removing listing:", error.message);
     }

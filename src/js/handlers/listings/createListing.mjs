@@ -36,7 +36,7 @@ export function createListingListener() {
 
         const response = await createListing(listingData);
         console.log("Listing created successfully:", response);
-        window.location.href = "/src/index.html";
+        window.location.href = "/index.html";
 
       } catch (error) {
         console.error("Error creating listing:", error.message);
