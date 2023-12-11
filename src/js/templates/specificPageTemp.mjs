@@ -165,7 +165,6 @@ bidderNames.forEach(bidderName => {
 bidderNamesContainer.appendChild(bidderNamesTitle);
 bidderNamesContainer.appendChild(bidderNamesList);
 
-bidListener(listingId, userName);
 // Add bidderNamesContainer to the parent container
 parent.appendChild(bidderNamesContainer);
   } catch (error) {
