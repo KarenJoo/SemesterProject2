@@ -1,5 +1,6 @@
 import { placeBid} from "./bidAuth.mjs";
 import { API_BASE_URL } from "../../API.mjs";
+import { singleCardTemplate } from "../../../pages/singleListing.mjs";
 
 
 export function bidListener(listingId, bidURL) {
@@ -19,11 +20,11 @@ export function bidListener(listingId, bidURL) {
       amount: amount,
     };
     
-    await placeBid(listingId, bid, method, bidURL); 
+    await placeBid(listingId, bid, method); 
   });
 
-  const bidListLink = document.getElementById("bidListLink"); // Adjust the ID based on your HTML
+  const bidListLink = document.getElementById("bidListLink"); 
   bidListLink.addEventListener("click", () => {
-    renderBidListModal(listingData.id, userName);
+    renderBidListModal(listingId, userName);
   });
 }

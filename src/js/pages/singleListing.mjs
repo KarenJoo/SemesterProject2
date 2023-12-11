@@ -28,7 +28,7 @@ export async function singleCardTemplate() {
     
     container.appendChild(card);
 
-    bidListener(listingId); 
+    bidListener(listingId, userName); 
   } catch (error) {
     console.error("Error fetching or rendering listing:", error.message);
   }
