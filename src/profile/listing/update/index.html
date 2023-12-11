@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="/dist/css/styles.css">
 </head>
 
-<body class="bg-light">
+<body class="bg-img min-vh-100 w-100 img-fluid d-flex flex-column max-width mt-5 no-repeat-bg"
+    style="background-image: url('/src/img/hero_bestbid.jpg');" alt="background photo">
     <header data-bs-theme="dark">
         <div class="container">
         </div>
@@ -67,7 +68,8 @@
                                 <a class="nav-link text-primary" href="/src/profile/edit/index.html">Edit profile</a>
                             </li>
                             <li class="nav-item my-2 mx-2">
-                                <a class="nav-link text-green" disabled href="/src/profile/listing/create/index.html">Create
+                                <a class="nav-link text-green" disabled
+                                    href="/src/profile/listing/create/index.html">Create
                                     listing</a>
                             </li>
                             <li class="nav-item my-2 mx-2">
@@ -105,44 +107,44 @@
     <main>
         <div class="container mt-5 mb-4">
             <div class="row">
-                <div class="d-flex align-items-center justify-content-center">
-                    <h2>Update listing</h2>
+                <div class="d-flex align-items-center justify-content-center mt-4">
+                    <h1>Update listing</h1>
                 </div>
                 <!-- insert title -->
-                <form id="updateListing" class="mb-5" method="PUT" action="" style="min-height: 100vh;">
-                    <label for="title">Update listing Title</label>
-                    <input class="form-control border-dark" id="title" type="text" name="title" required
+                <form id="updateListing" class="mb-5 mt-2" method="PUT" action="" style="min-height: 100vh;">
+                    <label for="title">Update listing title*</label>
+                    <input class="form-control border-secondary mb-3" id="title" type="text" name="title" required
                         placeholder="Listing title..." maxlength="30"></input>
 
                     <!-- insert description -->
                     <div class="mb-3">
-                        <label for="description" class="form-label"></label>
+                        <label for="description" class="form-label">Update description*</label>
                         <textarea class="form-control border-secondary" id="description" name="description" rows="3"
                             required placeholder="Write a description..."></textarea>
                     </div>
                     <!-- insert img URL, separated by comma -->
                     <div class="mb-3">
-                        <label for="media" class="form-label">Insert Image URLs (separated by commas)</label>
+                        <label for="media" class="form-label">Image URLs (separated by commas)</label>
                         <input class="form-control border-secondary mb-2" id="media" type="text" name="media"
-                            placeholder="Insert URLs here..."></input>
+                            placeholder="Insert URLs..."></input>
                     </div>
                     <!-- insert tags -->
-                    <label for="tags" class="form-label">Tags</label>
+                    <label for="tags" class="form-label">Tags (separated by commas)</label>
                     <input class="form-control border-secondary mb-2" id="tags" type="text" name="tags"
                         placeholder="Insert tags..."></input>
 
                     <!-- insert date of bid -->
-                    <label for="endsAt" class="mb-1">Listing Ends At</label>
+                    <label for="endsAt" class="mb-1">Update listing ends at*</label>
                     <!-- Modify your input for endsAt -->
-                    <input class="form-control border-secondary mb-5" id="endsAt" type="datetime-local"
-                        name="endsAt"></input>
+                    <input class="form-control border-secondary mb-5" id="endsAt" type="datetime-local" name="endsAt"
+                        required></input>
 
 
 
 
 
                     <div class="d-grid gap-2 mb-2">
-                        <button class="btn btn-green text-light" type="submit">
+                        <button class="btn btn-primary text-light" type="submit">
                             Update Listing
                         </button>
                     </div>
