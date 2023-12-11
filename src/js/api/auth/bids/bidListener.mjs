@@ -5,6 +5,7 @@ import { singleCardTemplate } from "../../../pages/singleListing.mjs";
 
 export function bidListener(listingId, bidURL) {
   const form = document.querySelector("#bid-form");
+  console.log(form);
 
   if (!form) {
     console.error("Bid form not found");
