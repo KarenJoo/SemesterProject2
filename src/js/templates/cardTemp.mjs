@@ -253,7 +253,7 @@ function renderBidButton(parent, listingData) {
 
   const bidButton = document.createElement("button");
   bidButton.setAttribute("type", "button");
-  bidButton.classList.add("btn", "btn-outline-secondary", "mx-auto", "shadow", "bid-btn"); 
+  bidButton.classList.add("btn", "btn-outline-green", "mx-auto", "shadow", "bid-btn"); 
   bidButton.innerText = "Bid on item";
   
   bidButton.addEventListener("click", (event) => {
