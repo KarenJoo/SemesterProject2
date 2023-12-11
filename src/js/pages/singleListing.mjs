@@ -1,6 +1,7 @@
 import { renderCardTemplate, cardTemplate } from "../templates/cardTemp.mjs";
 import * as cardMethods from "../listings/index.mjs";
 import { bidListener } from "../api/auth/bids/bidListener.mjs";
+import { getSellerProfile } from "../api/auth/profile/fetchProfiles.mjs";
 
 export async function singleCardTemplate() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -27,6 +28,9 @@ export async function singleCardTemplate() {
     const card = cardTemplate(listing, container, isSpecificPage);
     
     container.appendChild(card);
+
+    const endUserProfile = await getSellerProfile(userName);
+    // const endUserCredits = endUserProfile?.credits || 0;
 
     bidListener(listingId, userName); 
   } catch (error) {
