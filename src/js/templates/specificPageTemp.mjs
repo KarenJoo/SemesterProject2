@@ -122,7 +122,6 @@ export async function renderSpecificCard(parent, listingData, url) {
     bidButton.onclick = placeBid;
 
 
-    bidButton.onclick = () => bidForm.submit();
 
     specificDataDiv.appendChild(imgSliderContainer);
     
