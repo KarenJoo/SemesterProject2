@@ -111,7 +111,7 @@ export function renderSellerProfile(profile) {
     sellerLabel.classList.add("text-muted", "small");
     profileElement.appendChild(sellerLabel);
 
-    const mainSection = document.getElementById("profilesContainer"); // Update the container ID
+    const mainSection = document.getElementById("profilesContainer"); 
     mainSection.appendChild(profileElement);
 }
 
@@ -119,6 +119,6 @@ export function checkIfOwnProfile(profileName) {
     const params = new URLSearchParams(window.location.search);
     const currentProfileName = params.get("name");
     
-    // Check if there's a current profile name in the URL and it's not the user's own profile
+    // Checks if there's a current profile name in the URL and it's not the user's own profile
     return currentProfileName && currentProfileName.toLowerCase() !== profileName.toLowerCase();
 }

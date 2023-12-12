@@ -33,6 +33,7 @@ export function updateListingListener () {
                 try {
                     const response = await updateListing(id, listingData);
                     console.log("Listing updated successfully:", response);
+                    window.location.href = "/index.html";
 
             
                     // Check if the user is the author and redirect accordingly
