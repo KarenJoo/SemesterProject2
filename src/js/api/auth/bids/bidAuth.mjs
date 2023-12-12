@@ -1,12 +1,12 @@
 import { API_BASE_URL } from "../../API.mjs";
-import { load } from "../../../handlers/storage/index.mjs";
+import * as storage from "/src/js/handlers/storage/index.mjs"
 import { authFetch } from "../../../listings/authFetch.mjs";
 import { bidListener } from "./bidListener.mjs";
 
 
 export async function placeBid(listingId, bid, method) {
   try {
-    const token = storage.load("accessToken");
+    const token = storage.load("token");
     const bidURL = `${API_BASE_URL}/auction/listings/${listingId}/bids`; 
     const response = await authFetch(bidURL, { 
       method: method,
