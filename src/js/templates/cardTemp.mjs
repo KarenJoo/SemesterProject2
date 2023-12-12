@@ -37,13 +37,21 @@ export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
     const img = document.createElement("img");
     img.classList.add("card-img-top", "aspect-ratio-item", "object-fit-cover");
     img.classList.add("listing-image");
-    img.src = listingData.media[0] || "/src/img/example_listing.jpg";
+    img.src = listingData.media[0];
     img.alt = `Image of listing from ${listingData.title}`;
     
     imgContainer.appendChild(img);
     cardSize.appendChild(img);
 
-  }
+  } else {
+    // If no media is available insert placeholder image 
+    const placeholderImg = document.createElement("img");
+    placeholderImg.src = "/src/img/example_listing.jpg"; 
+    placeholderImg.alt = "Placeholder Image";
+
+    imgContainer.appendChild(placeholderImg);
+    cardSize.appendChild(imgContainer);
+}
     
 
     // seller 
@@ -65,7 +73,7 @@ seller.innerText = `${listingData.seller.name}`;
 
 // click event to the seller's name
 seller.addEventListener("click", (event) => {
-    window.location.href = `/src/profiles/index.html?name=${listingData.seller.name}`;
+    window.location.href = `/src/profile/index.html?name=${listingData.seller.name}`;
     event.stopPropagation();
 });
 

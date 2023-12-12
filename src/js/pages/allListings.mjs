@@ -16,5 +16,7 @@ export async function allCardsTemplate() {
   
   renderCardsTemplate(listings, container, true)
   }
+
+  allCardsTemplate();
   
   

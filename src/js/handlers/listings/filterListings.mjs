@@ -26,7 +26,7 @@ export const filterListings = (searchValue, listingData, filterType) => {
   };
 
 
- //chat(GPT) 
+
  export const searchListener = (listingData, container) => {
     const search = document.querySelector("#search");
     
@@ -34,7 +34,7 @@ export const filterListings = (searchValue, listingData, filterType) => {
       const searchValue = event.target.value.trim().toLowerCase();
       const filteredListings = filterListings(searchValue, listingData);
       console.log(filteredListings);
-      const container = document.querySelector("#listing");
+      const container = document.querySelector("#cardContainer");
       container.innerHTML = "";
       renderCardsTemplate(filteredListings, container, true);
     };
