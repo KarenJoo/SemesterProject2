@@ -43,14 +43,7 @@ export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
     imgContainer.appendChild(img);
     cardSize.appendChild(img);
 
-  } else {
-    // If no media is available insert placeholder image 
-    const placeholderImg = document.createElement("img");
-    placeholderImg.src = "/src/img/example_listing.jpg"; 
-    placeholderImg.alt = "Placeholder Image";
 
-    imgContainer.appendChild(placeholderImg);
-    cardSize.appendChild(imgContainer);
 }
     
 
