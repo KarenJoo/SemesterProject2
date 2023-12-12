@@ -3,7 +3,6 @@ import { getSellerProfile } from "../api/auth/profile/fetchProfiles.mjs";
 import { load } from "../handlers/storage/index.mjs";
 import { placeBid } from "../api/auth/bids/bidAuth.mjs";
 import { bidListener } from "../api/auth/bids/bidListener.mjs";
-import { bidInputHandler } from "../handlers/listings/bidHandler.mjs";
 
 
 const profile = load("profile");
@@ -106,7 +105,7 @@ export async function renderSpecificCard(parent, listingData, url) {
     bidForm.id = "bid-form";
 
 
-    // Bid input
+    // Bid input field
     const bidInput = document.createElement("input");
     bidInput.type = "number";
     bidInput.classList.add("form-control");
@@ -114,7 +113,6 @@ export async function renderSpecificCard(parent, listingData, url) {
     bidInput.name = "amount";
     bidInput.id = "bidAmount";
 
-    const bidHandler = bidInputHandler(bidInput);
 
     // Bid button
     const bidButton = document.createElement("button");
@@ -123,9 +121,9 @@ export async function renderSpecificCard(parent, listingData, url) {
     bidButton.innerText = "Place Bid";
     bidButton.onclick = placeBid;
 
-    bidButton.onclick = () => {
-  placeBid(listingId, {amount: bidInputHandler.getBidAmount});
-    }; 
+
+    bidButton.onclick = () => bidForm.submit();
+
     specificDataDiv.appendChild(imgSliderContainer);
     
      
@@ -168,7 +166,7 @@ bidderNames.forEach(bidderName => {
 bidderNamesContainer.appendChild(bidderNamesTitle);
 bidderNamesContainer.appendChild(bidderNamesList);
 
-bidListener(listingId, userName);
+
 // Add bidderNamesContainer to the parent container
 parent.appendChild(bidderNamesContainer);
   } catch (error) {

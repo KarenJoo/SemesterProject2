@@ -44,20 +44,16 @@ export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
     cardSize.appendChild(img);
 
   } else {
-    // If no media is available, insert placeholder image 
+    // If no media is available insert placeholder image 
     const placeholderImg = document.createElement("img");
-    placeholderImg.src = "/src/img/example_listing.jpg";
+    placeholderImg.src = "/src/img/example_listing.jpg"; 
     placeholderImg.alt = "Placeholder Image";
-
-    // Attach error event listener after setting the src
-    placeholderImg.addEventListener("error", () => {
-        placeholderImg.src = "/src/img/example_listing.jpg";
-    });
 
     imgContainer.appendChild(placeholderImg);
     cardSize.appendChild(imgContainer);
+}
+    
 
-  }
     // seller 
   const sellerContainer = document.createElement("div");
   sellerContainer.id = "seller-container";
@@ -77,7 +73,7 @@ seller.innerText = `${listingData.seller.name}`;
 
 // click event to the seller's name
 seller.addEventListener("click", (event) => {
-    window.location.href = `/src/profile/index.html?name=${listingData.seller.name}`;
+    window.location.href = `/src/profiles/index.html?name=${listingData.seller.name}`;
     event.stopPropagation();
 });
 
