@@ -143,20 +143,23 @@ const bidderNames = (listingData.bids || []).map(bid => bid.bidderName);
 
 const bidListContainer = document.createElement("div");
 bidListContainer.id = "bidListContainer";
-bidListContainer.classList.add("row", "featurette", "container-fluid", "mb-2", "mt-2");
+bidListContainer.classList.add("row", "featurette", "container-fluid", "mb-5", "mt-1");
 
 cardContainer.appendChild(bidListContainer);
 
 
 const bidderNamesContainer = document.createElement("div");
-bidderNamesContainer.classList.add("row", "featurette", "bg-light", "shadow", "container-fluid", "mb-2", "mt-4");
+bidderNamesContainer.classList.add("row", "featurette", "container-fluid", "mb-4", "mt-1");
 
 const bidderNamesTitle = document.createElement("h3");
-bidderNamesTitle.innerText = "Bidders";
+bidderNamesTitle.classList.add("text-green");
+bidderNamesTitle.innerText = "Bids on listing";
 
-const bidderNamesList = document.createElement("p");
+const bidderNamesList = document.createElement("div");
+bidderNamesList.classList.add("text-primary");
 bidderNames.forEach(bidderName => {
   const bidderNameItem = document.createElement("p");
+  bidderNameItem.classList.add("mb-1");
   bidderNameItem.innerText = bidderName;
   bidderNamesList.appendChild(bidderNameItem);
 });
