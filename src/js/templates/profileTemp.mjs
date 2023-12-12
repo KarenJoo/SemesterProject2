@@ -1,12 +1,12 @@
 import { profileSetUp } from "../api/auth/profile/profileSetup.mjs";
 
-// profileTemp.mjs
+
 export function profileTemplate(name, avatar, email, credits, listings) {
-    // Remove existing profile containers
+    // Removes existing profile containers
     const existingContainers = document.querySelectorAll('.container-fluid.mb-1.col-12.mb-5');
     existingContainers.forEach(container => container.remove());
 
-    // Create a new profile container
+    
     const profileContainer = document.createElement("div");
     profileContainer.classList.add("container-fluid", "mb-1", "col-12", "mb-5");
 
@@ -39,6 +39,12 @@ export function profileTemplate(name, avatar, email, credits, listings) {
     profileImage.width = "210";
     profileImage.height = "200";
 
+     // Placeholder if avatar can not display successfully  
+     profileImage.addEventListener("error", () => {
+        profileImage.src = "/src/img/example_listing.jpg";
+        profileImage.alt ="placeholder for profile avatar";
+    });
+
     const userName = document.createElement("h1");
     userName.id = "userName";
     userName.classList.add("mb-3", "display-5", "text-green");
@@ -66,6 +72,6 @@ export function profileTemplate(name, avatar, email, credits, listings) {
     const mainSection = document.querySelector('main');
     mainSection.appendChild(profileContainer);
 
-    // Return the created profileElement
+    
     return profileContainer;
 }
