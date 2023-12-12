@@ -101,7 +101,7 @@ export async function renderSpecificCard(parent, listingData, url) {
 
     // Bid container
     const bidForm = document.createElement("form");
-    bidForm.classList.add( "mb-3");
+    bidForm.classList.add( "mb-3", "d-flex");
     bidForm.method = 'POST';
     bidForm.id = "bid-form";
 
@@ -109,7 +109,9 @@ export async function renderSpecificCard(parent, listingData, url) {
     // Bid input field
     const bidInput = document.createElement("input");
     bidInput.type = "number";
-    bidInput.classList.add("form-control");
+    bidInput.classList.add("form-control", "mt-1");
+    bidInput.style.width = "60%";
+    bidInput.style.height = "30px";
     bidInput.placeholder = "Bid amount";
     bidInput.name = "amount";
     bidInput.id = "bidAmount";
@@ -118,7 +120,8 @@ export async function renderSpecificCard(parent, listingData, url) {
     // Bid button
     const bidButton = document.createElement("button");
     bidButton.type = "submit";
-    bidButton.classList.add("btn", "btn-primary");
+    bidButton.style.height = "30px";
+    bidButton.classList.add("btn", "btn-outline-primary", "mt-1", "btn-sm");
     bidButton.innerText = "Place Bid";
    
 
