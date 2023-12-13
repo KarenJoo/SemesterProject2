@@ -7,36 +7,24 @@ export async function editProfileListener() {
   console.log("Form element:", form);
 
   const url = new URL(location.href);
-  const name= url.searchParams.get("name");
+  const name = url.searchParams.get("name");
 
- 
-
-    if (form) { 
-      form.addEventListener("submit", async (event) => {
-    event.preventDefault();
+  if (form) {
+    try {
       const { name, email } = storage.load("profile");
       form.name.value = name;
       form.email.value = email;
 
-      const button = form.querySelector("button");
-      button.disabled = true;
-
       const profile = await getSellerProfile(name);
       form.avatar.value = profile.avatar;
 
+      // Enable the form submission button
+      const button = form.querySelector("button");
       button.disabled = false;
 
-      try {
-        const formData = new FormData(form);
-        const listingData = Object.fromEntries(formData.entries());
-
-        await editProfile(name, listingData, "PUT");
-
-        console.log("Profile avatar updated successfully");
-      } catch (error) {
-        console.error("Error updating profile avatar:", error.message);
-      }  
-    });
-}
+      console.log("Profile data loaded successfully");
+    } catch (error) {
+      console.error("Error loading profile data:", error.message);
     }
-
+  }
+}

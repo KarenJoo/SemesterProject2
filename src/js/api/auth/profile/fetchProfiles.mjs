@@ -15,7 +15,7 @@ export async function getSellerProfile(name) {
         throw new Error("Get requires a profile name");
     }
 
-    const getSellerProfile_URL = `${API_BASE_URL}${action}/${name}/media`;
+    const getSellerProfile_URL = `${API_BASE_URL}${action}/${name}`;
     
     const response = await authFetch(getSellerProfile_URL);
     return await response.json();
