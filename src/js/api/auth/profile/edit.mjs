@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const action = "/auction/listings/";
 const method = "PUT";
+
 export async function editProfile(userName, listingData) {
   if (!userName) {
     throw new Error("updating avatar requires an name");
@@ -17,7 +18,7 @@ export async function editProfile(userName, listingData) {
   const avatarURL = `${API_BASE_URL}${action}/${userName.name}/media`;
 
   try {
-    const token = storage.load("accessToken");
+    const token = storage.load("token");
     const profile = storage.load("name")
     const userName = profile?.name; 
 
@@ -40,3 +41,4 @@ export async function editProfile(userName, listingData) {
     console.error(error);
   }
 }
+

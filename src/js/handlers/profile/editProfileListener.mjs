@@ -1,4 +1,4 @@
-import { load } from "../storage/index.mjs";
+import * as storage from "../storage/index.mjs";
 import { editProfile } from "../../api/auth/profile/edit.mjs";
 import { getSellerProfile } from "../../api/auth/profile/fetchProfiles.mjs";
 
@@ -14,7 +14,7 @@ export async function editProfileListener() {
     if (form) { 
       form.addEventListener("submit", async (event) => {
     event.preventDefault();
-      const { name, email } = load("profile");
+      const { name, email } = storage.load("profile");
       form.name.value = name;
       form.email.value = email;
 
