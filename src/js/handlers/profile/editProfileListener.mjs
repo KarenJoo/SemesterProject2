@@ -7,7 +7,7 @@ export async function editProfileListener() {
   console.log("Form element:", form);
 
   const url = new URL(location.href);
-  const id= url.searchParams.get("id");
+  const name= url.searchParams.get("name");
 
  
 

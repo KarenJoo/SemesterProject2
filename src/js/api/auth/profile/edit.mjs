@@ -10,17 +10,16 @@ document.addEventListener("DOMContentLoaded", () => {
 const action = "/auction/listings/";
 const method = "PUT";
 
-export async function editProfile(userName, listingData) {
-  if (!userName) {
+export async function editProfile(name, listingData) {
+  if (!name) {
     throw new Error("updating avatar requires an name");
   }
 
-  const avatarURL = `${API_BASE_URL}${action}/${userName.name}/media`;
+  const avatarURL = `${API_BASE_URL}${action}/${name}/media`;
 
   try {
     const token = storage.load("token");
-    const profile = storage.load("name")
-    const userName = profile?.name; 
+ 
 
     const response = await authFetch(avatarURL, {
       method: method,
