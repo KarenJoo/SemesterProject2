@@ -24,6 +24,7 @@ export async function renderSpecificCard(parent, listingData, url) {
     const imgSliderContainer = document.createElement("div");
     imgSliderContainer.classList.add("img-slider-container", "bg-green");
     imgSliderContainer.style.height = "auto";
+    imgSliderContainer.style.width = "100%";
     imgSliderContainer.style.overflow = "hidden";
     imgSliderContainer.style.position = "relative"; 
 
@@ -86,9 +87,10 @@ export async function renderSpecificCard(parent, listingData, url) {
         const endUserProfile = await getSellerProfile(userName); 
         const endUserCredits = endUserProfile?.credits || 0;
 
- // Your Credits elements
+        // Your Credits elements
         const creditsContainer = document.createElement("div");
-        creditsContainer.classList.add("your-credits-container", "d-flex");
+        creditsContainer.classList.add("your-credits-container", "d-flex", "justify-content-center");
+        creditsContainer.style.width = "100%";
 
         // Display end user credits
         const yourCreditsParagraph = document.createElement("p");
@@ -96,23 +98,30 @@ export async function renderSpecificCard(parent, listingData, url) {
         yourCreditsParagraph.innerText = "Your Credits:";
 
         const yourCreditsValue = document.createElement("p");
-        yourCreditsValue.classList.add("mb-2", "text-green");
+        yourCreditsValue.classList.add("mb-2", "text-green", "mx-3");
         yourCreditsValue.innerText = endUserCredits;
 
     // Bid container
     const bidForm = document.createElement("form");
-    bidForm.classList.add( "mb-3", "d-flex");
+    bidForm.classList.add( "mb-3", "d-flex", "justify-content-center", "py-3");
+    bidForm.style.width = "100%";
     bidForm.method = 'POST';
     bidForm.id = "bid-form";
+
+    const bidHereLabel = document.createElement("h6");
+    bidHereLabel.classList.add("mx-2", "text-primary", "mt-1");
+    bidHereLabel.innerText = "Bid here:";
+
 
 
     // Bid input field
     const bidInput = document.createElement("input");
     bidInput.type = "number";
     bidInput.classList.add("form-control", "mt-1");
-    bidInput.style.width = "60%";
+    bidInput.style.minWidth = "80px";
+    bidInput.style.maxWidth = "100px";
     bidInput.style.height = "30px";
-    bidInput.placeholder = "Bid amount";
+    bidInput.placeholder = "0";
     bidInput.name = "amount";
     bidInput.id = "bidAmount";
 
@@ -121,6 +130,7 @@ export async function renderSpecificCard(parent, listingData, url) {
     const bidButton = document.createElement("button");
     bidButton.type = "submit";
     bidButton.style.height = "30px";
+    bidButton.style.minWidth = "80px";
     bidButton.classList.add("btn", "btn-outline-primary", "mt-1", "btn-sm");
     bidButton.innerText = "Place Bid";
    
@@ -131,6 +141,7 @@ export async function renderSpecificCard(parent, listingData, url) {
  creditsContainer.appendChild(yourCreditsParagraph);
  creditsContainer.appendChild(yourCreditsValue);  
 
+bidForm.appendChild(bidHereLabel);
 bidForm.appendChild(bidInput);
 bidForm.appendChild(bidButton); 
 cardContainer.appendChild(bidForm);
@@ -146,23 +157,23 @@ const bidderNames = (listingData.bids || []).map(bid => bid.bidderName);
 
 const bidListContainer = document.createElement("div");
 bidListContainer.id = "bidListContainer";
-bidListContainer.classList.add("row", "featurette", "container-fluid", "mb-5", "mt-1");
+bidListContainer.classList.add("row", "featurette", "container-fluid", "mb-1", "mt-1");
 
 cardContainer.appendChild(bidListContainer);
 
 
 const bidderNamesContainer = document.createElement("div");
-bidderNamesContainer.classList.add("row", "featurette", "container-fluid", "mb-4", "mt-1");
+bidderNamesContainer.classList.add("row", "featurette", "container-fluid", "mb-5", "mt-1");
 
-const bidderNamesTitle = document.createElement("h3");
-bidderNamesTitle.classList.add("text-green");
+const bidderNamesTitle = document.createElement("h6");
+bidderNamesTitle.classList.add("text-primary", "justify-content-center", "d-flex", "align-text-center");
 bidderNamesTitle.innerText = "Bids on listing";
 
 const bidderNamesList = document.createElement("div");
-bidderNamesList.classList.add("text-primary");
+bidderNamesList.classList.add("text-green");
 bidderNames.forEach(bidderName => {
   const bidderNameItem = document.createElement("p");
-  bidderNameItem.classList.add("mb-1");
+  bidderNameItem.classList.add("mb-1", "align-text-center", "justify-content-center", "d-flex");
   bidderNameItem.innerText = bidderName;
   bidderNamesList.appendChild(bidderNameItem);
 });

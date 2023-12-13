@@ -17,8 +17,17 @@ export async function placeBid(listingId, bid, method) {
       body: JSON.stringify(bid),
     });
 
-  } catch (error) {
-    console.error('Error when placing bid:', error);
-    alert("Error when placing bid");
-  }
+// if bid successfully placed > status 200
+if (response.status === 200) {
+  // Bid successfully placed > refresh page
+  window.location.reload();
+} else {
+  // Handle other response statuses or display an error message
+  console.error('Error when placing bid. Status:', response.status);
+  alert("Error when placing bid");
+}
+} catch (error) {
+console.error('Error when placing bid:', error);
+alert("Error when placing bid");
+}
 }

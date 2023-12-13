@@ -43,7 +43,6 @@ export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
     imgContainer.appendChild(img);
     cardSize.appendChild(img);
 
-
 }
     
 
@@ -73,7 +72,7 @@ seller.addEventListener("click", (event) => {
 
 // card data 
     const cardTitle = document.createElement("h5");
-    cardTitle.classList.add("card-title", "mt-2");
+    cardTitle.classList.add("card-title", "mt-2", "justify-content-center", "align-text-center");
     cardTitle.innerText = listingData.title;
   
     const cardText = document.createElement("p");
@@ -85,8 +84,9 @@ seller.addEventListener("click", (event) => {
       cardSize.style.minHeight = "auto";
       cardSize.style.maxHeight = "none";
       cardSize.style.height = "auto";
-      cardContainer.classList.add("mt-5", "mx-auto");
-      cardContainer.style.width = "70%";
+      cardContainer.classList.add("mt-5", "mx-auto", "container-fluid");
+      cardContainer.style.maxWidth = "70%";
+      cardContainer.style.width = "100%";
       cardContainer.style.margin = "0 auto";
   
   } else {
@@ -146,13 +146,7 @@ seller.addEventListener("click", (event) => {
     bidsValue.id = "bids";
     bidsValue.innerText = bidsCount; 
 
-    timeBidsContainer.appendChild(timeLeft);
-    timeBidsContainer.appendChild(timeLeftValue);
-
-    timeBidsContainer.appendChild(bidsParagraph);
-    timeBidsContainer.appendChild(bidsValue);
-    cardBody.appendChild(timeBidsContainer);
-
+  
     if (isClickable) {
   cardTitle.style.cursor = "pointer";
       // Add click event to the cardContainer
@@ -200,6 +194,12 @@ seller.addEventListener("click", (event) => {
       
       }
     }
+    timeBidsContainer.appendChild(timeLeft);
+    timeBidsContainer.appendChild(timeLeftValue);
+
+    timeBidsContainer.appendChild(bidsParagraph);
+    timeBidsContainer.appendChild(bidsValue);
+    cardBody.appendChild(timeBidsContainer);
 
     return cardContainer;
   }
@@ -250,7 +250,7 @@ seller.addEventListener("click", (event) => {
   
 function renderBidButton(parent, listingData) {
   const bidButtonContainer = document.createElement("div");
-  bidButtonContainer.classList.add("card-body", "d-flex", "justify-content-center");
+  bidButtonContainer.classList.add("card-body", "d-flex", "justify-content-center", "mb-2");
 
   const bidButton = document.createElement("button");
   bidButton.setAttribute("type", "button");
