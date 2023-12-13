@@ -7,37 +7,33 @@ document.addEventListener("DOMContentLoaded", () => {
   editProfileListener();
 });
 
-const action = "/auction/listings/";
+const action = "/auction/profiles";
 const method = "PUT";
 
-export async function editProfile(name, listingData) {
-  if (!name) {
+export async function editProfile(listingData) {
+  console.log(listingData);
+  if (!listingData.name) {
     throw new Error("updating avatar requires an name");
   }
 
-  const avatarURL = `${API_BASE_URL}${action}/${name}/media`;
+  const avatarURL = `${API_BASE_URL}${action}/${listingData.name}/media`;
 
   try {
-    const token = storage.load("token");
  
-
     const response = await authFetch(avatarURL, {
       method: method,
-      headers: {
-        "Content-Type": "application/json; charset=UTF-8",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ avatar: listingData.avatar }),
+      body: JSON.stringify(listingData),
     });
 
     if (response.ok) {
-      window.location.reload();
+      window.location.href = "/src/profile/index.html";
     } else {
       alert("Failed to update avatar");
     }
+
+    return await response.json();
   } catch (error) {
     alert("Failed to update avatar");
     console.error(error);
   }
 }
-
