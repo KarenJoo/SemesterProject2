@@ -24,10 +24,10 @@ if (response.status === 200) {
 } else {
   // Handle other response statuses or display an error message
   console.error('Error when placing bid. Status:', response.status);
-  alert("Error when placing bid");
+  alert("Your bid amount must be higher than highest bid");
 }
 } catch (error) {
 console.error('Error when placing bid:', error);
-alert("Error when placing bid");
+alert("Your bid amount must be higher than highest bid");
 }
 }

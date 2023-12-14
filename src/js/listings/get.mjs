@@ -16,5 +16,6 @@ export async function getListing(id) {
     }
     const getListing_URL = `${API_BASE_URL}${action}/${id}?sort=created&sortOrder=desc&_active=true&_seller=true&_bids=true`;
     const response = await authFetch(getListing_URL)
+    console.log(response)
     return await response.json();    
 }

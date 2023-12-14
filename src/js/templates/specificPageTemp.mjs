@@ -3,6 +3,7 @@ import { getSellerProfile } from "../api/auth/profile/fetchProfiles.mjs";
 import { load } from "../handlers/storage/index.mjs";
 import { placeBid } from "../api/auth/bids/bidAuth.mjs";
 import { bidListener } from "../api/auth/bids/bidListener.mjs";
+import { setBidInputMin } from "../api/auth/bids/bidInputValue.mjs";
 
 
 const profile = load("profile");
@@ -36,10 +37,10 @@ export async function renderSpecificCard(parent, listingData, url) {
     const imgSliderInner = document.createElement("div");
     imgSliderInner.classList.add("carousel-inner");
 
-      // Iterate through the media URLs 
-      listingData.media.forEach((mediaUrl, index) => {
-        const carouselItem = document.createElement("div");
-        carouselItem.classList.add("carousel-item");
+    // Iterate through the media URLs 
+    listingData.media.forEach((mediaUrl, index) => {
+    const carouselItem = document.createElement("div");
+    carouselItem.classList.add("carousel-item");
   
         const img = document.createElement("img");
         img.src = mediaUrl;
@@ -100,59 +101,62 @@ export async function renderSpecificCard(parent, listingData, url) {
         const yourCreditsValue = document.createElement("p");
         yourCreditsValue.classList.add("mb-2", "text-green", "mx-3");
         yourCreditsValue.innerText = endUserCredits;
-
-    // Bid container
-    const bidForm = document.createElement("form");
-    bidForm.classList.add( "mb-3", "d-flex", "justify-content-center", "py-3");
-    bidForm.style.width = "100%";
-    bidForm.method = 'POST';
-    bidForm.id = "bid-form";
-
-    const bidHereLabel = document.createElement("h6");
-    bidHereLabel.classList.add("mx-2", "text-primary", "mt-1");
-    bidHereLabel.innerText = "Bid here:";
-
-
-
-    // Bid input field
-    const bidInput = document.createElement("input");
-    bidInput.type = "number";
-    bidInput.classList.add("form-control", "mt-1");
-    bidInput.style.minWidth = "80px";
-    bidInput.style.maxWidth = "100px";
-    bidInput.style.height = "30px";
-    bidInput.placeholder = "0";
-    bidInput.name = "amount";
-    bidInput.id = "bidAmount";
-
-
-    // Bid button
-    const bidButton = document.createElement("button");
-    bidButton.type = "submit";
-    bidButton.style.height = "30px";
-    bidButton.style.minWidth = "80px";
-    bidButton.classList.add("btn", "btn-outline-primary", "mt-1", "btn-sm");
-    bidButton.innerText = "Place Bid";
-   
-
-  specificDataDiv.appendChild(imgSliderContainer);
-    
- cardContainer.appendChild(creditsContainer);
- creditsContainer.appendChild(yourCreditsParagraph);
- creditsContainer.appendChild(yourCreditsValue);  
-
-bidForm.appendChild(bidHereLabel);
-bidForm.appendChild(bidInput);
-bidForm.appendChild(bidButton); 
-cardContainer.appendChild(bidForm);
-
  
+    
+    
+         // Bid container
+      const bidForm = document.createElement("form");
+      bidForm.classList.add( "mb-3", "d-flex", "flex-column", "align-items-center", "py-3");
+      bidForm.style.width = "100%";
+      bidForm.method = 'POST';
+      bidForm.id = "bid-form";
 
- specificDataDiv.appendChild(cardContainer);
- parent.appendChild(specificDataDiv); 
+      const bidHereLabel = document.createElement("h6");
+      bidHereLabel.classList.add("mx-2", "text-primary", "mt-1");
+      bidHereLabel.innerText = "Bid here:";
 
 
-  // Extract bidder names
+  
+      // Bid input field
+     const bidInput = document.createElement("input");
+     bidInput.type = "number";
+     bidInput.classList.add("form-control", "mt-1");
+     bidInput.style.minWidth = "100px";
+     bidInput.style.maxWidth = "100px";
+     bidInput.style.height = "30px";
+     bidInput.name = "amount";
+     bidInput.id = "bidAmount";
+     bidInput.placeholder = "0"
+     bidInput.required = true;
+
+     // Bid button
+     const bidButton = document.createElement("button");
+     bidButton.type = "submit";
+     bidButton.style.height = "30px";
+     bidButton.style.minWidth = "80px";
+     bidButton.classList.add("btn", "btn-primary", "mt-1", "btn-sm");
+     bidButton.innerText = "Place Bid";
+   
+    specificDataDiv.appendChild(imgSliderContainer);
+    
+    cardContainer.appendChild(creditsContainer);
+    creditsContainer.appendChild(yourCreditsParagraph);
+    creditsContainer.appendChild(yourCreditsValue);  
+  
+    bidForm.appendChild(bidHereLabel);
+    bidForm.appendChild(bidInput);
+    bidForm.appendChild(bidButton); 
+    cardContainer.appendChild(bidForm);
+  
+    //setTimeout to get the input field
+  setTimeout(() => {
+  setBidInputMin(listingData);
+  }, 0);
+
+    specificDataDiv.appendChild(cardContainer);
+    parent.appendChild(specificDataDiv); 
+
+   // Extract bidder names
 const bidderNames = (listingData.bids || []).map(bid => bid.bidderName);
 
 const bidListContainer = document.createElement("div");
