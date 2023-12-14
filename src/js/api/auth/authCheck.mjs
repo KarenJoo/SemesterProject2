@@ -62,6 +62,26 @@ export function pathAuthorization() {
     const token = storage.load("token");
 
     if (path === "/src/listing/specific.html" && !token) {
-        window.location.replace("/src/profile/login/index.html")
+        // Display error message modal for specific.html
+        displayErrorMessage("You need to log in to bid. Click OK to log in.");
+    } if (path === "/src/profiles/index.html" && !token) {
+        displayErrorMessage("You need to log in to view profiles. Click OK to log in.");
+    }
+}
+
+function isAuthPage() {
+    return window.location.pathname === "/src/listing/specific.html";
+    return window.location.pathname === "/src/profiles/index.html";
+}
+
+function displayErrorMessage(message) {
+    console.log('Error Message:', message);
+
+    // Show a simple confirmation dialog with the error message
+    const userConfirmed = window.confirm(message);
+
+    // If the user clicks OK, redirect to the login page
+    if (userConfirmed) {
+        window.location.replace("/src/profile/login/index.html");
     }
 }
