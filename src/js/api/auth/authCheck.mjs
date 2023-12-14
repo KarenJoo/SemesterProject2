@@ -28,6 +28,7 @@ export async function authCheck() {
             if (response.ok) {
                 // if user is authenticated > display the profile icon
                 profileIcon.style.display = 'block';
+
             } else {
                 // if user is not authenticated > display the login link
                 profileIcon.style.display = 'none';
@@ -42,17 +43,25 @@ export async function authCheck() {
             }
         } else {
             // User is not logged in, display the login link
-            profileIcon.style.display = 'none';
+            profileIcon.innerHTML = ''; 
 
             const loginLink = document.createElement('a');
             loginLink.classList.add('nav-link', 'text-primary');
             loginLink.href = '/src/profile/login/index.html';
             loginLink.innerText = 'Log in';
 
-            profileIcon.innerHTML = ''; 
             profileIcon.appendChild(loginLink);
         }
     } catch (error) {
         console.error("Error checking authentication:", error.message);
+    }
+}
+
+export function pathAuthorization() {
+    const path = window.location.pathname;
+    const token = storage.load("token");
+
+    if (path === "/src/listing/specific.html" && !token) {
+        window.location.replace("/src/profile/login/index.html")
     }
 }
