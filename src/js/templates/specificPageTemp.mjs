@@ -23,7 +23,7 @@ export async function renderSpecificCard(parent, listingData, url) {
 
     // image slider container
     const imgSliderContainer = document.createElement("div");
-    imgSliderContainer.classList.add("img-slider-container", "bg-green");
+    imgSliderContainer.classList.add("img-slider-container");
     imgSliderContainer.style.height = "auto";
     imgSliderContainer.style.width = "100%";
     imgSliderContainer.style.overflow = "hidden";
