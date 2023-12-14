@@ -103,7 +103,6 @@ export async function renderSpecificCard(parent, listingData, url) {
         yourCreditsValue.innerText = endUserCredits;
  
     
-    
          // Bid container
       const bidForm = document.createElement("form");
       bidForm.classList.add( "mb-3", "d-flex", "flex-column", "align-items-center", "py-3");
@@ -143,6 +142,10 @@ export async function renderSpecificCard(parent, listingData, url) {
     creditsContainer.appendChild(yourCreditsParagraph);
     creditsContainer.appendChild(yourCreditsValue);  
   
+    const { seller } = listingData;
+    const isUserAndSeller = seller && seller.name === userName;
+    
+    if(!isUserAndSeller) {
     bidForm.appendChild(bidHereLabel);
     bidForm.appendChild(bidInput);
     bidForm.appendChild(bidButton); 
@@ -152,6 +155,7 @@ export async function renderSpecificCard(parent, listingData, url) {
   setTimeout(() => {
   setBidInputMin(listingData);
   }, 0);
+}
 
     specificDataDiv.appendChild(cardContainer);
     parent.appendChild(specificDataDiv); 
