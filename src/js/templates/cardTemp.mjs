@@ -13,7 +13,7 @@ export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
 
     const cardContainer = document.createElement("div");
     cardContainer.id = "cardContainer";
-    cardContainer.classList.add("col-12", "col-md-4", "row", "featurette", "container-fluid", "mb-2");
+    cardContainer.classList.add("col-12", "col-md-4", "row", "featurette", "container-fluid", "mb-2", "d-flex", "justify-content-center", "align-items-center");
  
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body", "my-1");
@@ -207,7 +207,7 @@ seller.addEventListener("click", (event) => {
   function renderUpdateButton(parent, listingData) {
     const updateBtn = document.createElement("button");
     updateBtn.type = "button";
-    updateBtn.classList.add("btn-sm", "btn", "btn-outline-primary", "update-listing-btn"); 
+    updateBtn.classList.add("btn-sm", "btn", "btn-link", "update-listing-btn", "mb-3", "mx-auto"); 
     updateBtn.innerText = "Update your listing";
     
   
@@ -224,7 +224,7 @@ seller.addEventListener("click", (event) => {
   function renderRemoveButton(parent, listingData) {
     const removeBtn = document.createElement("button");
     removeBtn.type = "button";
-    removeBtn.classList.add("btn-sm", "btn", "btn-outline-danger");
+    removeBtn.classList.add("btn-sm", "btn", "btn-link", "mb-3", "mx-auto");
     removeBtn.innerText = "Delete your listing";
     removeBtn.id = `removeListingBtn-${listingData.id}`;
 
@@ -254,7 +254,7 @@ function renderBidButton(parent, listingData) {
 
   const bidButton = document.createElement("button");
   bidButton.setAttribute("type", "button");
-  bidButton.classList.add("btn", "btn-outline-green", "mx-auto", "shadow", "bid-btn"); 
+  bidButton.classList.add("btn", "btn-outline-primary", "mx-auto", "shadow", "bid-btn"); 
   bidButton.innerText = "Bid on item";
   
   bidButton.addEventListener("click", (event) => {
