@@ -40,6 +40,7 @@ export async function profileSetUp() {
                 const profile = await fetchProfileData(sellerName || name);
                 renderProfile(profile);
                 await getProfileListings(sellerName || name);
+                
             } catch (error) {
                 console.error('Error setting up profile:', error);
             }
@@ -100,6 +101,7 @@ async function getProfileListings(name) {
         console.error('Error fetching and rendering listings:', error);
     }
 }
+
 
 
 export function renderSellerProfile(profile) {

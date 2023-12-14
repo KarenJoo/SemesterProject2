@@ -177,14 +177,19 @@ const bidderNamesTitle = document.createElement("h6");
 bidderNamesTitle.classList.add("text-primary", "justify-content-center", "d-flex", "align-text-center");
 bidderNamesTitle.innerText = "Bids on listing";
 
-const bidderNamesList = document.createElement("div");
-bidderNamesList.classList.add("text-green");
+
+const bidderNamesList = document.createElement("a");
+bidderNamesList.href = `/src/profile/index.html?name=${bidderNames}`;
+bidderNamesList.classList.add("text-green", "text-decoration-none");
+bidderNamesList.style.cursor = "pointer";
+
 bidderNames.forEach(bidderName => {
   const bidderNameItem = document.createElement("p");
   bidderNameItem.classList.add("mb-1", "align-text-center", "justify-content-center", "d-flex");
   bidderNameItem.innerText = bidderName;
   bidderNamesList.appendChild(bidderNameItem);
 });
+
 
 
 bidderNamesContainer.appendChild(bidderNamesTitle);
