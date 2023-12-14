@@ -5,7 +5,7 @@ export function renderProfileListings(profileData) {
     listingsContainer.style.minHeight = "100vh";
 
     const yourListings = document.createElement("h2");
-    yourListings.classList.add("mb-2", "text-green");
+    yourListings.classList.add("mb-2", "text-primary", "mx-5");
     yourListings.innerText = "All listings";
     listingsContainer.appendChild(yourListings);
 
@@ -13,15 +13,15 @@ export function renderProfileListings(profileData) {
         const { bids } = _count;
           
         const listingItem = document.createElement("div");
-        listingItem.classList.add("card", "mb-3");
+        listingItem.classList.add("card", "mx-5", "mb-2", "shadow");
 
         // Create and append elements for listing details
         const titleElement = document.createElement("h5");
-        titleElement.classList.add("card-title");
+        titleElement.classList.add("card-title", "mx-3", "my-3");
         titleElement.innerText = title;
 
         const endsAtElement = document.createElement("p");
-        endsAtElement.classList.add("card-text");
+        endsAtElement.classList.add("card-text", "mx-3", "my-3");
         endsAtElement.innerText = `Ends at: ${new Date(endsAt).toLocaleString()}`;
 
 

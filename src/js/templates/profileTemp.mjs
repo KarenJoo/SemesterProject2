@@ -30,6 +30,7 @@ export function profileTemplate(name, avatar, email, credits, listings) {
     profileImage.classList.add(
         "profile-image",
         "mb-2",
+        "mt-5",
         "shadow",
         "rounded-circle",
         "object-fit-cover",
@@ -47,7 +48,7 @@ export function profileTemplate(name, avatar, email, credits, listings) {
 
     const userName = document.createElement("h1");
     userName.id = "userName";
-    userName.classList.add("mb-3", "display-5", "text-green");
+    userName.classList.add("mb-3", "display-5", "text-primary");
     userName.innerText = name;
 
     const followers = document.createElement("div");
@@ -55,7 +56,7 @@ export function profileTemplate(name, avatar, email, credits, listings) {
 
     const userCredits = document.createElement("p");
     userCredits.id = "userCredits";
-    userCredits.classList.add("h6", "mb-2", "text-dark");
+    userCredits.classList.add("h6", "mb-2", "text-primary");
     userCredits.innerText = `Credits: ${credits}`;
 
     profileContainer.appendChild(profile);

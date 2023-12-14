@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="/dist/css/styles.css">
 </head>
 
-<body class="bg-light">
+<body class="bg-img min-vh-100 w-100 img-fluid d-flex flex-column max-width mt-3 no-repeat-bg"
+    style="background-image: url('/src/img/hero_bestbid.jpg');" alt="background photo">
     <header data-bs-theme="dark">
         <div class="container">
         </div>
@@ -99,18 +100,18 @@
         <!-- hero -->
         <div class="position-relative">
             <img src="/src/img/hero_bestbid.jpg" class="hero-img img-fluid" style="min-height: 50vh; object-fit: cover;"
-                alt="hero img white stone floor">
+                alt="hero img green wall with lamp in front">
 
             <div class="container mt-4 position-absolute top-50 start-50 translate-middle text-center">
                 <h1 class="text-light mt-2">"Take a chance - place a bid" </h1>
-                <a href="/src/profile/register/index.html" class="btn btn-outline-light btn-md">Start the journey
+                <a href="/src/profile/register/index.html" class="btn btn-outline-primary btn-md">Start the journey
                     here</a>
             </div>
         </div>
         <div class="container mt-4">
 
             <!-- search bar -->
-           
+
             <div class="container-fluid d-flex align-items-center justify-content-center mt-2 mb-3"></div>
             <form id="searchForm" class="input-group mx-1">
                 <input id="search" class="form-control me-1 border-primary" type="search" placeholder="Search here.."
@@ -118,8 +119,8 @@
 
                 <!-- filter -->
                 <div id="filterForm" class="btn-group">
-                    <button class="btn btn-outline-primary dropdown-toggle btn-sm" type="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
                         Sort listings
                     </button>
 

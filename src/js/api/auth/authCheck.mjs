@@ -56,32 +56,37 @@ export async function authCheck() {
         console.error("Error checking authentication:", error.message);
     }
 }
-
 export function pathAuthorization() {
     const path = window.location.pathname;
     const token = storage.load("token");
 
     if (path === "/src/listing/specific.html" && !token) {
-        // Display error message modal for specific.html
-        displayErrorMessage("You need to log in to bid. Click OK to log in.");
-    } if (path === "/src/profiles/index.html" && !token) {
-        displayErrorMessage("You need to log in to view profiles. Click OK to log in.");
+        // Display error message modal for specific.html or profiles/index.html
+        console.log("Error: ", getErrorMessage(path));
+        displayErrorMessage(getErrorMessage(path));
     }
 }
-
 function isAuthPage() {
-    return window.location.pathname === "/src/listing/specific.html";
-    return window.location.pathname === "/src/profiles/index.html";
+    const path = window.location.pathname;
+    return path === "/src/listing/specific.html";
 }
 
 function displayErrorMessage(message) {
     console.log('Error Message:', message);
 
-    // Show a simple confirmation dialog with the error message
+    
     const userConfirmed = window.confirm(message);
 
-    // If the user clicks OK, redirect to the login page
+    // If the user clicks OK > redirect to the login page
     if (userConfirmed) {
         window.location.replace("/src/profile/login/index.html");
+    }
+}
+
+// display separate path error messages using switch
+function getErrorMessage(path) {
+    switch (path) {
+        case "/src/listing/specific.html":
+            return "You need to log in to bid. Click OK to log in.";
     }
 }
