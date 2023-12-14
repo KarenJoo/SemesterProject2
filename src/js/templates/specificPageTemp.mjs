@@ -60,14 +60,14 @@ export async function renderSpecificCard(parent, listingData, url) {
       prevButton.setAttribute("type", "button");
       prevButton.setAttribute("data-bs-target", `#${imgSlider.id}`);
       prevButton.setAttribute("data-bs-slide", "prev");
-      prevButton.innerHTML = '<span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span>';
+      prevButton.innerHTML = '<span class="carousel-control-prev-icon bg-primary" aria-hidden="true"></span><span class="visually-hidden">Previous</span>';
   
       const nextButton = document.createElement("button");
       nextButton.classList.add("carousel-control-next");
       nextButton.setAttribute("type", "button");
       nextButton.setAttribute("data-bs-target", `#${imgSlider.id}`);
       nextButton.setAttribute("data-bs-slide", "next");
-      nextButton.innerHTML = '<span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span>';
+      nextButton.innerHTML = '<span class="carousel-control-next-icon bg-primary" aria-hidden="true"></span><span class="visually-hidden">Next</span>';
   
       imgSlider.appendChild(imgSliderInner);
       imgSlider.appendChild(prevButton);
