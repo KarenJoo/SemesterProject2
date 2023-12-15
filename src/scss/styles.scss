@@ -9,18 +9,13 @@
   --width: 100%;
 }
 
-.bg-img {
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center; 
-  }
-
 
 .hero-img {
   object-fit: fill;
-height: 100%;
-width: var(--width);
+  height: 100%;
+  width: var(--width);
 }
+
 
 p {
   font-size: 12px;
@@ -45,6 +40,6 @@ p {
 
 .specific-container {
   z-index: 1;
-overflow: hidden;
+  overflow: hidden;
 }
 
