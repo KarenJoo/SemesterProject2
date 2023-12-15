@@ -9,41 +9,9 @@ export async function authCheck() {
         // Retrieve user object from storage and parse it
         const user = JSON.parse(storage.load('user'));
 
-        if (user && user.name) {
-            const username = user.name;
-
-            // Check if the user is authenticated 
-            const token = storage.load('token');
-            const API_PROFILE_URL = `${API_BASE_URL}/auction/profiles/${username}`;
-            const response = await authFetch(API_PROFILE_URL, { 
-                method: 'GET',
-                headers: {
-                  "Content-Type": "application/json; charset=UTF-8",
-                  Authorization: `Bearer ${token}`,
-                },
-            });
-
-            console.log('Response:', response);
-
-            if (response.ok) {
-                // if user is authenticated > display the profile icon
-                profileIcon.style.display = 'block';
-
-            } else {
-                // if user is not authenticated > display the login link
-                profileIcon.style.display = 'none';
-
-                const loginLink = document.createElement('a');
-                loginLink.classList.add('nav-link', 'text-primary');
-                loginLink.href = '/src/profile/login/index.html';
-                loginLink.innerText = 'Log in';
-
-                profileIcon.innerHTML = ''; 
-                profileIcon.appendChild(loginLink);
-            }
-        } else {
+        if (!user || !user.name) {
             // User is not logged in, display the login link
-            profileIcon.innerHTML = ''; 
+            profileIcon.innerHTML = '';
 
             const loginLink = document.createElement('a');
             loginLink.classList.add('nav-link', 'text-primary');
@@ -51,11 +19,35 @@ export async function authCheck() {
             loginLink.innerText = 'Log in';
 
             profileIcon.appendChild(loginLink);
+        } else {
+            const username = user.name;
+
+            // Check if the user is authenticated 
+            const token = storage.load('token');
+            const API_PROFILE_URL = `${API_BASE_URL}/auction/profiles/${username}`;
+            const response = await authFetch(API_PROFILE_URL, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json; charset=UTF-8",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            console.log('Response:', response);
+
+            if (response.ok) {
+                // If the user is authenticated > display the profile icon
+                profileIcon.style.display = 'block';
+           
+            }
         }
     } catch (error) {
         console.error("Error checking authentication:", error.message);
     }
 }
+
+
+
 export function pathAuthorization() {
     const path = window.location.pathname;
     const token = storage.load("token");
