@@ -2,7 +2,6 @@ import { profileSetUp } from "../api/auth/profile/profileSetup.mjs";
 
 
 export function profileTemplate(name, avatar, email, credits, listings) {
-    // Removes existing profile containers
     const existingContainers = document.querySelectorAll('.container-fluid.mb-1.col-12.mb-5');
     existingContainers.forEach(container => container.remove());
 
@@ -21,7 +20,8 @@ export function profileTemplate(name, avatar, email, credits, listings) {
         "d-flex",
         "flex-column",
         "justify-content-center",
-        "align-items-center"
+        "align-items-center",
+        
     );
 
     const profileImage = document.createElement("img");
@@ -46,13 +46,17 @@ export function profileTemplate(name, avatar, email, credits, listings) {
         profileImage.alt ="placeholder for profile avatar";
     });
 
+    const userNameContainer = document.createElement("div");
+    userNameContainer.classList.add("container-fluid", "mb-1", "col-12", "mb-5", "bg-light", "shadow");
+
+
     const userName = document.createElement("h1");
     userName.id = "userName";
     userName.classList.add("mb-3", "display-5", "text-primary");
     userName.innerText = name;
 
-    const followers = document.createElement("div");
-    followers.classList.add("followers", "d-flex");
+    const creditsContainer = document.createElement("div");
+    creditsContainer.classList.add("creditsContainer", "d-flex");
 
     const userCredits = document.createElement("p");
     userCredits.id = "userCredits";
@@ -60,12 +64,12 @@ export function profileTemplate(name, avatar, email, credits, listings) {
     userCredits.innerText = `Credits: ${credits}`;
 
     profileContainer.appendChild(profile);
+    profileContainer.appendChild(userNameContainer);
 
-    followers.appendChild(userCredits);
-
+    creditsContainer.appendChild(userCredits);
     profileInfo.appendChild(profileImage);
     profileInfo.appendChild(userName);
-    profileInfo.appendChild(followers);
+    profileInfo.appendChild(creditsContainer);
 
     profileContainer.appendChild(profileInfo);
 

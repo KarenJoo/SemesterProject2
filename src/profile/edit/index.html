@@ -19,7 +19,7 @@
 </head>
 
 <body class="bg-img min-vh-100 w-100 img-fluid d-flex flex-column max-width mt-5 no-repeat-bg"
-    style="background-image: url('/src/img/hero_bestbid.jpg');" alt="background photo">
+    style="background-image: url('/src/img/bg.jpg');" alt="background photo">
     <header data-bs-theme="dark">
         <div class="container">
         </div>
@@ -91,7 +91,7 @@
                             <a class="nav-link text-primary" href="/src/profile/login/index.html">Log in </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-green disabled" href="/index.html" aria-disabled="true">Feed</a>
+                            <a class="nav-link text-primary" href="/index.html" aria-disabled="true">Feed</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-primary" href="/src/about/index.html">About </a>
@@ -121,11 +121,12 @@
 
                     <!-- insert avatar -->
                     <label for="avatar" class="form-label">Avatar*</label>
-                    <input class="form-control border-secondary mb-2" id="avatar" type="url" name="avatar"
+                    <input class="form-control border-secondary mb-4" id="avatar" type="url" name="avatar"
                         title="Avatar is required to update profile" placeholder="insert URL.." required></input>
 
                     <div class="d-grid gap-2 mb-2">
-                        <button id="editProfileBtn" class="btn btn-primary text-light" type="submit">
+                        <button id="editProfileBtn" class="btn btn-primary btn-md rounded-pill text-sm px-2"
+                            type="submit">
                             Edit Profile
                         </button>
                     </div>
@@ -136,8 +137,8 @@
 
     </main>
     <!-- FOOTER -->
-    <footer class="container-fluid bg-green text-center text-light p-3">
-        <p class="float-end"><a href="#" class="text-light">Back to top</a></p>
+    <footer class="container-fluid bg-light text-center text-primary p-3">
+        <p class="float-end"></p>
         <p> BestBid 2023 © Karen Jo </p>
     </footer>
 

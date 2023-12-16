@@ -49,7 +49,7 @@ export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
     // seller 
   const sellerContainer = document.createElement("div");
   sellerContainer.id = "seller-container";
-  sellerContainer.classList.add("d-flex", "align-items-center");
+  sellerContainer.classList.add("d-flex", "align-items-center", "justify-content-center");
   
     const sellerParagraph = document.createElement("p");
     sellerParagraph.classList.add("mb-1");
@@ -72,11 +72,11 @@ seller.addEventListener("click", (event) => {
 
 // card data 
     const cardTitle = document.createElement("h5");
-    cardTitle.classList.add("card-title", "mt-2", "justify-content-center", "align-text-center");
+    cardTitle.classList.add("card-title", "d-flex", "mt-2", "justify-content-center", "align-text-center");
     cardTitle.innerText = listingData.title;
   
     const cardText = document.createElement("p");
-    cardText.classList.add("card-text", "mb-4");
+    cardText.classList.add("card-text", "d-flex", "mx-5", "justify-content-center");
     cardText.innerText = listingData.description;
 
     
@@ -269,7 +269,7 @@ function renderBidButton(parent, listingData) {
 
     const bidButton = document.createElement("button");
     bidButton.setAttribute("type", "button");
-    bidButton.classList.add("btn", "btn-outline-primary", "mx-auto", "rounded-pill", "text-sm", "px-2"); 
+    bidButton.classList.add("btn", "btn-outline-primary", "mx-auto", "rounded-pill", "text-sm", "px-2", "mt-5"); 
     bidButton.innerText = "Bid on item";
     
     bidButton.addEventListener("click", (event) => {
