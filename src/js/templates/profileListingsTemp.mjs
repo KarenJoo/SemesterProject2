@@ -13,7 +13,7 @@ export function renderProfileListings(profileData) {
         const { bids } = _count;
           
         const listingItem = document.createElement("div");
-        listingItem.classList.add("card", "mx-5", "mb-2", "shadow");
+        listingItem.classList.add("card", "mx-3", "mb-2", "shadow");
 
         // Create and append elements for listing details
         const titleElement = document.createElement("h5");

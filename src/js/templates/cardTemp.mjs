@@ -13,13 +13,13 @@ export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
 
     const cardContainer = document.createElement("div");
     cardContainer.id = "cardContainer";
-    cardContainer.classList.add("col-12", "col-md-4", "row", "featurette", "container-fluid", "mb-2", "d-flex", "justify-content-center", "align-items-center");
+    cardContainer.classList.add("col-12", "col-md-4", "row", "container-fluid", "mb-2", "mx-auto");
  
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body", "my-1");
   
     const card = document.createElement("div");
-    card.classList.add("mx-1", "mb-3", "mt-3", "d-flex", "flex-column");
+    card.classList.add("mb-3", "mt-3", "d-flex", "flex-column");
   
     const cardSize = document.createElement("div");
     cardSize.classList.add("card", "shadow-sm");
@@ -85,7 +85,7 @@ seller.addEventListener("click", (event) => {
       cardSize.style.maxHeight = "none";
       cardSize.style.height = "auto";
       cardContainer.classList.add("mt-5", "mx-auto", "container-fluid");
-      cardContainer.style.maxWidth = "70%";
+      cardContainer.style.maxWidth = "90%";
       cardContainer.style.width = "100%";
       cardContainer.style.margin = "0 auto";
   
@@ -121,7 +121,7 @@ seller.addEventListener("click", (event) => {
 
 // Time left and Bids Section
     const timeBidsContainer = document.createElement("div");
-    timeBidsContainer.classList.add("container", "d-flex", "justify-content-between");
+    timeBidsContainer.classList.add("container", "d-flex", "flex-column", "mb-2", "mb-md-0", "justify-content-center", "align-items-center");
 
 // Display getTimeDiff as days, hours, min > endsAt
     const endsAt = listingData.endsAt || "N/A";
@@ -129,20 +129,28 @@ seller.addEventListener("click", (event) => {
     const formattedTimeDifference = formatTimeDifference(days, hours, minutes);
     console.log('Formatted time difference:', formattedTimeDifference);
 
+    const timeLeftContainer = document.createElement("div");
+    timeLeftContainer.classList.add("d-flex", "flex-column", "mb-2", "mb-md-0");
+
     const timeLeft = document.createElement("p");
-    timeLeft.classList.add("list-group-item");
+    timeLeft.classList.add("list-group-item", "mb-1", "text-center", "text-primary");
     timeLeft.innerText = "Time left:";
 
     const timeLeftValue = document.createElement("p");
+    timeLeftValue.classList.add("mx-1", "text-secondary", "text-center");
     timeLeftValue.id = "endsAt";
     timeLeftValue.innerText = formattedTimeDifference;
 
+    const bidsContainer = document.createElement("div");
+    bidsContainer.classList.add("flex-column", "container", "d-flex", "align-items-center");
     
+
     const bidsParagraph = document.createElement("p");
-    bidsParagraph.classList.add("list-group-item");
+    bidsParagraph.classList.add("list-group-item", "text-primary");
     bidsParagraph.innerText = "Bids:";
 
     const bidsValue = document.createElement("p");
+    bidsValue.classList.add("text-secondary");
     bidsValue.id = "bids";
     bidsValue.innerText = bidsCount; 
 
@@ -194,11 +202,14 @@ seller.addEventListener("click", (event) => {
       
       }
     }
-    timeBidsContainer.appendChild(timeLeft);
-    timeBidsContainer.appendChild(timeLeftValue);
-
-    timeBidsContainer.appendChild(bidsParagraph);
-    timeBidsContainer.appendChild(bidsValue);
+    timeLeftContainer.appendChild(timeLeft);
+    timeLeftContainer.appendChild(timeLeftValue);
+    
+    bidsContainer.appendChild(bidsParagraph);
+    bidsContainer.appendChild(bidsValue);
+    
+    timeBidsContainer.appendChild(timeLeftContainer);
+    timeBidsContainer.appendChild(bidsContainer);
     cardBody.appendChild(timeBidsContainer);
 
     return cardContainer;
@@ -258,7 +269,7 @@ function renderBidButton(parent, listingData) {
 
     const bidButton = document.createElement("button");
     bidButton.setAttribute("type", "button");
-    bidButton.classList.add("btn", "btn-outline-primary", "mx-auto", "shadow", "bid-btn"); 
+    bidButton.classList.add("btn", "btn-outline-primary", "mx-auto", "rounded-pill", "text-sm", "px-2"); 
     bidButton.innerText = "Bid on item";
     
     bidButton.addEventListener("click", (event) => {

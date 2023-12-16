@@ -15,7 +15,7 @@ export function setBidInputMin(listingData) {
     bidInput.min = highestBid;
 
     const bidInputText = document.createElement("p");
-    bidInputText.classList.add("text-muted", "my-1")
+    bidInputText.classList.add("my-1", "text-secondary", "mt-2")
     bidInputText.innerText = `Current highest bid: ${highestBid}`;
   
     bidInput.parentElement.appendChild(bidInputText);
