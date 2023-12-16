@@ -234,7 +234,7 @@ seller.addEventListener("click", (event) => {
   function renderUpdateButton(parent, listingData) {
     const updateBtn = document.createElement("button");
     updateBtn.type = "button";
-    updateBtn.classList.add("btn-sm", "btn", "btn-link", "update-listing-btn", "mb-3", "mx-auto"); 
+    updateBtn.classList.add("btn-sm", "btn", "btn-link", "update-listing-btn", "mt-5", "mx-auto", "d-flex", "justify-content-center"); 
     updateBtn.innerText = "Update your listing";
     
   
@@ -256,7 +256,7 @@ seller.addEventListener("click", (event) => {
   function renderRemoveButton(parent, listingData) {
     const removeBtn = document.createElement("button");
     removeBtn.type = "button";
-    removeBtn.classList.add("btn-sm", "btn", "btn-link", "mb-3", "mx-auto");
+    removeBtn.classList.add("btn-sm", "btn", "btn-link", "mb-5", "mx-auto", "justify-content-center", "d-flex");
     removeBtn.innerText = "Delete your listing";
     removeBtn.id = `removeListingBtn-${listingData.id}`;
 
