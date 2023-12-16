@@ -31,7 +31,7 @@ export async function renderSpecificCard(parent, listingData, url) {
     const imgSlider = document.createElement("div");
     imgSlider.id = "imgSlider";
     imgSlider.classList.add("carousel", "slide", "mx-auto");
-    imgSlider.style.width = "80%";
+    imgSlider.style.width = "100%";
 
     const imgSliderInner = document.createElement("div");
     imgSliderInner.classList.add("carousel-inner");
@@ -47,7 +47,7 @@ export async function renderSpecificCard(parent, listingData, url) {
     img.src = mediaUrl;
     img.classList.add("aspect-ratio-item", "object-fit-cover");
     img.style.height = "70vh";
-    img.style.maxWidth = "100%";
+    img.style.width = "100%";
   
     carouselItem.appendChild(img);
     imgSliderInner.appendChild(carouselItem);

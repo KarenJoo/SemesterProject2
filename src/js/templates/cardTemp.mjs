@@ -37,7 +37,7 @@ export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
     
 // Container for maintaining aspect ratio
 const imgContainer = document.createElement("div");
-imgContainer.classList.add("aspect-ratio-item", "aspect-ratio-4x5");
+imgContainer.classList.add("mx-0");
 imgContainer.style.height = "80%"; 
 
     //if no media > insert example image
@@ -85,7 +85,7 @@ seller.addEventListener("click", (event) => {
     cardTitle.innerText = listingData.title;
   
     const cardText = document.createElement("p");
-    cardText.classList.add("card-text", "d-flex", "mx-5", "justify-content-center");
+    cardText.classList.add("card-text", "d-flex", "mx-3", "justify-content-center", "align-items-center");
     cardText.innerText = listingData.description;
 
     
