@@ -47,6 +47,7 @@ imgContainer.style.height = "80%";
     img.classList.add("listing-image");
     img.src = listingData.media[0];
     img.alt = `Image of listing from ${listingData.title}`;
+    img.style.width = "100%";
     
     imgContainer.appendChild(img);
     cardSize.appendChild(img);
@@ -92,9 +93,8 @@ seller.addEventListener("click", (event) => {
       cardSize.style.minHeight = "auto";
       cardSize.style.maxHeight = "none";
       cardSize.style.height = "auto";
-      cardContainer.classList.add("col-12", "col-md-4", "d-flex", "container", "justify-content-center", "align-items-center", "mb-2", "mx-auto");
-      cardContainer.style.maxWidth = "90%";
-      cardContainer.style.width = "100%";
+      cardSize.style.width = "600px"; //adjust specific card 
+     
   
   } else {
       cardSize.style.minHeight = "80vh"; 

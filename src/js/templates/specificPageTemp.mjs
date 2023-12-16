@@ -21,22 +21,17 @@ export async function renderSpecificCard(parent, listingData, url) {
 
   try { 
     const specificDataDiv = document.createElement("div");
-    specificDataDiv.classList.add("specific-container", "mx-auto", "container-fluid", "justify-content-center", "align-items-center");
+    specificDataDiv.classList.add("specific-container", "mx-auto", "justify-content-center", "align-items-center");
     specificDataDiv.style.height = "auto";
-    specificDataDiv.style.width = "100%";
 
     // image slider container
     const imgSliderContainer = document.createElement("div");
-    imgSliderContainer.classList.add("img-slider-container");
-    imgSliderContainer.style.height = "auto";
-    imgSliderContainer.style.width = "100%";
-    imgSliderContainer.style.overflow = "hidden";
-    imgSliderContainer.style.position = "relative"; 
-
+    imgSliderContainer.classList.add("img-slider-container", "text-center");
 
     const imgSlider = document.createElement("div");
     imgSlider.id = "imgSlider";
-    imgSlider.classList.add("carousel", "slide");
+    imgSlider.classList.add("carousel", "slide", "mx-auto");
+    imgSlider.style.width = "80%";
 
     const imgSliderInner = document.createElement("div");
     imgSliderInner.classList.add("carousel-inner");
@@ -45,12 +40,14 @@ export async function renderSpecificCard(parent, listingData, url) {
     listingData.media.forEach((mediaUrl, index) => {
     const carouselItem = document.createElement("div");
     carouselItem.classList.add("carousel-item");
+
+
   
     const img = document.createElement("img");
     img.src = mediaUrl;
     img.classList.add("aspect-ratio-item", "object-fit-cover");
     img.style.height = "70vh";
-    img.style.width = "100%";
+    img.style.maxWidth = "100%";
   
     carouselItem.appendChild(img);
     imgSliderInner.appendChild(carouselItem);
@@ -86,7 +83,7 @@ export async function renderSpecificCard(parent, listingData, url) {
     // Add the image slider container to the card container
     const cardContainer = document.createElement("div");
     cardContainer.id = "cardContainer";
-    cardContainer.classList.add("row", "featurette", "container", "mb-2", "mt-4", "mx-auto");
+    cardContainer.classList.add("row", "container", "mx-auto", "container-fluid", "justify-content-center", "align-items-center", "col-md-12");
       
 
     // Fetch end user's credits
