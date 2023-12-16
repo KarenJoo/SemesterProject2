@@ -27,6 +27,14 @@ export async function authCheck() {
             loginLink.innerText = 'Log in';
 
             profileIcon.appendChild(loginLink);
+
+
+            // Hide the authorized links
+            const authorizedLinks = document.querySelectorAll('.authorized-link');
+
+            authorizedLinks.forEach(link => {
+                link.style.display = 'none';
+            });
         } else {
             const username = user.name;
 
@@ -46,7 +54,6 @@ export async function authCheck() {
             if (response.ok) {
                 // If the user is authenticated > display the profile icon
                 profileIcon.style.display = 'block';
-           
             }
         }
     } catch (error) {
