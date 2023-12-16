@@ -9,9 +9,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const action = "/auction/listings";
   const method = "PUT"; 
 
+/**
+ * Updates a listing on the API based on the provided ID.
+ *
+ * @param {string} id - The ID of the listing to update.
+ * @param {Object} listingData - The updated listing data.
+ * @returns {Promise<Object>} Returns the updated listing as an object.
+ * @throws Will throw an error if the request fails, the response status is not OK, or the response body is not valid JSON.
+ * @async
+ */
 export async function updateListing(id, listingData) {
         if (!id) {
-          throw new Error("Update listing requires a postID");
+          throw new Error("Update listing requires a ID");
         }
       
         const updateListingURL = `${API_BASE_URL}${action}/${id}?_seller=true`;

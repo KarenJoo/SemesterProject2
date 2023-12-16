@@ -2,6 +2,15 @@ import { updateListing } from "../../listings/update.mjs";
 import { getTimeDifference, formatTimeDifference } from "../storage/getTimeDiff.mjs";
 import { load } from "../storage/index.mjs";
 
+/**
+ * Sets up a listener for updating a listing form, validating input, and handling the update process.
+ *
+ * @returns {void}
+ *
+ * @example
+ * // Call the function to set up the update listing listener
+ * updateListingListener();
+ */
 export function updateListingListener () {
     const form = document.getElementById("updateListing");
     console.log("Form element:", form);
@@ -33,6 +42,7 @@ export function updateListingListener () {
                 try {
                     const response = await updateListing(id, listingData);
                     console.log("Listing updated successfully:", response);
+                    window.location.href = "/index.html";
 
             
                     // Check if the user is the author and redirect accordingly
@@ -42,9 +52,9 @@ export function updateListingListener () {
                     const isAuthorAndUser = author && author.name === userName;
             
                     if (isAuthorAndUser) {
-                      window.location.href = `/profile/listing/update/index.html?id=${id}`;
+                      window.location.href = `/src/profile/listing/update/index.html?id=${id}`;
                     } else {
-                      window.location.href = `/listing/specific.html?id=${response.id}`;
+                      window.location.href = `/src/listing/specific.html?id=${response.id}`;
                     }
             
                   } catch (error) {
@@ -56,14 +66,34 @@ export function updateListingListener () {
                 });
               }
             }
-// validateMediaUrls function
+
+            
+/**
+ * Validates media URLs by trimming and splitting the input string.
+ *
+ * @param {string} media - Comma-separated URLs to validate.
+ * @returns {string[]} - Array of validated and trimmed media URLs.
+ *
+ * @example
+ * // Call the function to validate media URLs
+ * const validatedMedia = validateMediaUrls("url1, url2, url3");
+ */
 function validateMediaUrls(media) {
     const mediaUrls = media.split(",").map(url => url.trim());
         
     return mediaUrls;
 }
 
-// Display Time Difference Function
+/**
+ * Displays the time difference between the current time and the specified end time.
+ *
+ * @param {Date} endsAt - The end time for the listing.
+ * @returns {void}
+ *
+ * @example
+ * // Call the function to display the time difference
+ * displayTimeDifference(new Date("2023-01-01T12:00:00"));
+ */
 function displayTimeDifference(endsAt) {
     const { days, hours, minutes } = getTimeDifference(endsAt);
     const formattedTimeDifference = formatTimeDifference(days, hours, minutes);
