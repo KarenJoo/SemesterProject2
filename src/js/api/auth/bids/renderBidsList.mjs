@@ -1,7 +1,19 @@
 import { authFetch } from "../../../listings/authFetch.mjs";
 import { API_BASE_URL } from "../../API.mjs";
 
-export async function renderBidListModal(listingId, userName) {
+/**
+ * Renders a bid list for a specific listing.
+ *
+ * @param {string} listingId - The ID of the listing for which to fetch and render the bid list.
+ * @param {string} userName - The username of the current user.
+ * @returns {Promise<void>} - A Promise that resolves when the bid list is rendered.
+ *
+ * @example
+ * const listingId = "12345";
+ * const userName = "user_name";
+ * await renderBidList(listingId, userName);
+ */
+export async function renderBidList(listingId, userName) {
     try {
       const bidListURL = `${API_BASE_URL}/auction/listings/${listingId}/bids`;
       const response = await authFetch(bidListURL);
@@ -14,8 +26,8 @@ export async function renderBidListModal(listingId, userName) {
       const bidData = await response.json();
   
       // Render bid modal
-      const bidModal = document.createElement("div");
-      bidModal.classList.add("bid-modal");
+      const bidList = document.createElement("div");
+      bidList.classList.add("bid-modal");
   
       // Iterate through the bids 
       bidData.bids.forEach((bid) => {
@@ -35,11 +47,11 @@ export async function renderBidListModal(listingId, userName) {
         bidItem.appendChild(bidAmount);
         bidItem.appendChild(bidDate);
   
-        bidModal.appendChild(bidItem);
+        bidList.appendChild(bidItem);
       });
   
       
-      document.body.appendChild(bidModal);
+      document.body.appendChild(bidList);
   
      
   

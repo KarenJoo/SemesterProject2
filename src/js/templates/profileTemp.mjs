@@ -1,6 +1,17 @@
 import { profileSetUp } from "../api/auth/profile/profileSetup.mjs";
 
-
+/**
+ * Generates a profile template with user information.
+ * @param {string} name - The user's name.
+ * @param {string} avatar - The URL of the user's avatar image.
+ * @param {string} email - The user's email address.
+ * @param {number} credits - The number of credits associated with the user.
+ * @param {Object[]} listings - Array of user's listings data.
+ * @param {string} listings[].title - The title of the listing.
+ * @param {string} listings[].endsAt - The end date and time of the listing.
+ * @param {string[]} listings[].media - Array of media URLs associated with the listing.
+ * @returns {HTMLElement} The generated profile container element.
+ */
 export function profileTemplate(name, avatar, email, credits, listings) {
     const existingContainers = document.querySelectorAll('.container-fluid.mb-1.col-12.mb-5');
     existingContainers.forEach(container => container.remove());

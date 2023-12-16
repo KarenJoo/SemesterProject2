@@ -1,6 +1,17 @@
 import { login } from "../login.mjs";
 import { profileSetUp } from "./profileSetup.mjs";
 
+/**
+ * Handles the login form and initiates the profile setup process.
+ *
+ * @returns {void}
+ *
+ * @example
+ * // Ensure the login form has an id "loginForm" in the HTML:
+ * // <form id="loginForm"> ... </form>
+ *
+ * loginProfile();
+ */
 export async function loginProfile() {
     const form = document.querySelector("#loginForm");
 

@@ -8,7 +8,15 @@ document.addEventListener("DOMContentLoaded", () => {
       
       const action = "/auction/listings";
       const method = "DELETE"; 
-      
+
+/**
+ * Removes a listing from the API based on the provided ID.
+ *
+ * @param {string} id - The ID of the listing to remove.
+ * @returns {Promise<null|Object>} Returns null if the response body is empty. Otherwise, returns the response body as an object.
+ * @throws Will throw an error if the request fails, the response status is not OK, or the response body is not valid JSON.
+ * @async
+ */
 export async function removeListing(id) {
     if (!id) {
         throw new Error("Deleting a Listing requires a ListingID");

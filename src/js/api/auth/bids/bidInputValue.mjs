@@ -1,3 +1,21 @@
+/**
+ * Sets the minimum bid amount and adds input validation for the bid input field.
+ *
+ * @param {object} listingData - The data of the listing, including bid information.
+ * @returns {void}
+ *
+ * @example
+ * const listingData = {
+ *   bids: [
+ *     { amount: 50 },
+ *     { amount: 70 },
+ *     // ...
+ *   ],
+ *   // other listing data
+ * };
+ *
+ * setBidInputMin(listingData);
+ */
 export function setBidInputMin(listingData) {
     const bidInput = document.getElementById("bidAmount");
 

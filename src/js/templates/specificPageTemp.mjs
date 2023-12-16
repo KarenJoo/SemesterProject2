@@ -10,12 +10,16 @@ const profile = load("profile");
 const userName = profile?.name || "unknown name";
 console.log(userName);
 
-
+/**
+ * Renders the specific card for a listing with an image slider and bid form.
+ * @param {HTMLElement} parent - The parent element to which the specific card will be appended.
+ * @param {Object} listingData - The data of the listing to be displayed.
+ * @param {string} url - The URL of the listing.
+ * @returns {void}
+ */
 export async function renderSpecificCard(parent, listingData, url) {
 
   try { 
-       
-  
     const specificDataDiv = document.createElement("div");
     specificDataDiv.classList.add("specific-container", "mx-auto", "container-fluid", "justify-content-center", "align-items-center");
     specificDataDiv.style.height = "auto";

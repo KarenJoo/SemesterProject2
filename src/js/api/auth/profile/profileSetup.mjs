@@ -19,6 +19,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 let executeOnce = false;
 
+/**
+ * Sets up the user profile page by fetching and rendering user data and listings.
+ *
+ * @returns {Promise<void>} A Promise that resolves when profile setup is complete.
+ *
+ * @throws {Error} If there is an error fetching or rendering the profile data.
+ */
 export async function profileSetUp() {
     try {
         if (executeOnce) {
@@ -52,6 +59,14 @@ export async function profileSetUp() {
     }
 }
 
+/**
+ * Fetches profile data from the API.
+ *
+ * @param {string} name - The name of the profile to fetch.
+ * @returns {Promise<Object>} A Promise that resolves with the fetched profile data.
+ *
+ * @throws {Error} If there is an error fetching the profile data.
+ */
 async function fetchProfileData(name) {
     try {
         const API_PROFILE_URL = `${API_BASE_URL}/auction/profiles/${name}`;
@@ -68,6 +83,12 @@ async function fetchProfileData(name) {
     }
 }
 
+/**
+ * Renders the user profile on the page.
+ *
+ * @param {Object} profile - The user profile data to render.
+ * @returns {void}
+ */
 function renderProfile(profile) {
     const { name, avatar, email, credits, _count } = profile;
     const { listings } = _count;
@@ -90,7 +111,14 @@ function renderProfile(profile) {
     profilesContainer.appendChild(profileElement);
 }
 
-
+/**
+ * Fetches and renders the listings associated with a profile.
+ *
+ * @param {string} name - The name of the profile whose listings to fetch and render.
+ * @returns {Promise<void>} A Promise that resolves when listings are fetched and rendered.
+ *
+ * @throws {Error} If there is an error fetching or rendering the listings.
+ */
 async function getProfileListings(name) {
     try {
         const profileListingsResponse = await authFetch(`${API_BASE_URL}/auction/profiles/${name}/listings`);
@@ -102,8 +130,12 @@ async function getProfileListings(name) {
     }
 }
 
-
-
+/**
+ * Renders a seller's profile on the page with a label indicating it's a seller's profile.
+ *
+ * @param {Object} profile - The seller's profile data to render.
+ * @returns {void}
+ */
 export function renderSellerProfile(profile) {
     const { name, avatar, email, credits } = profile;
     const profileElement = profileTemplate(name, avatar, email, credits);
@@ -117,10 +149,16 @@ export function renderSellerProfile(profile) {
     mainSection.appendChild(profileElement);
 }
 
+/**
+ * Checks if the current profile is the user's own profile based on the URL.
+ *
+ * @param {string} profileName - The name of the profile to check.
+ * @returns {boolean} Returns true if it's not the user's own profile, otherwise false.
+ */
 export function checkIfOwnProfile(profileName) {
     const params = new URLSearchParams(window.location.search);
     const currentProfileName = params.get("name");
     
-    // Checks if there's a current profile name in the URL and it's not the user's own profile
+    // Checks if the current profile name in the URL is not the user's own profile
     return currentProfileName && currentProfileName.toLowerCase() !== profileName.toLowerCase();
 }

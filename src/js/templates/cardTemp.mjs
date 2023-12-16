@@ -9,6 +9,13 @@ const profile = load("profile");
 const userName = profile?.name || "unknown name";
 console.log(userName);
 
+/**
+ * Generates an HTML card template for a listing, if all listings displayed on index.html, if else listing displayed on specific.html
+ * @param {Object} listingData - Data of the listing to render as a card.
+ * @param {boolean} [isClickable=false] - Whether the card should be clickable.
+ * @param {boolean} [isSpecificPage] - Whether the card is rendered on a specific page.
+ * @returns {HTMLDivElement} The HTML element representing the rendered card.
+ */
 export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
 
     const cardContainer = document.createElement("div");
@@ -89,7 +96,7 @@ seller.addEventListener("click", (event) => {
       cardContainer.style.width = "100%";
   
   } else {
-      cardSize.style.minHeight = "70vh";
+      cardSize.style.minHeight = "70vh"; 
       cardSize.style.maxHeight = "70%";
           
   }
@@ -214,6 +221,11 @@ seller.addEventListener("click", (event) => {
     return cardContainer;
   }
   
+  /**
+ * Renders an "Update" button for a listing card.
+ * @param {HTMLElement} parent - The parent element to which the button will be appended.
+ * @param {Object} listingData - Data of the listing associated with the button.
+ */
   function renderUpdateButton(parent, listingData) {
     const updateBtn = document.createElement("button");
     updateBtn.type = "button";
@@ -231,6 +243,11 @@ seller.addEventListener("click", (event) => {
     parent.appendChild(updateBtn);
   }
 
+/**
+ * Renders a "Remove" button for a listing card.
+ * @param {HTMLElement} parent - The parent element to which the button will be appended.
+ * @param {Object} listingData - Data of the listing associated with the button.
+ */
   function renderRemoveButton(parent, listingData) {
     const removeBtn = document.createElement("button");
     removeBtn.type = "button";
@@ -257,7 +274,12 @@ seller.addEventListener("click", (event) => {
   parent.appendChild(removeBtn);
 }
  
-  
+ 
+/**
+ * Renders a "Bid" button for a listing card.
+ * @param {HTMLElement} parent - The parent element to which the button will be appended.
+ * @param {Object} listingData - Data of the listing associated with the button.
+ */ 
 function renderBidButton(parent, listingData) {
   const { seller } = listingData;
   const isUserAndSeller = seller && seller.name === userName;
@@ -281,13 +303,24 @@ function renderBidButton(parent, listingData) {
     parent.appendChild(bidButtonContainer);
   }
 }
-  // Function to render a single card
+  
+/**
+ * Renders a single card template for a listing.
+ * @param {Object} listingData - Data of the listing to render as a card.
+ * @param {HTMLElement} parent - The parent element to which the card will be appended.
+ * @param {boolean} [isClickable=false] - Whether the card should be clickable.
+ */
   export function renderCardTemplate(listingData, parent, isClickable = false) {
     const card = cardTemplate(listingData, isClickable);
     parent.appendChild(card);
   }
   
-  // Function to render multiple cards
+/**
+ * Renders card templates for multiple listings.
+ * @param {Object[]} listingDataList - Array of listing data to render as cards.
+ * @param {HTMLElement} parent - The parent element to which the cards will be appended.
+ * @param {boolean} [isClickable=false] - Whether the cards should be clickable.
+ */
   export function renderCardsTemplate(listingDataList, parent, isClickable = false) {
     listingDataList.forEach((listingData) => {
       renderCardTemplate(listingData, parent, isClickable);

@@ -2,6 +2,14 @@ import * as storage from "../../handlers/storage/index.mjs";
 import { authFetch } from "../../listings/authFetch.mjs";
 import { API_BASE_URL } from "../API.mjs";
 
+/**
+ * Checks the authentication status of the user and updates the profile icon visibility accordingly.
+ * If the user is not logged in, displays a login link; otherwise, displays the profile icon.
+ *
+ * @returns {Promise<void>} A Promise that resolves when the authentication check is complete.
+ *
+ * @throws {Error} If there is an error during the authentication check.
+ */
 export async function authCheck() {
     const profileIcon = document.getElementById('profileIcon');
 
@@ -46,8 +54,10 @@ export async function authCheck() {
     }
 }
 
-
-
+/**
+ * Checks the current path and user authentication status to handle authorization logic.
+ * If the path is "/src/listing/specific.html" and the user is not authenticated, displays an error message.
+ */
 export function pathAuthorization() {
     const path = window.location.pathname;
     const token = storage.load("token");
@@ -58,11 +68,24 @@ export function pathAuthorization() {
         displayErrorMessage(getErrorMessage(path));
     }
 }
+
+/**
+ * Checks if the current page is an authentication-related page.
+ *
+ * @returns {boolean} True if the current page is an authentication-related page, otherwise false.
+ */
 function isAuthPage() {
     const path = window.location.pathname;
     return path === "/src/listing/specific.html";
 }
 
+
+/**
+ * Displays an error message modal based on the provided path.
+ * If the user confirms, redirects to the login page.
+ *
+ * @param {string} path - The current path.
+ */
 function displayErrorMessage(message) {
     console.log('Error Message:', message);
 
@@ -75,6 +98,13 @@ function displayErrorMessage(message) {
     }
 }
 
+
+/**
+ * Returns an error message based on the provided path.
+ *
+ * @param {string} path - The current path.
+ * @returns {string} The error message corresponding to the provided path.
+ */
 // display separate path error messages using switch
 function getErrorMessage(path) {
     switch (path) {

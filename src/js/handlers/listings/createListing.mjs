@@ -1,6 +1,15 @@
 import { createListing } from "../../listings/create.mjs";
 import { getTimeDifference, formatTimeDifference } from "../storage/getTimeDiff.mjs";
 
+/**
+ * Sets up a listener for the create listing form submission.
+ *
+ * @returns {void}
+ *
+ * @example
+ * // Call the function to set up the listener
+ * createListingListener();
+ */
 export function createListingListener() {
   const form = document.getElementById("createListing");
   const submitButton = form.querySelector('#submit');
@@ -52,15 +61,34 @@ export function createListingListener() {
   }
 }
 )};
-              
-// validateMediaUrls function
+
+
+/**
+ * Validates media URLs by splitting and trimming them.
+ *
+ * @param {string} media - Comma-separated list of media URLs.
+ * @returns {string[]} - Array of validated media URLs.
+ *
+ * @example
+ * const validatedMedia = validateMediaUrls("https://example.com/image.jpg, https://example.com/video.mp4");
+ * console.log("Validated media URLs:", validatedMedia);
+ */              
 function validateMediaUrls(media) {
     const mediaUrls = media.split(",").map(url => url.trim());
         
     return mediaUrls;
 }
 
-// Display Time Difference Function
+/**
+ * Displays the time difference between the current date and the provided end date.
+ *
+ * @param {Date} endsAt - The end date of the listing.
+ * @returns {void}
+ *
+ * @example
+ * // Assume 'endsAt' is a valid Date object
+ * displayTimeDifference(endsAt);
+ */
 function displayTimeDifference(endsAt) {
     const { days, hours, minutes } = getTimeDifference(endsAt);
     const formattedTimeDifference = formatTimeDifference(days, hours, minutes);

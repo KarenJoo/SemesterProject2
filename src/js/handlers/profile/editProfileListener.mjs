@@ -2,6 +2,15 @@ import * as storage from "../storage/index.mjs";
 import { editProfile } from "../../api/auth/profile/edit.mjs";
 import { getSellerProfile } from "../../api/auth/profile/fetchProfiles.mjs";
 
+/**
+ * Sets up a listener for the profile editing form, pre-filling the form with user data, and handling the edit process.
+ *
+ * @returns {void}
+ *
+ * @example
+ * // Call the function to set up the edit profile listener
+ * editProfileListener();
+ */
 export async function editProfileListener() {
   const form = document.querySelector("#editProfile");
   console.log("Form element:", form);

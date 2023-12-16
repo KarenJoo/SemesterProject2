@@ -1,4 +1,14 @@
 
+/**
+ * Renders a list of listings for a user profile.
+ * @param {Object[]} profileData - Array of listing data associated with the user profile.
+ * @param {string} profileData[].title - The title of the listing.
+ * @param {string} profileData[].endsAt - The end date and time of the listing.
+ * @param {string[]} profileData[].media - Array of media URLs associated with the listing.
+ * @param {string} profileData[].id - The unique identifier of the listing.
+ * @param {Object} profileData[]._count - Object containing count information, e.g., bids count.
+ * @param {number} profileData[]._count.bids - The number of bids on the listing.
+ */
 export function renderProfileListings(profileData) {
     const listingsContainer = document.createElement("div");
     listingsContainer.classList.add("container-fluid", "mb-5");
