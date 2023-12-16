@@ -35,9 +35,10 @@ export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
     cardSize.style.height = "400px";
 
     
-    // Container for maintaining aspect ratio
-  const imgContainer = document.createElement("div");
-  imgContainer.classList.add("aspect-ratio", "aspect-ratio-4x5");
+// Container for maintaining aspect ratio
+const imgContainer = document.createElement("div");
+imgContainer.classList.add("aspect-ratio-item", "aspect-ratio-4x5");
+imgContainer.style.height = "80%"; 
 
     //if no media > insert example image
   if(!isSpecificPage) {
@@ -96,8 +97,9 @@ seller.addEventListener("click", (event) => {
       cardContainer.style.width = "100%";
   
   } else {
-      cardSize.style.minHeight = "70vh"; 
+      cardSize.style.minHeight = "80vh"; 
       cardSize.style.maxHeight = "70%";
+      imgContainer.style.height = "400vh";
           
   }
   
