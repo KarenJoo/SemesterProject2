@@ -41,41 +41,21 @@
                 </div>
 
                 <!-- BestBid Logo -->
-                <a class="logo mx-auto order-md-1" href="./index.html">
+                <a class="logo mx-auto" href="./index.html">
                     <img src="../src/img/BestBid.png" style="width: 7rem" alt="BestBid logo">
                 </a>
 
                 <!-- profile menu -->
                 <div id="profileIcon" class="order-md-2 col-1 d-flex align-items-center justify-content-end">
                     <!-- profile icon -->
-                    <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="bg-dark"
-                                class="bi bi-person-circle" viewBox="0 0 16 16">
-                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                <path fill-rule="evenodd"
-                                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                            </svg>
-                        </a>
-                        <ul class="dropdown-menu bg-light dropdown-menu-end mt-1">
-                            <li class="nav-item my-2 mx-2">
-                                <a class="nav-link text-primary" aria-current="page"
-                                    href="/src/profile/index.html">Profile</a>
-                            </li>
-                            <li class="nav-item my-2 mx-2">
-                                <a class="nav-link text-primary" href="/src/profile/listing/create/index.html">Create
-                                    listing</a>
-                            </li>
-                            <li class="nav-item my-2 mx-2">
-                                <a class="nav-link text-primary" href="/src/profile/listing/update/index.html">Update
-                                    listing</a>
-                            </li>
-                            <li class="nav-item my-2 mx-2">
-                                <button class="btn btn-link nav-link text-primary" id="logoutButton">Log out</button>
-                            </li>
-                        </ul>
-                    </div>
+                    <a href="/src/profile/index.html" class="text-dark text-decoration-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="bg-dark"
+                            class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                            <path fill-rule="evenodd"
+                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                        </svg>
+                    </a>
                 </div>
 
 
@@ -90,9 +70,28 @@
                         <li class="nav-item">
                             <a class="nav-link text-primary" href="/src/about/index.html">About </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-primary" aria-current="page"
+                                href="/src/profile/index.html">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-primary" href="/src/profile/listing/create/index.html">Create
+                                listing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-primary" href="/src/profile/listing/update/index.html">Update
+                                listing</a>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-link nav-link text-primary" id="logoutButton">Log out</button>
+                        </li>
                     </ul>
                 </div>
             </div>
+
+
+            <!-- menu -->
         </nav>
     </header>
 
@@ -103,7 +102,7 @@
                 alt="hero img green wall with lamp in front">
 
             <div class="container mt-4 position-absolute top-50 start-50 translate-middle text-center">
-                <h1 class="text-light mt-2 text-sm">"Your dream is one bid away" </h1>
+                <h1 class="text-light mt- text-sm">"Your dream is one bid away" </h1>
                 <p class="text-light text-sm">Take action, create your own budget-friendly living</p>
                 <a href="/src/profile/register/index.html"
                     class="btn btn-outline-primary btn-md rounded-pill px-2 text-sm">Start your journey
