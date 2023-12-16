@@ -13,7 +13,7 @@ export function cardTemplate(listingData, isClickable = false, isSpecificPage) {
 
     const cardContainer = document.createElement("div");
     cardContainer.id = "cardContainer";
-    cardContainer.classList.add("col-12", "col-md-4", "row", "container-fluid", "mb-2", "mx-auto");
+    cardContainer.classList.add("col-12", "col-md-4", "container", "justify-content-center", "align-items-center", "mb-2", "mx-auto");
  
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body", "my-1");
@@ -84,17 +84,16 @@ seller.addEventListener("click", (event) => {
       cardSize.style.minHeight = "auto";
       cardSize.style.maxHeight = "none";
       cardSize.style.height = "auto";
-      cardContainer.classList.add("mt-5", "mx-auto", "container-fluid");
+      cardContainer.classList.add("col-12", "col-md-4", "d-flex", "container", "justify-content-center", "align-items-center", "mb-2", "mx-auto");
       cardContainer.style.maxWidth = "90%";
       cardContainer.style.width = "100%";
-      cardContainer.style.margin = "0 auto";
   
   } else {
       cardSize.style.minHeight = "70vh";
       cardSize.style.maxHeight = "70%";
           
   }
- 
+  
     // Append elements to the DOM     
      sellerContainer.appendChild(sellerParagraph);
     sellerContainer.appendChild(seller);

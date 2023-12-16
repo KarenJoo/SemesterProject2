@@ -17,9 +17,9 @@ export async function renderSpecificCard(parent, listingData, url) {
        
   
     const specificDataDiv = document.createElement("div");
-    specificDataDiv.classList.add("specific-container", "mx-auto", "container");
+    specificDataDiv.classList.add("specific-container", "mx-auto", "container-fluid", "justify-content-center", "align-items-center");
     specificDataDiv.style.height = "auto";
-    specificDataDiv.style.width = "100%";
+    specificDataDiv.style.width = "80%";
 
     // image slider container
     const imgSliderContainer = document.createElement("div");
