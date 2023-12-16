@@ -93,9 +93,10 @@ seller.addEventListener("click", (event) => {
       cardSize.style.minHeight = "auto";
       cardSize.style.maxHeight = "none";
       cardSize.style.height = "auto";
-      cardSize.style.width = "600px"; //adjust specific card 
-     
-  
+
+      card.classList.add("col-sm-6", "d-flex", "mx-auto");
+      cardSize.style.width = "60vw"; //adjust specific card 
+
   } else {
       cardSize.style.minHeight = "80vh"; 
       cardSize.style.maxHeight = "70%";
@@ -107,6 +108,7 @@ seller.addEventListener("click", (event) => {
      sellerContainer.appendChild(sellerParagraph);
     sellerContainer.appendChild(seller);
      cardBody.appendChild(sellerContainer);
+     
 
      cardSize.appendChild(cardBody); 
     cardBody.appendChild(cardTitle);
@@ -219,6 +221,7 @@ seller.addEventListener("click", (event) => {
     timeBidsContainer.appendChild(timeLeftContainer);
     timeBidsContainer.appendChild(bidsContainer);
     cardBody.appendChild(timeBidsContainer);
+
 
     return cardContainer;
   }

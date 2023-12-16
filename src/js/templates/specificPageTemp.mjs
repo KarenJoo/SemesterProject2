@@ -21,12 +21,12 @@ export async function renderSpecificCard(parent, listingData, url) {
 
   try { 
     const specificDataDiv = document.createElement("div");
-    specificDataDiv.classList.add("specific-container", "mx-auto", "justify-content-center", "align-items-center");
+    specificDataDiv.classList.add("specific-container", "mx-auto");
     specificDataDiv.style.height = "auto";
 
     // image slider container
     const imgSliderContainer = document.createElement("div");
-    imgSliderContainer.classList.add("img-slider-container", "text-center");
+    imgSliderContainer.classList.add("img-slider-container");
 
     const imgSlider = document.createElement("div");
     imgSlider.id = "imgSlider";
@@ -138,9 +138,8 @@ export async function renderSpecificCard(parent, listingData, url) {
  
   
     
-    specificDataDiv.appendChild(imgSliderContainer);
-    
-    
+    cardContainer.appendChild(imgSliderContainer);
+
   
     const { seller } = listingData;
     const isUserAndSeller = seller && seller.name === userName;

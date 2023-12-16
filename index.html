@@ -22,7 +22,7 @@
     <header data-bs-theme="dark">
         <div class="container">
         </div>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-white shadow">
+            <nav class="navbar navbar-expand-md navbar-primary fixed-top bg-white shadow">
             <div class="container-fluid d-flex justify-content-between align-items-center">
 
                 <!-- Burger menu -->
@@ -33,7 +33,7 @@
 
                         <!-- burger icon-->
                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="bg-secondary"
-                            class="bi bi-list mt-1" viewBox="0 0 16 16">
+                            class="order-md-2 bi bi-list mt-1" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
                                 d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                         </svg>
@@ -41,17 +41,17 @@
                 </div>
 
                 <!-- BestBid Logo -->
-                <a class="logo mx-auto" href="./index.html">
-                    <img src="../src/img/BestBid.png" style="width: 7rem" alt="BestBid logo">
+                <a class="logo mx-auto order-md-2 d-flex align-items-center justify-content-center" href="/index.html">
+                    <img src="/src/img/BestBid.png" style="width: 7rem" alt="BestBid logo">
                 </a>
 
                 <!-- profile menu -->
-                <div id="profileIcon" class="col-1 d-flex align-items-center justify-content-end">
+                <div id="profileIcon" class="order-md-3 col-1 d-flex align-items-center justify-content-end">
                     <!-- profile icon -->
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="bg-dark"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="bg-primary"
                                 class="bi bi-person-circle" viewBox="0 0 16 16">
                                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                                 <path fill-rule="evenodd"
@@ -78,17 +78,14 @@
                     </div>
                 </div>
 
-
                 <!-- Burger menu links -->
-                <div class="collapse navbar-collapse" id="burgerCollapse">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <div class="collapse navbar-collapse bg-green col-md-0" id="burgerCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0 col-12">
                         <li class="nav-item">
-                            <!--/burger-menu-item2 -->
-                            <a class="nav-link text-green disabled" href="/burger-menu-item2"
-                                aria-disabled="true">Feed</a>
+                            <a class="nav-link text-primary" href="/index.html" aria-disabled="true">Feed</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-primary" href="/src/about/index.html">About </a>
+                            <a class="nav-link text-green" disabled href="#">About</a>
                         </li>
                     </ul>
                 </div>
